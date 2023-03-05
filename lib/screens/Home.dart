@@ -14,9 +14,9 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: Applibar(),
+      appBar: custAppbar(),
 
-      bottomNavigationBar:Bottombar(),
+      bottomNavigationBar:custBottombar(),
 
       endDrawer: custDrawer(),
     );
