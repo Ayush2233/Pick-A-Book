@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'screens/Home.dart';
+import 'screens/sign up.dart';
 
 void main()
 {
   runApp(MaterialApp(
-    home: Home(),
+    home: SignUp(),
     debugShowCheckedModeBanner: false,
   ));
 }
