@@ -10,6 +10,7 @@ Widget custBottombar()
       top: -30,
       curveSize: 85,
       style: TabStyle.fixedCircle,
+
       items: [
         TabItem(icon: Image.asset('assets/icons/home.png')),
         TabItem(icon: Image.asset('assets/icons/search.png')),
