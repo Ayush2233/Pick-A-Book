@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 
-Widget Bottombar()
+Widget custBottombar()
 {
   return ConvexAppBar(
       // disableDefaultTabController: true,
@@ -10,6 +10,7 @@ Widget Bottombar()
       top: -30,
       curveSize: 85,
       style: TabStyle.fixedCircle,
+
       items: [
         TabItem(icon: Image.asset('assets/icons/home.png')),
         TabItem(icon: Image.asset('assets/icons/search.png')),
