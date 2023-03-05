@@ -95,7 +95,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin{
                   children:
               [
                 homeslidernew(),
-                Text("Trending"),
+                homeslidernew(),
               ]
               ),
             ),
