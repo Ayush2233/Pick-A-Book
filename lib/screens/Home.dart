@@ -21,6 +21,12 @@ class _HomeState extends State<Home> {
 
       endDrawer: custDrawer(),
 
+      body: SingleChildScrollView(
+
+        child: Column(),
+
+      ),
+
     );
   }
 }
