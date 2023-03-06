@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:project2/widgets/Bottomnav.dart';
@@ -124,6 +125,15 @@ class _HomeState extends State<Home> with TickerProviderStateMixin{
           //  BOOKSHELF
             bookshelf(),
             bookshelf(),
+
+            Center(
+              child: MaterialButton(onPressed: (){
+                FirebaseAuth.instance.signOut();
+              },
+              color: Colors.lightBlue,
+              child: Text("Signout"),),
+            )
+
 
 
           ],
