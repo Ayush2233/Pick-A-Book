@@ -5,6 +5,7 @@ PreferredSizeWidget custAppbar()
   return AppBar
     (
     backgroundColor: Colors.transparent,
+
     elevation: 0,
     actions:
     [
