@@ -6,7 +6,7 @@ Widget homeslider(String url ,int index)
 {
   return Container(
     margin: EdgeInsets.symmetric(horizontal: 5),
-    color: Colors.grey,
+    // color: Colors.grey,
     child: Image.network(url),
   );
 }

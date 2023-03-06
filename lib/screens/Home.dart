@@ -67,7 +67,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin{
               ),
             ),
 
-            SizedBox(height: 10,),
+            SizedBox(height:0,),
 
             //TABS (NEW AND TRENDING)
 
@@ -93,7 +93,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin{
               ),
             ),
 
-            SizedBox(height: 10,),
+            SizedBox(height: 0,),
 
             //TAB BAR VIEW (TAB AREAS)
             Container(
@@ -110,7 +110,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin{
               ),
             ),
 
-          SizedBox(height: 15,),
+          SizedBox(height: 10,),
           
           //  RECOMMENDED FOR YOU
             Container(
