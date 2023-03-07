@@ -4,8 +4,10 @@ import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 Widget custBottombar()
 {
   return ConvexAppBar(
+
       // disableDefaultTabController: true,
       // initialActiveIndex: 0,
+
       height: 55,
       top: -25,
       curveSize: 75,
@@ -13,7 +15,9 @@ Widget custBottombar()
 
       items: [
         TabItem(icon: Image.asset('assets/icons/home.png')),
+
         TabItem(icon: Image.asset('assets/icons/search.png')),
+
         TabItem(
             icon: Container(
 

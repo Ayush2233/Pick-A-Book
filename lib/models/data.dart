@@ -1,3 +1,4 @@
+// LIST OF BOOK COVERS
 var covers =
 [
   'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/pictures/2014/7/30/1406719709641/7e11c283-6f2b-4847-83bd-f1de6bf3735d-1360x2040.jpeg?width=700&quality=85&auto=format&fit=max&s=d0904fe58cf158cf1c17417692855aaa',
@@ -15,3 +16,8 @@ var covers =
 ];
 
 String user = "Ayush";
+String username = "Ayush Agarwal";
+String email = "ayush.aggarwal.21cse@bmu.edu.in";
+String userimage = "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MzR8fHBlcnNvbnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60";
+
+

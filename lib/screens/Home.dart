@@ -10,7 +10,6 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:project2/widgets/homeslider.dart';
 
 
-
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
 
@@ -132,9 +131,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin{
               },
               color: Colors.lightBlue,
               child: Text("Signout"),),
-            )
-
-
+            ),
 
           ],
         ),
