@@ -1,4 +1,5 @@
 import 'package:firebase_core/firebase_core.dart';
+import 'package:project2/screens/navigationcontroller.dart';
 import 'package:project2/screens/signin.dart';
 import 'package:project2/utilities/check.dart';
 import 'screens/Home.dart';
@@ -14,12 +15,8 @@ void main() async
   await Firebase.initializeApp();
 
   runApp(MaterialApp(
-    home: Home(),
-    // routes:
-    // {
-    //   "/" :(context)=> Home(),
-    //   "/signup":(context)=>SignUp(),
-    // },
+    home: navcontroller(),
+
     debugShowCheckedModeBanner: false,
   ));
 }

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:project2/widgets/appbar.dart';
 import 'package:project2/widgets/drawer.dart';
-import 'package:project2/widgets/Bottomnav.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:project2/models/data.dart';
 
@@ -17,7 +16,7 @@ class _SearchState extends State<Search> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: custAppbar(),
-      bottomNavigationBar:custBottombar(),
+      // bottomNavigationBar:custBottombar(),
       endDrawer: custDrawer(),
 
       body:SingleChildScrollView(
