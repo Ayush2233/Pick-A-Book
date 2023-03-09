@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 
-PreferredSizeWidget Applibar()
+PreferredSizeWidget custAppbar()
 {
   return AppBar
     (
     backgroundColor: Colors.transparent,
+
     elevation: 0,
     actions:
     [
@@ -13,7 +14,6 @@ PreferredSizeWidget Applibar()
         child: Container(
           width: 40,
           decoration: BoxDecoration(shape: BoxShape.circle,color: Colors.black),
-
         ),
       )
     ],
