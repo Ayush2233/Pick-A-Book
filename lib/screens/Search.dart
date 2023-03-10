@@ -22,12 +22,20 @@ class _SearchState extends State<Search> {
       body:SingleChildScrollView(
         child: Column(
           children: [
+
+            // SEARCH TEXT FIELD
             Container(height: 55,child: SizedBox(width: 370,
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(0,7,0,0),
+
+                //TEXT FIELD AND ICON
                 child: TextField(
-                  decoration: InputDecoration(filled: true,fillColor: Color(0xFFf3f3f3),suffixIcon: Icon(CupertinoIcons.search_circle_fill,color: Color(0xFFDE6077),size: 50,),hintText: 'Search Book...',
+                  decoration: InputDecoration(filled: true,fillColor: Color(0xFFf3f3f3),
+                      suffixIcon: Icon(CupertinoIcons.search_circle_fill,color: Color(0xFFDE6077),size: 50,),
+
+                      hintText: 'Search Book...',
                       hintStyle: TextStyle(fontSize: 13),
+
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(100)),
                           borderSide: BorderSide.none
@@ -38,10 +46,13 @@ class _SearchState extends State<Search> {
 
             SizedBox(height: 40,),
 
+            //GENRE BUTTONS
             Container(height: 300,
             child: Column(
               children: [
-                Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,           // Row 1
+
+                //ROW 1 - 3 GENRE
+                Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                   SizedBox(width: 115,height: 43,child: OutlinedButton(onPressed: () {print("pressed");}, child: Text('Fiction',style: TextStyle(color: Colors.black,fontWeight: FontWeight.w700),)
                     ,style:OutlinedButton.styleFrom(side: BorderSide(color: Color(0xFFDE6077)),shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10)))) ,)),
@@ -53,6 +64,7 @@ class _SearchState extends State<Search> {
 
                 SizedBox(height: 10,),
 
+                //ROW 2 - GENREE
                 Row(                                                           //Row 2
                 children: [
                   SizedBox(width: 70,),
@@ -65,6 +77,7 @@ class _SearchState extends State<Search> {
 
                 SizedBox(height: 10,),
 
+                //ROW 3
                 Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     SizedBox(width: 115,height: 43,child: OutlinedButton(onPressed: () {print("pressed");}, child: Text('Fantasy',style: TextStyle(color: Colors.black,fontWeight: FontWeight.w700),)
@@ -77,7 +90,8 @@ class _SearchState extends State<Search> {
 
                 SizedBox(height: 10,),
 
-                Row(                                                           //Row 2
+                //ROW 4
+                Row(
                   children: [
                     SizedBox(width: 70,),
                     SizedBox(width: 115,height: 43,child: OutlinedButton(onPressed: () {print("pressed");}, child: Text('Biography',style: TextStyle(color: Colors.black,fontWeight: FontWeight.w700),)
@@ -88,6 +102,8 @@ class _SearchState extends State<Search> {
                   ],),
 
                 SizedBox(height: 10,),
+
+                //ROW 5
 
                 Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
@@ -103,13 +119,18 @@ class _SearchState extends State<Search> {
             ),
             ),
 
+            // TOP RATED
 
             Container(height: 700,
               child: Column(children: [
+
+                //TOP RATED TEXT
                 Row(children: [SizedBox(width: 30,),Text('Top Rated',style: TextStyle(fontSize: 20,fontWeight: FontWeight.w600),),
                   SizedBox(width: 200,),Text('See All'),SizedBox(width: 10,),Icon(Icons.navigate_next)],),
 
                 SizedBox(height: 20,),
+
+                //HORIZONTAL GRID
 
                 Container(height: 150,width: double.maxFinite,
                 child: ListView.builder(scrollDirection: Axis.horizontal
