@@ -83,15 +83,92 @@ class _LoginState extends State<Login> {
 
             SizedBox(height: 15,),
 
-            GestureDetector(
-              onTap: widget.showSignup,
-              child: Text("New User Register Now", style: TextStyle(
-                  color: Colors.blue,fontSize: 16,fontWeight: FontWeight.bold
-              ),
+
+
+
+
+            SizedBox(height: 20,),
+
+
+
+            //FORGET PASSWORD
+
+            Center(
+              child: GestureDetector(
+                onTap: (){},
+                child: Text('Forget the password ?',style: TextStyle(color: Colors.red[700],fontWeight: FontWeight.w600,fontSize: 15),),
               ),
             ),
 
-            // Conatiner for google login
+            SizedBox(height: 40,),
+
+
+
+            //EASY LOGIN
+
+            // CONTINUE TEXT
+            Container(child:
+              Column(children: [
+                Center(child: Text('------------ or continue with ------------'
+                ,style: TextStyle(fontSize: 15),),),
+
+                SizedBox(height: 30,),
+
+
+                //EASY LOGIN BUTTONS
+                Center(
+                  child: Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                    //FACEBOOK
+                    SizedBox(width: 80,height: 50,
+                      child: OutlinedButton(onPressed: (){}, child: Icon(Icons.facebook),
+                        style: OutlinedButton.styleFrom(shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
+                      ),
+                    )
+
+                    //GOOGLE
+                    ,SizedBox(width: 80,height: 50,
+                      child: OutlinedButton(onPressed: (){}, child: Image.asset('assets/icons/google.png',width: 20,),
+                        style: OutlinedButton.styleFrom(shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
+                      ),
+                    )
+
+                    //TWITTER
+                    ,SizedBox(width: 80,height: 50,
+                      child: OutlinedButton(onPressed: (){}, child: Image.asset('assets/icons/twitter (1).png',width: 20,),
+                        style: OutlinedButton.styleFrom(shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
+                      ),
+                    )
+                  ],),
+                ),
+
+                SizedBox(height: 40,),
+
+
+                //// Signup button
+                Center(
+                  child: Padding(
+                      padding: const EdgeInsets.fromLTRB(100,0,0,0),
+                      child: Row(
+                        children: [
+                          Text("Don't have an account? ", style: TextStyle(
+                              color: Colors.black,fontSize: 15,fontWeight: FontWeight.w400
+                          ),
+                          ),
+                          GestureDetector(
+                            onTap: widget.showSignup,
+                            child: Text('Sign up',style: TextStyle(
+                              color: Colors.red[700],fontSize: 15,fontWeight: FontWeight.w500
+                            ),),
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+
+                ],
+              ),
+            )
             //Container()
           ],
         ),
