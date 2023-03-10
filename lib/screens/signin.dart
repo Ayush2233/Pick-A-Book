@@ -156,7 +156,7 @@ class _LoginState extends State<Login> {
                           ),
                           ),
                           GestureDetector(
-                            onTap: (){},
+                            onTap: widget.showSignup,
                             child: Text('Sign up',style: TextStyle(
                               color: Colors.red[700],fontSize: 15,fontWeight: FontWeight.w500
                             ),),
