@@ -83,6 +83,8 @@ class _LoginState extends State<Login> {
 
             SizedBox(height: 15,),
 
+
+            // Signup button
             GestureDetector(
               onTap: widget.showSignup,
               child: Text("New User Register Now", style: TextStyle(

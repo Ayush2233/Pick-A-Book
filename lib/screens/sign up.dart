@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
 class SignUp extends StatefulWidget {
+  final VoidCallback showLogin;
+  const SignUp({Key? key, required this.showLogin}) : super(key: key);
 
 
   @override
@@ -77,7 +79,16 @@ class _SignUpState extends State<SignUp> {
                   onPressed: () {},
                   child: Text('Sign Up',style: TextStyle(color: Colors.black,fontSize: 20,fontWeight: FontWeight.bold),)),
             ),
-            )
+            ),
+            SizedBox(height: 15,),
+
+            GestureDetector(
+              onTap: widget.showLogin,
+              child: Text("Already a user? Signin ",
+              style: TextStyle(
+                  color: Colors.blue,fontSize: 16,fontWeight: FontWeight.bold
+              ),),
+            ),
           ],),
         )
 
