@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -11,7 +12,35 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUp> {
+
+  final _email = TextEditingController();
+  final _password = TextEditingController();
+  final _confirm = TextEditingController();
+
+
+  bool confirm (){
+    if(_password.text.trim() == _confirm.text.trim()){
+      return true;
+    }
+    else{
+      return false;
+    }
+  }
+
+
+  Future sign_up () async{
+    if(confirm()){
+      FirebaseAuth.instance.createUserWithEmailAndPassword(email: _email.text.trim(), password: _password.text.trim());
+    }
+  }
   @override
+
+  void dispose() {
+    _email.dispose();
+    _password.dispose();
+    _confirm.dispose();
+    super.dispose();
+  }
   Widget build(BuildContext context){
     return Scaffold(
         body: SingleChildScrollView(
@@ -54,19 +83,19 @@ class _SignUpState extends State<SignUp> {
               SizedBox(height: 15,),
 
               //EMAIL
-              SizedBox(width: 350,child: TextField(decoration: InputDecoration(filled: true,fillColor: Color(0xFFf3f3f3),
+              SizedBox(width: 350,child: TextField(controller: _email,decoration: InputDecoration(filled: true,fillColor: Color(0xFFf3f3f3),
                 prefixIcon: Icon(Icons.email_outlined),labelText: 'Email',border: InputBorder.none,),)),
 
               SizedBox(height: 15,),
 
               //PASSWORD
-              SizedBox(width: 350,child: TextField(decoration: InputDecoration(filled: true,fillColor: Color(0xFFf3f3f3),
+              SizedBox(width: 350,child: TextField(controller: _password,decoration: InputDecoration(filled: true,fillColor: Color(0xFFf3f3f3),
                 suffixIcon: Icon(CupertinoIcons.eye_slash_fill),prefixIcon: Icon(CupertinoIcons.lock),labelText: 'Password',border: InputBorder.none,),)),
 
               SizedBox(height: 15,),
 
               //CONFIRM PASSWORD
-              SizedBox(width: 350,child: TextField(decoration: InputDecoration(filled: true,fillColor: Color(0xFFf3f3f3),
+              SizedBox(width: 350,child: TextField(controller: _confirm,decoration: InputDecoration(filled: true,fillColor: Color(0xFFf3f3f3),
                 suffixIcon: Icon(CupertinoIcons.eye_slash_fill),prefixIcon: Icon(CupertinoIcons.lock),labelText: 'Confirm Password',border: InputBorder.none,),)),
 
 
@@ -76,7 +105,7 @@ class _SignUpState extends State<SignUp> {
             Container(height: 60,child: SizedBox(width: 350,
               child: ElevatedButton(style: ElevatedButton.styleFrom(shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
                   primary: Color(0xFFedc6cd),shadowColor: Colors.black,elevation: 8),
-                  onPressed: () {},
+                  onPressed: sign_up,
                   child: Text('Sign Up',style: TextStyle(color: Colors.black,fontSize: 20,fontWeight: FontWeight.bold),)),
             ),
             ),
