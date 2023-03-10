@@ -33,7 +33,7 @@ Widget custDrawer()
           children:
           [
             //IMAGE
-            CircleAvatar(radius: 70,child: Image.network(userimage,fit: BoxFit.cover,),),
+            CircleAvatar(radius: 70,backgroundImage: NetworkImage(userimage,)),
             //USERNAME
             Text("$username",style: GoogleFonts.montserrat(fontSize: 18,fontWeight: FontWeight.bold),),
             //EMAIL
