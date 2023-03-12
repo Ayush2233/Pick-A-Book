@@ -46,10 +46,7 @@ class _navcontrollerState extends State<navcontroller> {
                 padding: const EdgeInsets.only(right: 20),
                 child: GestureDetector(
                   onTap: (){Scaffold.of(context).openEndDrawer();},
-                  child: Container(
-                    width: 40,
-                    decoration: BoxDecoration(shape: BoxShape.circle,color: Colors.black),
-                  ),
+                  child: CircleAvatar(backgroundImage:NetworkImage(userimage),radius: 20,),
                 ),
               );
             }
