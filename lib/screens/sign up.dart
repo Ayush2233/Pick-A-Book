@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class SignUp extends StatefulWidget {
   final VoidCallback showLogin;
@@ -15,6 +16,9 @@ class _SignUpState extends State<SignUp> {
   final _email = TextEditingController();
   final _password = TextEditingController();
   final _confirm = TextEditingController();
+  final _name = TextEditingController();
+  final _age = TextEditingController();
+
 
   bool confirm() {
     if (_password.text.trim() == _confirm.text.trim()) {
@@ -26,9 +30,21 @@ class _SignUpState extends State<SignUp> {
 
   Future sign_up() async {
     if (confirm()) {
+      // Auth User
       FirebaseAuth.instance.createUserWithEmailAndPassword(
           email: _email.text.trim(), password: _password.text.trim());
+
+      // Add user
+      addUser(_name.text.trim(), _email.text.trim(), int.parse(_age.text.trim()));
     }
+  }
+
+  Future addUser(String name , String email , int age) async{
+    await FirebaseFirestore.instance.collection('Users').add({
+      'name' : name,
+      'age' : age,
+      'email': email,
+    });
   }
 
   @override
@@ -36,6 +52,8 @@ class _SignUpState extends State<SignUp> {
     _email.dispose();
     _password.dispose();
     _confirm.dispose();
+    _name.dispose();
+    _age.dispose();
     super.dispose();
   }
 
@@ -79,6 +97,7 @@ class _SignUpState extends State<SignUp> {
                   SizedBox(
                       width: 340,
                       child: TextField(
+                        controller: _name,
                         decoration: InputDecoration(
                           filled: true,
                           fillColor: Color(0xFFf3f3f3),
@@ -102,6 +121,7 @@ class _SignUpState extends State<SignUp> {
                         SizedBox(
                           width: 155,
                           child: TextField(
+                            controller: _age,
                             decoration: InputDecoration(
                                 filled: true,
                                 fillColor: Color(0xFFf3f3f3),
