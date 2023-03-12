@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:project2/widgets/appbar.dart';
-import 'package:project2/widgets/drawer.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:project2/models/data.dart';
 
@@ -15,9 +13,7 @@ class _SearchState extends State<Search> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: custAppbar(),
-      // bottomNavigationBar:custBottombar(),
-      endDrawer: custDrawer(),
+
 
       body:SingleChildScrollView(
         child: Column(
@@ -125,8 +121,7 @@ class _SearchState extends State<Search> {
               child: Column(children: [
 
                 //TOP RATED TEXT
-                Row(children: [SizedBox(width: 30,),Text('Top Rated',style: TextStyle(fontSize: 20,fontWeight: FontWeight.w600),),
-                  SizedBox(width: 200,),Text('See All'),SizedBox(width: 10,),Icon(Icons.navigate_next)],),
+                Row(children: [SizedBox(width: 30,),Text('Top Rated',style: TextStyle(fontSize: 20,fontWeight: FontWeight.w600),),],),
 
                 SizedBox(height: 20,),
 
@@ -141,7 +136,7 @@ class _SearchState extends State<Search> {
                 SizedBox(height: 20,),
 
                 Row(children: [SizedBox(width: 30,),Text('Top Rated',style: TextStyle(fontSize: 20,fontWeight: FontWeight.w600),),
-                  SizedBox(width: 200,),Text('See All'),SizedBox(width: 10,),Icon(Icons.navigate_next)],),
+                  ],),
 
                 SizedBox(height: 20,),
 

@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class SignUp extends StatefulWidget {
   final VoidCallback showLogin;
@@ -39,65 +40,67 @@ class _SignUpState extends State<SignUp> {
   }
 
   Widget build(BuildContext context) {
+
     return Scaffold(
-        body: SingleChildScrollView(
-      child: Column(
-        children: [
-          // LOGIN IMAGE
-          Container(
-            height: 300,
-            child: Padding(
-              padding: const EdgeInsets.fromLTRB(0, 50, 0, 0),
+
+      body: SingleChildScrollView(
+        // width: double.maxFinite,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+
+            // LOGIN IMAGE
+
+            Container(
+              margin: EdgeInsets.only(top: 30),
+              // color: Colors.red,
+              height: 230,
               child: Column(
                 children: [
-                  //  LOGIN IMAGE
-                  // CREATE YOUR ACCOUNT TEXT
+                  Image.asset('assets/images/login image.png',height: 150,),
 
-                  Image.asset('assets/images/login image.png'),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Text(
-                    'Create Your Account',
+                  SizedBox(height: 10,),
+
+                  Text('Create Your Account',
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
                   )
-                ],
-              ),
+                ],),
             ),
-          ),
 
-          // FORM CONTAINER
-          Container(
-            height: 400,
-            child: Column(
-              children: [
-                // FORM FOR SIGN UP
+            // FORM CONTAINER
 
-                //USERNAME
-                SizedBox(
+            Container(
+              child: Column(
+
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+
+                  //NAME
+                  SizedBox(
+                      width: 340,
+                      child: TextField(
+                        decoration: InputDecoration(
+                          filled: true,
+                          fillColor: Color(0xFFf3f3f3),
+                          prefixIcon: Icon(CupertinoIcons.profile_circled),
+                          labelText: 'Name',
+                          border: InputBorder.none,
+                        ),
+                      )),
+
+                  SizedBox(
+                    height: 10,
+                  ),
+
+                  //AGE AND GENDER
+                  Container(
                     width: 340,
-                    child: TextField(
-                      decoration: InputDecoration(
-                        filled: true,
-                        fillColor: Color(0xFFf3f3f3),
-                        prefixIcon: Icon(CupertinoIcons.profile_circled),
-                        labelText: 'Name',
-                        border: InputBorder.none,
-                      ),
-                    )),
-
-                SizedBox(
-                  height: 15,
-                ),
-
-                //AGE AND GENDER
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(35, 0, 30, 0),
-                  child: SingleChildScrollView(
                     child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
+                        // AGE
                         SizedBox(
-                          width: 145,
+                          width: 155,
                           child: TextField(
                             decoration: InputDecoration(
                                 filled: true,
@@ -110,11 +113,10 @@ class _SignUpState extends State<SignUp> {
                                 border: InputBorder.none),
                           ),
                         ),
+
+                        // GENDER
                         SizedBox(
-                          width: 47,
-                        ),
-                        SizedBox(
-                          width: 145,
+                          width: 155,
                           child: TextField(
                             decoration: InputDecoration(
                                 filled: true,
@@ -127,102 +129,111 @@ class _SignUpState extends State<SignUp> {
                       ],
                     ),
                   ),
-                ),
 
-                SizedBox(
-                  height: 15,
-                ),
+                  SizedBox(
+                    height: 10,
+                  ),
 
-                //EMAIL
-                SizedBox(
-                    width: 340,
-                    child: TextField(
-                      controller: _email,
-                      decoration: InputDecoration(
-                        filled: true,
-                        fillColor: Color(0xFFf3f3f3),
-                        prefixIcon: Icon(Icons.email_outlined),
-                        labelText: 'Email',
-                        border: InputBorder.none,
-                      ),
-                    )),
+                  //EMAIL
+                  SizedBox(
+                      width: 340,
+                      child: TextField(
+                        controller: _email,
+                        decoration: InputDecoration(
+                          filled: true,
+                          fillColor: Color(0xFFf3f3f3),
+                          prefixIcon: Icon(Icons.email_outlined),
+                          labelText: 'Email',
+                          border: InputBorder.none,
+                        ),
+                      )),
 
-                SizedBox(
-                  height: 15,
-                ),
+                  SizedBox(
+                    height: 10,
+                  ),
 
-                //PASSWORD
-                SizedBox(
-                    width: 340,
-                    child: TextField(
-                      controller: _password,
-                      decoration: InputDecoration(
-                        filled: true,
-                        fillColor: Color(0xFFf3f3f3),
-                        suffixIcon: Icon(CupertinoIcons.eye_slash_fill),
-                        prefixIcon: Icon(CupertinoIcons.lock),
-                        labelText: 'Password',
-                        border: InputBorder.none,
-                      ),
-                    )),
+                  //PASSWORD
+                  SizedBox(
+                      width: 340,
+                      child: TextField(
+                        controller: _password,
+                        decoration: InputDecoration(
+                          filled: true,
+                          fillColor: Color(0xFFf3f3f3),
+                          suffixIcon: Icon(CupertinoIcons.eye_slash_fill),
+                          prefixIcon: Icon(CupertinoIcons.lock),
+                          labelText: 'Password',
+                          border: InputBorder.none,
+                        ),
+                      )),
 
-                SizedBox(
-                  height: 15,
-                ),
+                  SizedBox(
+                    height: 10,
+                  ),
 
-                //CONFIRM PASSWORD
-                SizedBox(
-                    width: 340,
-                    child: TextField(
-                      controller: _confirm,
-                      decoration: InputDecoration(
-                        filled: true,
-                        fillColor: Color(0xFFf3f3f3),
-                        suffixIcon: Icon(CupertinoIcons.eye_slash_fill),
-                        prefixIcon: Icon(CupertinoIcons.lock),
-                        labelText: 'Confirm Password',
-                        border: InputBorder.none,
-                      ),
-                    )),
-              ],
+                  //CONFIRM PASSWORD
+                  SizedBox(
+                      width: 340,
+                      child: TextField(
+                        controller: _confirm,
+                        decoration: InputDecoration(
+                          filled: true,
+                          fillColor: Color(0xFFf3f3f3),
+                          suffixIcon: Icon(CupertinoIcons.eye_slash_fill),
+                          prefixIcon: Icon(CupertinoIcons.lock),
+                          labelText: 'Confirm Password',
+                          border: InputBorder.none,
+                        ),
+                      )),
+                ],
+              ),
             ),
-          ),
 
-          // SIGN UP BUTTON
-          Container(
-            height: 60,
-            child: SizedBox(
-              width: 350,
+            SizedBox(height: 20,),
+            // SIGN UP BUTTON
+            Container(
+              height: 50,
+              width: 340,
               child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(40)),
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
                       primary: Color(0xFFedc6cd),
                       shadowColor: Colors.black,
-                      elevation: 8),
+                      elevation: 5),
                   onPressed: sign_up,
-                  child: Text(
-                    'Sign Up',
+                  child: Text('Sign Up',
                     style: TextStyle(
                         color: Colors.black,
                         fontSize: 20,
                         fontWeight: FontWeight.bold),
                   )),
             ),
-          ),
-          SizedBox(
-            height: 15,
-          ),
 
-          // GestureDetector(
-          //   onTap: widget.showLogin,
-          //   child: Text("Already a user? Signin ",
-          //   style: TextStyle(
-          //       color: Colors.blue,fontSize: 16,fontWeight: FontWeight.bold
-          //   ),),
-          // ),
-        ],
+            SizedBox(height: 40,),
+
+            Center(
+                  child:Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text("Already have an account ?", style: TextStyle(color: Colors.black,fontSize: 15,fontWeight: FontWeight.w400),),
+
+                        GestureDetector(
+                          onTap: widget.showLogin,
+                          child: Text('Sign up',style: TextStyle(color: Colors.red[700],fontSize: 15,fontWeight: FontWeight.w500),),
+
+                        )
+                      ],
+                    ),
+
+                ),
+
+
+
+
+          ],
+        ),
       ),
-    ));
+
+    );
   }
 }

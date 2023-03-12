@@ -1,8 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:project2/widgets/appbar.dart';
-import 'package:project2/widgets/drawer.dart';
+
 import 'package:project2/models/data.dart';
 import 'package:project2/widgets/bookshelf.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -23,12 +22,6 @@ class _HomeState extends State<Home> with TickerProviderStateMixin{
 
     return Scaffold(
       // extendBodyBehindAppBar: true,
-
-      appBar: custAppbar(),
-
-      // bottomNavigationBar:custBottombar(),
-
-      endDrawer: custDrawer(),
 
       body: SingleChildScrollView(
 
@@ -124,15 +117,6 @@ class _HomeState extends State<Home> with TickerProviderStateMixin{
             bookshelf(),
             bookshelf(),
 
-            Center(
-              child: MaterialButton(onPressed: (){
-                FirebaseAuth.instance.signOut();
-              },
-              color: Colors.lightBlue,
-              child: Text("Signout"),),
-            ),
-
-            SizedBox(height: 20,),
 
 
 
