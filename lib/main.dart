@@ -16,6 +16,7 @@ void main() async
 
   runApp(MaterialApp(
     home: Check(),
+    theme: ThemeData(primarySwatch: Colors.pink,),
 
     debugShowCheckedModeBanner: false,
   ));
