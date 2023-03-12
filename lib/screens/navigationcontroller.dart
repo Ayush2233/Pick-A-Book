@@ -33,7 +33,7 @@ class _navcontrollerState extends State<navcontroller> {
         height: 55,
         top: -25,
         curveSize: 75,
-        style: TabStyle.reactCircle,
+        style: TabStyle.react,
         onTap: _onItemTapped,
         initialActiveIndex: currentindex,
         backgroundColor: Colors.white,
