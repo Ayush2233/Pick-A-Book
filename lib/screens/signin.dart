@@ -72,7 +72,7 @@ class _LoginState extends State<Login> {
 
 
             //Signin button container
-            Container(height: 50,child: SizedBox(width: 350,
+            Container(height: 50,child: SizedBox(width: 330,
               child: ElevatedButton(style: ElevatedButton.styleFrom(shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),primary: Color(0xFFedc6cd),shadowColor: Colors.black,elevation: 8),onPressed: (
                   ) {
                 signin();

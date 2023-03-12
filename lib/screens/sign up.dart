@@ -66,36 +66,36 @@ class _SignUpState extends State<SignUp> {
               // FORM FOR SIGN UP
 
               //USERNAME
-              SizedBox(width: 350,child: TextField(decoration: InputDecoration(filled: true,fillColor: Color(0xFFf3f3f3),
+              SizedBox(width: 340,child: TextField(decoration: InputDecoration(filled: true,fillColor: Color(0xFFf3f3f3),
                 prefixIcon: Icon(CupertinoIcons.profile_circled),labelText: 'Name',border: InputBorder.none,),)),
 
               SizedBox(height: 15,),
 
               //AGE AND GENDER
               Padding(
-                padding: const EdgeInsets.fromLTRB(30,0,30,0),
+                padding: const EdgeInsets.fromLTRB(35,0,30,0),
                 child: SingleChildScrollView(
-                  child: Row(children: [SizedBox(width: 160,child: TextField(decoration: InputDecoration(filled: true,fillColor: Color(0xFFf3f3f3),prefixIcon: Icon(CupertinoIcons.group,color: Colors.black,),labelText: "Age",border: InputBorder.none),),),
-                  SizedBox(width: 30,),SizedBox(width: 160,child: TextField(decoration: InputDecoration(filled: true,fillColor: Color(0xFFf3f3f3),prefixIcon: Icon(Icons.male),labelText: "Gender",border: InputBorder.none),),)],),
+                  child: Row(children: [SizedBox(width: 145,child: TextField(decoration: InputDecoration(filled: true,fillColor: Color(0xFFf3f3f3),prefixIcon: Icon(CupertinoIcons.group,color: Colors.black,),labelText: "Age",border: InputBorder.none),),),
+                  SizedBox(width: 47,),SizedBox(width: 145,child: TextField(decoration: InputDecoration(filled: true,fillColor: Color(0xFFf3f3f3),prefixIcon: Icon(Icons.male),labelText: "Gender",border: InputBorder.none),),)],),
                 ),
               ),
 
               SizedBox(height: 15,),
 
               //EMAIL
-              SizedBox(width: 350,child: TextField(controller: _email,decoration: InputDecoration(filled: true,fillColor: Color(0xFFf3f3f3),
+              SizedBox(width: 340,child: TextField(controller: _email,decoration: InputDecoration(filled: true,fillColor: Color(0xFFf3f3f3),
                 prefixIcon: Icon(Icons.email_outlined),labelText: 'Email',border: InputBorder.none,),)),
 
               SizedBox(height: 15,),
 
               //PASSWORD
-              SizedBox(width: 350,child: TextField(controller: _password,decoration: InputDecoration(filled: true,fillColor: Color(0xFFf3f3f3),
+              SizedBox(width: 340,child: TextField(controller: _password,decoration: InputDecoration(filled: true,fillColor: Color(0xFFf3f3f3),
                 suffixIcon: Icon(CupertinoIcons.eye_slash_fill),prefixIcon: Icon(CupertinoIcons.lock),labelText: 'Password',border: InputBorder.none,),)),
 
               SizedBox(height: 15,),
 
               //CONFIRM PASSWORD
-              SizedBox(width: 350,child: TextField(controller: _confirm,decoration: InputDecoration(filled: true,fillColor: Color(0xFFf3f3f3),
+              SizedBox(width: 340,child: TextField(controller: _confirm,decoration: InputDecoration(filled: true,fillColor: Color(0xFFf3f3f3),
                 suffixIcon: Icon(CupertinoIcons.eye_slash_fill),prefixIcon: Icon(CupertinoIcons.lock),labelText: 'Confirm Password',border: InputBorder.none,),)),
 
 
@@ -111,13 +111,16 @@ class _SignUpState extends State<SignUp> {
             ),
             SizedBox(height: 15,),
 
-            GestureDetector(
-              onTap: widget.showLogin,
-              child: Text("Already a user? Signin ",
-              style: TextStyle(
-                  color: Colors.blue,fontSize: 16,fontWeight: FontWeight.bold
-              ),),
-            ),
+
+
+
+            // GestureDetector(
+            //   onTap: widget.showLogin,
+            //   child: Text("Already a user? Signin ",
+            //   style: TextStyle(
+            //       color: Colors.blue,fontSize: 16,fontWeight: FontWeight.bold
+            //   ),),
+            // ),
           ],),
         )
 
