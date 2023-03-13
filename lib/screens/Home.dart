@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import 'package:project2/models/data.dart';
 import 'package:project2/widgets/bookshelf.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -102,7 +101,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin{
               ),
             ),
 
-          SizedBox(height: 10,),
+          // SizedBox(height: 10,),
           
           //  RECOMMENDED FOR YOU
             Container(
@@ -115,7 +114,22 @@ class _HomeState extends State<Home> with TickerProviderStateMixin{
 
           //  BOOKSHELF
             bookshelf(),
-            bookshelf(),
+
+            SizedBox(height: 25,),
+            // bookshelfs(),
+
+            Row(children: [SizedBox(width: 30,),Text('Top Rated',style: GoogleFonts.montserrat(fontSize: 20,fontWeight: FontWeight.w600),),],),
+
+            SizedBox(height: 20,),
+
+            //HORIZONTAL GRID
+
+            Container(height: 150,width: double.maxFinite,
+              child: ListView.builder(scrollDirection: Axis.horizontal
+                  ,itemCount: covers.length,itemBuilder: (context,index){
+                    return Container(margin: EdgeInsets.only(left: 20),height: 160, child: Image.network(covers[index],fit: BoxFit.cover));
+                  }),
+            ),
 
 
 

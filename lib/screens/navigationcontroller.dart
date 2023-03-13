@@ -64,7 +64,7 @@ class _navcontrollerState extends State<navcontroller> {
         curveSize: 60,
         style: TabStyle.react,
         onTap: _onItemTapped,
-        activeColor: Colors.red,
+        // activeColor: Colors.red,
         initialActiveIndex: currentindex,
         backgroundColor: Colors.white,
         // shadowColor: Color(0xffCCC1F8),

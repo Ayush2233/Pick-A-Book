@@ -7,37 +7,50 @@ Widget bookshelf()
 {
   return Center(
     child: Container(
-      width: 380,
+      // color: Colors.red,
+      width: 360,
       child: Stack(
         children:
         [
-          Container(
-            margin: EdgeInsets.only(left: 60),
-            height: 150,
-            width: 300,
-            child: Row(
-              children: [Container(
+          Center(
+            child: Container(
+              // color: Colors.yellow,
+              // margin: EdgeInsets.only(left: 60),
+              height: 150,
+              width: 380,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
 
-                child: CarouselSlider.builder(
-                    options: CarouselOptions(viewportFraction: .35,autoPlay: true),
-                    itemCount: 5,
-                    itemBuilder: (context,index,readIndex)
-                  {
-                    return Container(
-                      margin:EdgeInsets.only(),
-                      // color: Colors.grey,
-                      child: Image.network(covers[index],fit: BoxFit.cover,),
-                      );
-                  },
+                  SizedBox(child: IconButton(icon: Icon(Icons.arrow_back_ios,color: Color(0xff969696).withOpacity(.6),),onPressed:(){}),
+                  ),
+                  Container(
+
+                  child: CarouselSlider.builder(
+                      options: CarouselOptions(viewportFraction: .30,autoPlay: true),
+                      itemCount: 5,
+                      itemBuilder: (context,index,readIndex)
+                    {
+                      return Container(
+                        margin:EdgeInsets.only(),
+                        // color: Colors.grey,
+                        child: Image.network(cover1[index],fit: BoxFit.cover,),
+                        );
+                    },
+                  ),
+                  height: 100,
+                  width: 260,
                 ),
-                height: 100,
-                width: 260,
-              ),]
+                  SizedBox(child: IconButton(icon: Icon(Icons.arrow_forward_ios,color: Color(0xff969696).withOpacity(.6)),onPressed:(){}),
+                  ),
+                ]
 
-            )
+              )
+            ),
           ),
           Positioned(
             child: Container(
+              // color: Colors.grey,
               width: 380,
                 child: Image.asset('assets/images/shelff.png',scale: .1,fit: BoxFit.cover,),),
             top: 114,
