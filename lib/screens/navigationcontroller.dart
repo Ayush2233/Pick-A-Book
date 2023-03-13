@@ -24,6 +24,8 @@ class _navcontrollerState extends State<navcontroller> {
   List<Widget> navlist = [Home(),Search(),community(),bookmark(),marketplace()];
   int currentindex=0;
 
+  final user = FirebaseAuth.instance.currentUser!;
+
   void _onItemTapped(int index) {
     setState(() {
       currentindex = index;
@@ -120,7 +122,7 @@ class _navcontrollerState extends State<navcontroller> {
                   //USERNAME
                   Text("$username",style: GoogleFonts.montserrat(fontSize: 18,fontWeight: FontWeight.bold),),
                   //EMAIL
-                  Text("$email"),
+                  Text(user.email!),
                 ],
               ),),
 
