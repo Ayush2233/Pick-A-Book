@@ -33,6 +33,7 @@ dependencies:
   convex_bottom_bar: ^3.2.0
   google_fonts: ^4.0.3
   carousel_slider: ^4.2.1
+  bottom_sheet: ^3.1.2
 
 
 
