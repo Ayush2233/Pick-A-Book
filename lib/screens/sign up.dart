@@ -39,13 +39,20 @@ class _SignUpState extends State<SignUp> {
 
   Future sign_up() async {
     if (confirm()) {
-      // Auth User
-      FirebaseAuth.instance.createUserWithEmailAndPassword(
-          email: _email.text.trim(), password: _password.text.trim());
 
-      // Add user
-      addUser(_name.text.trim(), _email.text.trim(), int.parse(_age.text.trim()));
-      success= true;
+      try {
+        // Auth User
+        FirebaseAuth.instance.createUserWithEmailAndPassword(
+            email: _email.text.trim(), password: _password.text.trim());
+
+
+        // Add user
+        addUser(
+            _name.text.trim(), _email.text.trim(), int.parse(_age.text.trim()));
+        success = true;
+      }catch(e){
+        print(e);
+      }
 
       }
   }
@@ -223,6 +230,7 @@ class _SignUpState extends State<SignUp> {
                               width: 340,
                               child: TextField(
                                 controller: _password,
+                                obscureText: true,
                                 decoration: InputDecoration(
                                   filled: true,
                                   fillColor: Color(0xFFf3f3f3),
@@ -242,6 +250,7 @@ class _SignUpState extends State<SignUp> {
                               width: 340,
                               child: TextField(
                                 controller: _confirm,
+                                obscureText: true,
                                 decoration: InputDecoration(
                                   filled: true,
                                   fillColor: Color(0xFFf3f3f3),
