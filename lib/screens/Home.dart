@@ -6,6 +6,7 @@ import 'package:project2/widgets/bookshelf.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:project2/widgets/homeslider.dart';
 import 'package:bottom_sheet/bottom_sheet.dart';
+import 'package:like_button/like_button.dart';
 
 
 class Home extends StatefulWidget {
@@ -65,13 +66,6 @@ class _HomeState extends State<Home> with TickerProviderStateMixin{
                         ),
                       ),
 
-                      IconButton(
-                        onPressed: () {},
-                        icon: Icon(
-                          Icons.favorite,
-                          color: Colors.redAccent,
-                        ),
-                      ),
 
                     ],
                   ),
@@ -81,6 +75,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin{
 
               SizedBox(height: 30),
 
+              // IMAGE
               Center(
                 child: Container(
                   child:Image.network(
@@ -88,8 +83,10 @@ class _HomeState extends State<Home> with TickerProviderStateMixin{
                   width: 130,
                 ),
               ),
+
               SizedBox(height: 25),
 
+              //GENRE
               Container(
                 decoration: BoxDecoration(color: Color(0xffDE6077),
                     borderRadius: BorderRadius.all(Radius.circular(20))
@@ -105,8 +102,10 @@ class _HomeState extends State<Home> with TickerProviderStateMixin{
                   ),
                 ),
               ),
+
               SizedBox(height: 20),
 
+              //TITLE
               Center(
                 child:
                 Text(
@@ -118,7 +117,10 @@ class _HomeState extends State<Home> with TickerProviderStateMixin{
                   ),
                 ),
               ),
+
               SizedBox(height: 10),
+
+              //AUTHOR
               Center(
                 child:
                 Text(
@@ -129,18 +131,22 @@ class _HomeState extends State<Home> with TickerProviderStateMixin{
                   ),
                 ),
               ),
+
               SizedBox(height: 35),
 
-
+              // Rating Box
               Container(
-                decoration: BoxDecoration(color: Colors.black,
+                decoration: BoxDecoration(
+                    color: Colors.black,
                     borderRadius: BorderRadius.all(Radius.circular(20))
                 ),
                 height: 80,
                 width: 350,
-                child: Column(mainAxisAlignment: MainAxisAlignment.center,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Row(mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         Container(
                           child: Text(
@@ -208,23 +214,38 @@ class _HomeState extends State<Home> with TickerProviderStateMixin{
                         ),
 
                         Container(
-                          child: Text(
-                            "1100",
-                            style: GoogleFonts.montserrat(
-                              color: Colors.white,
-                              fontSize: 16,
-                            ),
+                          child: LikeButton(
+                            likeCount: 100,
+                            countBuilder: (likecount,isliked,text)
+                            {
+                              return Text(
+                                text,
+                                style: TextStyle(
+                                  color: isliked?Colors.pinkAccent:Colors.white,
+                                  fontSize: 15,
+                                ),
+
+                              );
+                            },
+
                           ),
+                          // child: Text(
+                          //   "1100",
+                          //   style: GoogleFonts.montserrat(
+                          //     color: Colors.white,
+                          //     fontSize: 16,
+                          //   ),
+                          // ),
                         ),
                       ], //children
                     ),
                   ],
                 ),
               ),
+
               SizedBox(height: 45),
 
-
-
+              //BOOK DETAILS
               Column(crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
@@ -266,7 +287,9 @@ class _HomeState extends State<Home> with TickerProviderStateMixin{
                   ),
                 ],
               ),
+
               SizedBox(height: 20),
+
             ],
           ),
         ),
