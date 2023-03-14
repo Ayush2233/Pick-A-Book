@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:project2/models/google.dart';
 
 
 class Login extends StatefulWidget {
@@ -128,7 +129,7 @@ class _LoginState extends State<Login> {
 
                     //GOOGLE
                     ,SizedBox(width: 80,height: 50,
-                      child: OutlinedButton(onPressed: (){}, child: Image.asset('assets/icons/google.png',width: 20,),
+                      child: OutlinedButton(onPressed: ()=> Auth_services().signInwithGoogle(), child: Image.asset('assets/icons/google.png',width: 20,),
                         style: OutlinedButton.styleFrom(shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
                       ),
                     )
