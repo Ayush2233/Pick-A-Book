@@ -6,6 +6,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:confetti/confetti.dart';
+import 'package:project2/utilities/check.dart';
+
 
 class SignUp extends StatefulWidget {
   final VoidCallback showLogin;
@@ -43,6 +45,7 @@ class _SignUpState extends State<SignUp> {
 
       // Add user
       addUser(_name.text.trim(), _email.text.trim(), int.parse(_age.text.trim()));
+      success= true;
 
       }
   }
@@ -64,11 +67,15 @@ class _SignUpState extends State<SignUp> {
                       onPressed: () {
                         _controller.stop();
                         Navigator.pop(context);
+                        setState(() {
+                          success= false;
+                        });
                       },
                     ),
                   ],
                 );
           });
+      // success = false;
     }
   }
 
@@ -89,7 +96,8 @@ class _SignUpState extends State<SignUp> {
     _confirm.dispose();
     _name.dispose();
     _age.dispose();
-    _controller.dispose();
+    // _controller.dispose();
+
     super.dispose();
   }
 
