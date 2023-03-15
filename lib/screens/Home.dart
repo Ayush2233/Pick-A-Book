@@ -433,6 +433,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin{
                         child: Image.network(covers[index],fit: BoxFit.cover)));
                   }),
             ),
+            SizedBox(height: 200,)
 
           ],
         ),

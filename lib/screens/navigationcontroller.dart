@@ -38,6 +38,9 @@ class _navcontrollerState extends State<navcontroller> {
     return Scaffold(
 
       appBar: AppBar(
+        leading: Container(padding: EdgeInsets.only(left: 10),
+          child: Image.asset('assets/images/logo.png'),),
+        leadingWidth: 110,
         backgroundColor: Colors.transparent,
 
         elevation: 0,

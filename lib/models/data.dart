@@ -21,6 +21,14 @@ var cover1=['https://d1csarkz8obe9u.cloudfront.net/posterpreviews/teal-and-orang
   'https://static-cse.canva.com/blob/1016185/1024w-bpueJw9ttIE.jpg',
   'https://cdn.myportfolio.com/560d16623f9c2df9615744dfab551b3d/e50c016f-b6a8-4666-8fb8-fe6bd5fd9fec_rw_1920.jpeg?h=dc627898fc5eac88aa791fb2b124ecbd',];
 
+
+var postimage=[
+  'https://images.pexels.com/photos/2465877/pexels-photo-2465877.jpeg?auto=compress&cs=tinysrgb&w=600',
+  'https://images.pexels.com/photos/2099691/pexels-photo-2099691.jpeg?auto=compress&cs=tinysrgb&w=600',
+  'https://images.pexels.com/photos/4273468/pexels-photo-4273468.jpeg?auto=compress&cs=tinysrgb&w=600',
+  'https://images.pexels.com/photos/1005012/pexels-photo-1005012.jpeg?auto=compress&cs=tinysrgb&w=600',
+  'https://images.pexels.com/photos/7249178/pexels-photo-7249178.jpeg?auto=compress&cs=tinysrgb&w=600',
+];
 String user = "Ayush";
 String username = "Ayush Agarwal";
 String email = "ayush.aggarwal.21cse@bmu.edu.in";
