@@ -25,10 +25,42 @@ class _HomeState extends State<Home> with TickerProviderStateMixin{
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text("Pick-a-book"),
-        centerTitle: true,
+
+        // backgroundColor: Colors.black,
         backgroundColor: Color(0xffDE6077),
         elevation: 0,
+        actions:
+        [
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8),
+            child: LikeButton(
+              likeBuilder: (isliked)
+              {
+                return Icon(
+                  Icons.bookmark_add,
+                  color: isliked?Colors.yellowAccent:Colors.white,
+
+                );
+              },
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8),
+            child: LikeButton(
+              likeBuilder: (isliked)
+              {
+                return Icon(
+                  Icons.bookmark_added,
+                  color: isliked?Colors.yellowAccent:Colors.white,
+
+                );
+              },
+            ),
+          ),
+
+
+
+        ],
       ),
       body: Padding(
         padding: EdgeInsets.fromLTRB(30, 40, 30, 10),
@@ -37,41 +69,6 @@ class _HomeState extends State<Home> with TickerProviderStateMixin{
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  IconButton(
-                    onPressed: () {},
-                    icon: Icon(
-                      Icons.arrow_back_ios_new,
-                      color: Colors.black,
-                    ),
-                  ),
-
-                  Row(mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      IconButton(
-                        onPressed: () {},
-                        icon: Icon(
-                          Icons.bookmark_add,
-                          color: Colors.black,
-                        ),
-                      ),
-
-                      IconButton(
-                        onPressed: () {},
-                        icon: Icon(
-                          Icons.bookmark_added_outlined,
-                          color: Colors.black,
-                        ),
-                      ),
-
-
-                    ],
-                  ),
-
-                ],
-              ),
 
               SizedBox(height: 30),
 
@@ -423,8 +420,10 @@ class _HomeState extends State<Home> with TickerProviderStateMixin{
             //HORIZONTAL GRID
 
             Container(height: 150,width: double.maxFinite,
-              child: ListView.builder(scrollDirection: Axis.horizontal
-                  ,itemCount: covers.length,itemBuilder: (context,index){
+              child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: covers.length,
+                  itemBuilder: (context,index){
 
                     return GestureDetector
                       ( onTap: (){bottomup();},
@@ -434,9 +433,6 @@ class _HomeState extends State<Home> with TickerProviderStateMixin{
                         child: Image.network(covers[index],fit: BoxFit.cover)));
                   }),
             ),
-
-
-
 
           ],
         ),

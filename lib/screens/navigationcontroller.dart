@@ -34,6 +34,7 @@ class _navcontrollerState extends State<navcontroller> {
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
 
       appBar: AppBar(
@@ -68,7 +69,6 @@ class _navcontrollerState extends State<navcontroller> {
         initialActiveIndex: currentindex,
         backgroundColor: Colors.white,
         // shadowColor: Color(0xffCCC1F8),
-
 
         items: [
 

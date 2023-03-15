@@ -18,6 +18,7 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUp> {
+
   final _email = TextEditingController();
   final _password = TextEditingController();
   final _confirm = TextEditingController();
@@ -51,6 +52,7 @@ class _SignUpState extends State<SignUp> {
             _name.text.trim(), _email.text.trim(), int.parse(_age.text.trim()));
         success = true;
       }catch(e){
+
         print(e);
       }
 

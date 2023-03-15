@@ -14,13 +14,14 @@ Widget homeslider(String url ,int index)
 Widget homeslidernew()
 {
   return CarouselSlider.builder(
+
     itemCount: covers.length,
     options: CarouselOptions(
       // viewportFraction: .35,
       viewportFraction: .28,
       height: 150,
       autoPlay: true,
-      autoPlayInterval: Duration(seconds: 2) ,
+      autoPlayInterval: Duration(seconds: 3) ,
       enlargeCenterPage: true,
       enlargeStrategy: CenterPageEnlargeStrategy.height,
       pageSnapping: false,
