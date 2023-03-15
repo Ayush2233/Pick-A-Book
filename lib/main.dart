@@ -1,4 +1,5 @@
 import 'package:firebase_core/firebase_core.dart';
+import 'package:project2/models/db_connect.dart';
 import 'package:project2/screens/navigationcontroller.dart';
 import 'package:project2/screens/signin.dart';
 import 'package:project2/utilities/check.dart';
@@ -13,6 +14,7 @@ void main() async
 {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  await MongoDatabase.connect();
 
   runApp(MaterialApp(
     home: Check(),
