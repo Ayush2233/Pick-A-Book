@@ -11,7 +11,9 @@ class community extends StatefulWidget {
 class _communityState extends State<community> {
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
+      floatingActionButton: FloatingActionButton(child: Icon(Icons.add),onPressed: (){},backgroundColor: Color(0xffDE6077),),
       body:ListView.builder(
         itemBuilder: (context, index) {
           return Padding(
