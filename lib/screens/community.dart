@@ -13,7 +13,7 @@ class _communityState extends State<community> {
   Widget build(BuildContext context) {
 
     return Scaffold(
-      floatingActionButton: FloatingActionButton(child: Icon(Icons.add),onPressed: (){},backgroundColor: Color(0xffDE6077),),
+      // floatingActionButton: FloatingActionButton(child: Icon(Icons.add),onPressed: (){},backgroundColor: Color(0xffDE6077),),
       body:ListView.builder(
         itemBuilder: (context, index) {
           return Padding(
