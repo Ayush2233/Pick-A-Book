@@ -1,7 +1,7 @@
 import 'package:mongo_dart/mongo_dart.dart' as M;
 
 import 'connection.dart';
-import 'user_modeldart';
+import 'user_model.dart';
 
 Future<void> insertDB(String uid, String name , String email, int age, String gender) async
 {

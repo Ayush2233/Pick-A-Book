@@ -5,7 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:project2/models/app_to_db.dart';
 import 'package:project2/models/connection.dart';
-import 'package:project2/models/user_modeldart';
+import 'package:project2/models/user_model.dart';
 import 'package:project2/screens/completeProfile.dart';
 import 'package:project2/utilities/check.dart';
 import 'package:mongo_dart/mongo_dart.dart' as M;
