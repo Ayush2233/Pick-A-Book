@@ -1,5 +1,6 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'sign up.dart';
 import 'package:project2/screens/marketplace.dart';
 import 'package:project2/screens/community.dart';
 import 'package:project2/screens/bookmark.dart';
@@ -143,7 +144,8 @@ class _navcontrollerState extends State<navcontroller> {
 
                   // SIGNOUT BUTTON
                   ListTile(
-                    onTap:(){FirebaseAuth.instance.signOut();},
+                    onTap:(){FirebaseAuth.instance.signOut();
+                      sign=false;},
                     leading: Icon(Icons.logout_outlined,color: Colors.black,),
                     title: Text("Sign Out"),),
 

@@ -1,12 +1,14 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:project2/models/book_model.dart';
 import 'package:project2/models/data.dart';
 import 'package:project2/widgets/bookshelf.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:project2/widgets/homeslider.dart';
 import 'package:bottom_sheet/bottom_sheet.dart';
 import 'package:like_button/like_button.dart';
+import 'package:project2/models/connection.dart';
 
 
 class Home extends StatefulWidget {
@@ -17,7 +19,26 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> with TickerProviderStateMixin{
+  var fetchdata;
+  @override
+  void initState() {
+    // TODO: implement initState
+    fetchdata = MongoDatabase.fetchbooks();
+    print("INIT DONE");
+    print(fetchdata);
+    super.initState();
+  }
 
+  Widget bookscard(Bookmap data)
+  {
+    return GestureDetector
+      (     child: Container(
+            margin: EdgeInsets.only(left: 20),
+            height: 160,
+            // child: Text('${data.bookAverageRating}'),
+            child: Image.network('${data.coverPage}',fit: BoxFit.cover),
+        ));
+  }
 
 
   Widget _bottomslider(BuildContext context,ScrollController scrollcontroller,double bottomsheetoffset)
@@ -433,7 +454,38 @@ class _HomeState extends State<Home> with TickerProviderStateMixin{
                         child: Image.network(covers[index],fit: BoxFit.cover)));
                   }),
             ),
-            SizedBox(height: 200,)
+
+            SizedBox(height: 20,),
+
+      Container(height: 150,width: double.maxFinite,
+        child: FutureBuilder(
+            future: fetchdata,
+            builder: (context, AsyncSnapshot snapshot){
+              if(snapshot.connectionState==ConnectionState.waiting){
+                return Center(
+                  child: CircularProgressIndicator(),
+                );
+              }
+              else{
+                if(snapshot.hasData){
+                  return ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: snapshot.data.length,
+                      itemBuilder: (context,index){
+                        return bookscard(Bookmap.fromJson(snapshot.data[index]));
+                      }
+                  );
+                }
+                else{
+                  return Center(
+                    child: Text('No Data Available'),
+                  );
+                }
+              }
+            }
+        ),
+      )
+
 
           ],
         ),

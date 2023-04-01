@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:project2/models/google.dart';
+import 'package:project2/utilities/google.dart';
 
 
 class Login extends StatefulWidget {
@@ -20,9 +20,52 @@ class _LoginState extends State<Login> {
   Future signin() async{
     try {
       await FirebaseAuth.instance.signInWithEmailAndPassword(
-          email: _email.text.trim(), password: _password.text.trim());
-    }catch(e){
-      print(e);
+          email: _email.text.trim(), password: _password.text.trim());}
+
+    on FirebaseAuthException catch(e)
+    {
+      switch (e.code) {
+        case "ERROR_EMAIL_ALREADY_IN_USE":
+        case "account-exists-with-different-credential":
+        case "email-already-in-use":
+        ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text("email-already-in-use")));
+          break;
+        case "ERROR_WRONG_PASSWORD":
+        case "wrong-password":
+        ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text("Wrong email/password combination")));
+          break;
+        case "ERROR_USER_NOT_FOUND":
+        case "user-not-found":
+        ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text("No user found with this email")));
+          break;
+        case "ERROR_USER_DISABLED":
+        case "user-disabled":
+        ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text("User disabled")));
+          break;
+        case "ERROR_TOO_MANY_REQUESTS":
+        case "operation-not-allowed":
+        ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text("Too many requests to log into this account")));
+          break;
+        case "ERROR_OPERATION_NOT_ALLOWED":
+        case "operation-not-allowed":
+        ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text("error, please try again later")));
+          break;
+        case "ERROR_INVALID_EMAIL":
+        case "invalid-email":
+        ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text("Email address is invalid.")));
+          break;
+        default:
+          ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(content: Text("Login failed. Please try again.")));
+          break;
+      }
     }
   }
 
@@ -78,12 +121,22 @@ class _LoginState extends State<Login> {
 
 
             //Signin button container
+
             Container(height: 60,child: SizedBox(width: 350,
-              child: ElevatedButton(style: ElevatedButton.styleFrom(shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),primary: Color(0xFFedc6cd),shadowColor: Colors.black,elevation: 8),onPressed: (
-                  ) {
-                signin();
-              },
-                  child: Text('Sign In',style: TextStyle(color: Colors.black,fontSize: 20,fontWeight: FontWeight.bold),)),
+              child:
+              ElevatedButton(
+                 onPressed: ()
+                 {
+                   signin();},
+                  style: ElevatedButton.styleFrom(
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
+                      side: BorderSide(color: Colors.pink,width: 2),
+                      backgroundColor: Colors.pink
+                    // primary: Color(0xFFedc6cd),
+                    // shadowColor: Colors.black,
+                    // elevation: 5
+                  ),
+                  child: Text('Sign In',style: TextStyle(color: Colors.white,fontSize: 20,fontWeight: FontWeight.bold),)),
             ),
             ),
 
