@@ -23,6 +23,8 @@ class bookdetails
         elevation: 0,
         actions:
         [
+          //Bookmark Button
+
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8),
             child: LikeButton(
@@ -36,6 +38,9 @@ class bookdetails
               },
             ),
           ),
+
+          //Already read Button
+
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8),
             child: LikeButton(
@@ -50,28 +55,26 @@ class bookdetails
             ),
           ),
 
-
-
         ],
       ),
 
 
       body: Padding(
         padding: EdgeInsets.fromLTRB(30, 40, 30, 10),
+
         child: SingleChildScrollView(
           child: Column(
 
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
 
-              SizedBox(height: 30),
+              SizedBox(height: 15),
 
               // IMAGE
               Center(
                 child: Container(
-                  child:Image.network(
-                      "${data.coverPage}"),
-                  width: 130,
+                  child:Image.network("${data.coverPage}",fit: BoxFit.cover,),
+                  width: 135,
                 ),
               ),
 
@@ -94,11 +97,11 @@ class bookdetails
 
               //TITLE
               Center(
-                child: Text(
-                  "${data.title}",
+                child: Text("${data.title}",
+                  textAlign: TextAlign.center,
                   style: GoogleFonts.montserrat(
                     color: Colors.black,
-                    fontSize: 20,
+                    fontSize: 18,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -108,14 +111,12 @@ class bookdetails
 
               //AUTHOR
               Center(
-                child:
-                Text(
-                  "Jennifer Lynn Barnes",
+                child: Text("${data.author}",
+                  textAlign: TextAlign.center,
                   style: GoogleFonts.montserrat(
                     color: Colors.black,
                     fontSize: 15,
-                  ),
-                ),
+                  ),),
               ),
 
               SizedBox(height: 35),
@@ -156,24 +157,16 @@ class bookdetails
                           ),
                         ),
 
-                        Container(
-                          child: Text(
-                            "Likes",
-                            style: GoogleFonts.montserrat(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                              fontSize: 16,
-                            ),
-                          ),
-                        ),
                       ], //children
                     ),
+
                     SizedBox(height: 10),
+
                     Row(mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         Container(
                           child: Text(
-                            "Oxford",
+                            "${data.publisher}",
                             style: GoogleFonts.montserrat(
                               color: Colors.white,
                               fontSize: 16,
@@ -185,7 +178,7 @@ class bookdetails
                           child: Row(
                             children: [
                               Text(
-                                "4 ",
+                                "${data.bookAverageRating}",
                                 style: GoogleFonts.montserrat(
                                   color: Colors.white,
                                   fontSize: 16,
@@ -199,30 +192,7 @@ class bookdetails
                           ),
                         ),
 
-                        Container(
-                          child: LikeButton(
-                            likeCount: 100,
-                            countBuilder: (likecount,isliked,text)
-                            {
-                              return Text(
-                                text,
-                                style: TextStyle(
-                                  color: isliked?Colors.pinkAccent:Colors.white,
-                                  fontSize: 15,
-                                ),
 
-                              );
-                            },
-
-                          ),
-                          // child: Text(
-                          //   "1100",
-                          //   style: GoogleFonts.montserrat(
-                          //     color: Colors.white,
-                          //     fontSize: 16,
-                          //   ),
-                          // ),
-                        ),
                       ], //children
                     ),
                   ],
@@ -244,8 +214,7 @@ class bookdetails
                   ),
                   SizedBox(height: 15),
                   Text(
-                    "Avery Grambs has a plan for a better future: "
-                        "survive high school, win a scholarship, and get out. But her fortunes...",
+                    "${data.description}",
                     style: TextStyle(
                       color: Colors.black,
                       fontSize: 15,
@@ -263,9 +232,8 @@ class bookdetails
                   ),
                   SizedBox(height: 15),
                   Text(
-                    "Published Year : 2021 \n"
-                        "Language : en \n"
-                        "Publisher : Oxford",
+                    "Published Year : ${data.publisher} \n"
+                        "Publisher : ${data.publicationYear}",
                     style: TextStyle(
                       color: Colors.black,
                       fontSize: 15,
@@ -286,10 +254,6 @@ class bookdetails
   void bottomup(BuildContext context)
   {
     showFlexibleBottomSheet(context: context,
-      // isScrollControlled: true,
-      // anchorPoint: Offset(50,200),
-      // shape: RoundedRectangleBorder(borderRadius: BorderRadius.only(topLeft: Radius.circular(20),topRight: Radius.circular(20))),
-      // enableDrag: true,
       isExpand: true,
       maxHeight: 1,
       minHeight: 0,
