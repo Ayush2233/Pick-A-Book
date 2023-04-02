@@ -13,11 +13,12 @@ class Bookmap {
     required this.description,
     required this.publicationYear,
     required this.publisher,
+    required this.ratingcount,
     required this.bookAverageRating,
     required this.coverPage,
     required this.genre,
     required this.author,
-
+    required this.likes,
   });
 
   ObjectId id;
@@ -26,11 +27,12 @@ class Bookmap {
   String description;
   int publicationYear;
   String publisher;
-  // int ratingcount;
+  int ratingcount;
   double bookAverageRating;
   String coverPage;
   String genre;
   String author;
+  int likes;
 
 
   factory Bookmap.fromJson(Map<String, dynamic> json) => Bookmap(
@@ -40,11 +42,13 @@ class Bookmap {
     description: json["book_description"],
     publicationYear: json["publication_year"],
     publisher: json["publisher"],
-    // ratingcount: json["ratings_count"],
+    ratingcount: json["ratings_count"],
     bookAverageRating: json["book_average_rating"]?.toDouble(),
     coverPage: json["cover_page"],
     genre: json["genre"],
     author: json["author_name"],
+    likes: json["likes"],
+
 
   );
 
@@ -55,11 +59,12 @@ class Bookmap {
     "book_description": description,
     "publication_year": publicationYear,
     "publisher": publisher,
-    // "ratings_count": ratingcount,
+    "ratings_count": ratingcount,
     "book_average_rating": bookAverageRating,
     "cover_page": coverPage,
     "genre": genre,
     "author_name": author,
+    "likes": likes,
 
   };
 }

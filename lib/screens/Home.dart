@@ -23,34 +23,27 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> with TickerProviderStateMixin{
 
   var fetchdata;
+  var fetchnewdata;
+  var toprateddata;
+  var marveldata;
+  var disneydata;
+  var Romancedata;
 
 
   @override
   void initState() {
     // TODO: implement initState
     fetchdata = MongoDatabase.fetchbooks();
+    fetchnewdata= MongoDatabase.fetchnewbooks();
+    toprateddata= MongoDatabase.fetchtopratedbooks();
+    marveldata= MongoDatabase.fetchmarvelbooks();
+    disneydata= MongoDatabase.fetchdisneybooks();
+    Romancedata=MongoDatabase.fetchRomancebooks();
+
     print("INIT DONE");
     print(fetchdata);
     super.initState();
   }
-
-  // Widget bookscard(Bookmap data)
-  // {
-  //   return GestureDetector
-  //
-  //     (     onTap: ()
-  //             {
-  //               var Book= bookdetails(data: data);
-  //               Book.bottomup(context);
-  //             },
-  //           child: Container(
-  //           margin: EdgeInsets.only(left: 20),
-  //           height: 160,
-  //           // child: Text('${data.bookAverageRating}'),
-  //           child: Image.network('${data.coverPage}',fit: BoxFit.cover),
-  //       ));
-  // }
-
 
 
   @override
@@ -134,8 +127,8 @@ class _HomeState extends State<Home> with TickerProviderStateMixin{
                   controller: _tabController,
                   children:
               [
-                carouselslider(fetchdata),
-                carouselslider(fetchdata),
+                carouselslider(fetchnewdata),
+                carouselslider(toprateddata),
               ]
               ),
             ),
@@ -158,63 +151,46 @@ class _HomeState extends State<Home> with TickerProviderStateMixin{
 
             //HORIZONTAL GRID
 
-            Row(children: [SizedBox(width: 30,),Text('Top Rated',style: GoogleFonts.montserrat(fontSize: 20,fontWeight: FontWeight.w600),),],),
-
-            SizedBox(height: 20,),
-
-            Container(height: 150,width: double.maxFinite,
-              child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: covers.length,
-                  itemBuilder: (context,index){
-
-                    return GestureDetector
-                      (
-                        child: Container(
-                        margin: EdgeInsets.only(left: 20),
-                        height: 160,
-                        child: Image.network(covers[index],fit: BoxFit.cover)));
-                  }),
-            ),
-
-            SizedBox(height: 20,),
-
-            Container(
-              height: 150,
-              width: double.maxFinite,
-              child: FutureBuilder(
-                  future: fetchdata,
-                  builder: (context, AsyncSnapshot snapshot)
-                  {
-                    if(snapshot.connectionState==ConnectionState.waiting)
-                    {
-                      return Center(
-                        child: CircularProgressIndicator(),);
-                    }
-                    else
-                    {
-                      if(snapshot.hasData)
-                      {
-                        return ListView.builder(
-                            scrollDirection: Axis.horizontal,
-                            itemCount: snapshot.data.length,
-                            itemBuilder: (context,index)
-                            {
-                              return bookscard(Bookmap.fromJson(snapshot.data[index]),context);
-                            }
-                            );
-                      }
-                      else
-                      {
-                        return Center(child: Text('No Data Available'),);
-                      }
-                    }
-                  }),
-            ),
+            //TOP RATED
+            Row(children: [SizedBox(width: 30,),
+              Text('Top Rated',style: GoogleFonts.montserrat(fontSize: 20,fontWeight: FontWeight.w600),),],),
 
             SizedBox(height: 20,),
 
             futureslider(fetchdata),
+
+            SizedBox(height: 20,),
+
+            //MARVEL
+            Row(children: [SizedBox(width: 30,),
+              Text('Marvel',style: GoogleFonts.montserrat(fontSize: 20,fontWeight: FontWeight.w600),),],),
+
+
+            SizedBox(height: 20,),
+
+            futureslider(marveldata),
+
+            SizedBox(height: 20,),
+
+
+            //DISNEY
+            Row(children: [SizedBox(width: 30,),
+              Text('Disney',style: GoogleFonts.montserrat(fontSize: 20,fontWeight: FontWeight.w600),),],),
+
+            SizedBox(height: 20,),
+
+            futureslider(disneydata),
+
+            SizedBox(height: 20,),
+
+            //FANTSY AND PARANORMAL
+            Row(children: [SizedBox(width: 30,),
+              Text('Romance',style: GoogleFonts.montserrat(fontSize: 20,fontWeight: FontWeight.w600),),],),
+
+            SizedBox(height: 20,),
+
+            futureslider(Romancedata),
+
 
           ],
         ),
