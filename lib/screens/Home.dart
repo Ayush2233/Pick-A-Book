@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:project2/models/book_model.dart';
 import 'package:project2/models/data.dart';
+import 'package:project2/models/user_model.dart';
 import 'package:project2/widgets/bookshelf.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:project2/widgets/homeslider.dart';
@@ -10,11 +11,15 @@ import 'package:bottom_sheet/bottom_sheet.dart';
 import 'package:like_button/like_button.dart';
 import 'package:project2/models/connection.dart';
 import 'bookdetails.dart';
+import 'navigationcontroller.dart';
 import 'package:project2/widgets/bookcard.dart';
+
+
 
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
+
 
   @override
   State<Home> createState() => _HomeState();
@@ -22,26 +27,37 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> with TickerProviderStateMixin{
 
-  var fetchdata;
+
+
+
   var fetchnewdata;
+  var trendingdata;
   var toprateddata;
+  var childrendata;
   var marveldata;
-  var disneydata;
   var Romancedata;
+  var comicdata;
+  var fantasydata;
+  var youngadultdata;
+  var scholasticdata;
+
 
 
   @override
   void initState() {
     // TODO: implement initState
-    fetchdata = MongoDatabase.fetchbooks();
     fetchnewdata= MongoDatabase.fetchnewbooks();
+    trendingdata=MongoDatabase.fetchtrendbooks();
     toprateddata= MongoDatabase.fetchtopratedbooks();
+    childrendata= MongoDatabase.fetchChildrenbooks();
     marveldata= MongoDatabase.fetchmarvelbooks();
-    disneydata= MongoDatabase.fetchdisneybooks();
     Romancedata=MongoDatabase.fetchRomancebooks();
+    comicdata=MongoDatabase.fetchComicbooks();
+    fantasydata=MongoDatabase.fetchFantbooks();
+    youngadultdata=MongoDatabase.fetchYoungadultbooks();
+    scholasticdata=MongoDatabase.fetchscholasticbooks();
 
     print("INIT DONE");
-    print(fetchdata);
     super.initState();
   }
 
@@ -53,7 +69,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin{
 
     return Scaffold(
       // extendBodyBehindAppBar: true,
-
+      // backgroundColor: darktheme?Colors.white:Colors.black,
       body: SingleChildScrollView(
 
         child: Column(
@@ -77,12 +93,13 @@ class _HomeState extends State<Home> with TickerProviderStateMixin{
                   Text("Hi,$user",
                     style: GoogleFonts.montserrat(
                       fontSize: 15,
-                      color: Color(0xff969696),),),
+                      color: darktheme?Colors.white:Color(0xff969696),),),
 
                   SizedBox(height: 5,),
 
                   Text("Discover Latest Books",
                     style: GoogleFonts.montserrat(
+                      color: darktheme?Colors.white:Colors.black,
                       fontSize: 25,
                       fontWeight: FontWeight.w600,
                       ),)
@@ -128,7 +145,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin{
                   children:
               [
                 carouselslider(fetchnewdata),
-                carouselslider(toprateddata),
+                carouselslider(trendingdata),
               ]
               ),
             ),
@@ -157,14 +174,45 @@ class _HomeState extends State<Home> with TickerProviderStateMixin{
 
             SizedBox(height: 20,),
 
-            futureslider(fetchdata),
+            futureslider(toprateddata),
 
             SizedBox(height: 20,),
 
+            //Fantasy
+            Row(children: [SizedBox(width: 30,),
+              Text("Fantastic Fantasies",style: GoogleFonts.montserrat(fontSize: 20,fontWeight: FontWeight.w600),),],),
+
+            SizedBox(height: 20,),
+
+            futureslider(fantasydata),
+
+            SizedBox(height: 20,),
+
+
+            //Comic World
+            Row(children: [SizedBox(width: 30,),
+              Text('Comic World',style: GoogleFonts.montserrat(fontSize: 20,fontWeight: FontWeight.w600),),],),
+
+            SizedBox(height: 20,),
+
+            futureslider(comicdata),
+
+            SizedBox(height: 20,),
+
+            //Romance
+            Row(children: [SizedBox(width: 30,),
+              Text("Top Romance Novels",style: GoogleFonts.montserrat(fontSize: 20,fontWeight: FontWeight.w600),),],),
+
+            SizedBox(height: 20,),
+
+            futureslider(Romancedata),
+
+            SizedBox(height: 20,),
+
+
             //MARVEL
             Row(children: [SizedBox(width: 30,),
-              Text('Marvel',style: GoogleFonts.montserrat(fontSize: 20,fontWeight: FontWeight.w600),),],),
-
+              Text('Explore the World of Marvel',style: GoogleFonts.montserrat(fontSize: 20,fontWeight: FontWeight.w600),),],),
 
             SizedBox(height: 20,),
 
@@ -173,23 +221,39 @@ class _HomeState extends State<Home> with TickerProviderStateMixin{
             SizedBox(height: 20,),
 
 
-            //DISNEY
+            //Young Adult
             Row(children: [SizedBox(width: 30,),
-              Text('Disney',style: GoogleFonts.montserrat(fontSize: 20,fontWeight: FontWeight.w600),),],),
+              Text('Young Adult',style: GoogleFonts.montserrat(fontSize: 20,fontWeight: FontWeight.w600),),],),
 
             SizedBox(height: 20,),
 
-            futureslider(disneydata),
+            futureslider(youngadultdata),
 
             SizedBox(height: 20,),
 
-            //FANTSY AND PARANORMAL
+
             Row(children: [SizedBox(width: 30,),
-              Text('Romance',style: GoogleFonts.montserrat(fontSize: 20,fontWeight: FontWeight.w600),),],),
+              Text('From Scolastic Inc.',style: GoogleFonts.montserrat(fontSize: 20,fontWeight: FontWeight.w600),),],),
 
             SizedBox(height: 20,),
 
-            futureslider(Romancedata),
+            futureslider(scholasticdata),
+
+            SizedBox(height: 20,),
+
+
+            //Best Children's Books
+            Row(children: [SizedBox(width: 30,),
+              Text("Best Children's Books",style: GoogleFonts.montserrat(fontSize: 20,fontWeight: FontWeight.w600),),],),
+
+            SizedBox(height: 20,),
+
+            futureslider(childrendata),
+
+            SizedBox(height: 20,),
+
+
+
 
 
           ],

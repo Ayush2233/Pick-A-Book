@@ -14,6 +14,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:project2/models/connection.dart';
 
+bool darktheme=false;
 
 class navcontroller extends StatefulWidget {
   const navcontroller({Key? key}) : super(key: key);
@@ -24,12 +25,20 @@ class navcontroller extends StatefulWidget {
 
 class _navcontrollerState extends State<navcontroller> {
   var  currentUser;
-  List<Widget> navlist = [Home(),Search(),community(),bookmark(),marketplace()];
+  var fetchuser;
+  List<Widget> navlist =[];
   int currentindex=0;
 
 
   final user = FirebaseAuth.instance.currentUser!;
-  var fetchuser;
+
+
+  void darkmode()
+  {
+    setState(() {
+      darktheme=!darktheme;
+    });
+  }
 
   void _onItemTapped(int index) {
     setState(() {
@@ -40,6 +49,9 @@ class _navcontrollerState extends State<navcontroller> {
   @override
   void initState() {
   fetchuser = MongoDatabase.fetchUserData();
+  // var x=Usermap.fromJson(fetchuser);
+  navlist=[Home(),Search(),community(),bookmark(),marketplace()];
+
     super.initState();
   }
 
@@ -48,7 +60,7 @@ class _navcontrollerState extends State<navcontroller> {
     
 
     return Scaffold(
-
+      backgroundColor: darktheme?Colors.black:Colors.white,
       appBar: AppBar(
         leading: Container(padding: EdgeInsets.only(left: 10),
           child: Image.asset('assets/images/logo.png'),),
@@ -58,6 +70,7 @@ class _navcontrollerState extends State<navcontroller> {
         elevation: 0,
         actions:
         [
+          IconButton(onPressed: (){darkmode();}, icon: Icon(Icons.dark_mode,color:darktheme?Colors.white:Colors.black,)),
           Builder(
             builder: (context) {
               return Padding(
@@ -82,7 +95,7 @@ class _navcontrollerState extends State<navcontroller> {
         onTap: _onItemTapped,
         // activeColor: Colors.red,
         initialActiveIndex: currentindex,
-        backgroundColor: Colors.white,
+        backgroundColor: darktheme?Colors.black:Colors.white,
         // shadowColor: Color(0xffCCC1F8),
 
         items: [
@@ -104,9 +117,6 @@ class _navcontrollerState extends State<navcontroller> {
         future: fetchuser,
         builder: (context, AsyncSnapshot snapshot) {
           if(snapshot.hasData) {
-            setState(() {
-              currentUser = Usermap.fromJson(snapshot.data);
-            });
             return Container(
               child: returndrawer(Usermap.fromJson(snapshot.data)),
             );

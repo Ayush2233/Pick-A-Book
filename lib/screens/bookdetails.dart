@@ -167,11 +167,14 @@ class bookdetails
                     Row(mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         Container(
-                          child: Text(
-                            "${data.publisher}",
-                            style: GoogleFonts.montserrat(
-                              color: Colors.white,
-                              fontSize: 16,
+                          child: Container(
+                            width: 200,
+                            child: Text(
+                              "${data.publisher}",
+                              style: GoogleFonts.montserrat(
+                                color: Colors.white,
+                                fontSize: 16,
+                              ),
                             ),
                           ),
                         ),

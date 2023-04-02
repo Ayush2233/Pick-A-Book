@@ -62,7 +62,7 @@ Widget carouselslider(Future future)
             {
               return CarouselSlider.builder(
 
-                itemCount: covers.length,
+                itemCount: snapshot.data.length,
                 options: CarouselOptions(
                   // viewportFraction: .35,
                   viewportFraction: .28,
