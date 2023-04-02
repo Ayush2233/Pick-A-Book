@@ -47,8 +47,19 @@ class MongoDatabase{
 
   static Future<List<Map<String, dynamic>>> fetchbooks() async
   {
-    final result = await bookCollection.find({"book_average_rating":3.5}).toList();
-    // print('result '+ result);
+    final result = await bookCollection.find(where.eq('book_average_rating', 3.5)).toList();
+    return result;
+  }
+  
+  static Future<List<Map<String, dynamic>>> fetchtopratedbooks() async
+  {
+    final result = await bookCollection.find().toList();
+    return result;
+  }
+  
+  static Future<List<Map<String, dynamic>>> fetchtrendibooks() async
+  {
+    final result = await bookCollection.find().toList();
     return result;
   }
 

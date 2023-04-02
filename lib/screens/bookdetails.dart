@@ -232,8 +232,8 @@ class bookdetails
                   ),
                   SizedBox(height: 15),
                   Text(
-                    "Published Year : ${data.publisher} \n"
-                        "Publisher : ${data.publicationYear}",
+                    "Published Year : ${data.publicationYear} \n"
+                        "Publisher : ${data.publisher}",
                     style: TextStyle(
                       color: Colors.black,
                       fontSize: 15,
@@ -262,5 +262,4 @@ class bookdetails
       builder: _bottomslider,);
   }
 }
-
 
