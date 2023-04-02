@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:mongo_dart/mongo_dart.dart';
 import 'package:project2/models/user_model.dart';
 import 'package:project2/screens/navigationcontroller.dart';
@@ -10,6 +11,8 @@ const Mongo_url = "mongodb+srv://project2:project2@pickabookdata.es9jtrh.mongodb
 // Collections
 const userdata = "Users";
 const books = "bookdata";
+
+final Fireuser = FirebaseAuth.instance.currentUser!;
 
 
 
@@ -62,6 +65,20 @@ class MongoDatabase{
     final result = await bookCollection.find().toList();
     return result;
   }
+
+  static Future<Map<String, dynamic>> fetchUserData() async
+  {
+    final result = await userCollection.findOne(where.eq("uid", Fireuser.uid));
+    return result;
+  }
+
+  // static Future<String> getName() async{
+  //   final result = await userCollection.findOne(where.eq("uid", Fireuser.uid));
+  //   final user_name = result["name"] as String;
+  //   return user_name;
+  // }
+
+
 
 }
 
