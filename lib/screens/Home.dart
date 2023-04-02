@@ -134,8 +134,8 @@ class _HomeState extends State<Home> with TickerProviderStateMixin{
                   controller: _tabController,
                   children:
               [
-                homeslidernew(),
-                homeslidernew(),
+                carouselslider(fetchdata),
+                carouselslider(fetchdata),
               ]
               ),
             ),

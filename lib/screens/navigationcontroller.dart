@@ -1,5 +1,7 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:project2/models/user_model.dart';
+import 'package:project2/widgets/drawer.dart';
 import 'sign up.dart';
 import 'package:project2/screens/marketplace.dart';
 import 'package:project2/screens/community.dart';
@@ -10,6 +12,7 @@ import 'package:project2/screens/Search.dart';
 import 'package:project2/models/data.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:project2/models/connection.dart';
 
 
 class navcontroller extends StatefulWidget {
@@ -20,12 +23,13 @@ class navcontroller extends StatefulWidget {
 }
 
 class _navcontrollerState extends State<navcontroller> {
-
-
+  var  currentUser;
   List<Widget> navlist = [Home(),Search(),community(),bookmark(),marketplace()];
   int currentindex=0;
 
+
   final user = FirebaseAuth.instance.currentUser!;
+  var fetchuser;
 
   void _onItemTapped(int index) {
     setState(() {
@@ -34,7 +38,14 @@ class _navcontrollerState extends State<navcontroller> {
   }
 
   @override
+  void initState() {
+  fetchuser = MongoDatabase.fetchUserData();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    
 
     return Scaffold(
 
@@ -89,74 +100,21 @@ class _navcontrollerState extends State<navcontroller> {
 
       ),
 
-      endDrawer: Drawer(
-        child: Column(
-
-          children:
-          [
-            SizedBox(height: 30,),
-
-            //BACK BUTTON AND HEAD
-            Row(children:
-            [
-              //BACK BUTTON
-              Builder(
-                builder: (context) {
-                  return Container(child: IconButton(onPressed: (){Scaffold.of(context).closeEndDrawer();}, icon: Icon(Icons.arrow_back),));
-                }
-              ),
-
-              Container(margin:EdgeInsets.only(left: 80),child: Text("Profile",style: GoogleFonts.montserrat(fontSize: 15,fontWeight: FontWeight.w600),),)
-
-            ],),
-
-            //PROFILE DETAILS AND IMAGE
-            Container(
-
-              height: 230,
-              padding: EdgeInsets.only(top: 20),
-
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-
-                children:
-                [
-                  //IMAGE
-                  CircleAvatar(radius: 70,backgroundImage: NetworkImage(userimage,)),
-                  //USERNAME
-                  Text("$username",style: GoogleFonts.montserrat(fontSize: 18,fontWeight: FontWeight.bold),),
-                  //EMAIL
-                  Text(user.email!),
-                ],
-              ),),
-
-            //LISTVIEW LIST OF OPTIONS
-            Container(
-
-              height: 400,
-
-              child: ListView
-                (
-                children:
-                [
-                  //EDIT PROFILE
-                  ListTile(leading: Icon(Icons.person_outline,color: Colors.black,),title: Text("Edit Profile"),),
-
-                  // SIGNOUT BUTTON
-                  ListTile(
-                    onTap:(){FirebaseAuth.instance.signOut();
-                      sign=false;},
-                    leading: Icon(Icons.logout_outlined,color: Colors.black,),
-                    title: Text("Sign Out"),),
-
-
-                ],
-              ),
-            ),
-
-          ],
-        ),
-
+      endDrawer: FutureBuilder(
+        future: fetchuser,
+        builder: (context, AsyncSnapshot snapshot) {
+          if(snapshot.hasData) {
+            setState(() {
+              currentUser = Usermap.fromJson(snapshot.data);
+            });
+            return Container(
+              child: returndrawer(Usermap.fromJson(snapshot.data)),
+            );
+          }
+          else{
+            return Text("No data");
+          }
+        }
       ),
 
       body: navlist.elementAt(currentindex),
