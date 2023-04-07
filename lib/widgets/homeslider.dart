@@ -86,3 +86,44 @@ Widget carouselslider(Future future)
         }),
   );
 }
+
+Widget futuregrid(future)
+{
+  return Container(
+    height: 600,
+    child: FutureBuilder(
+        future: future,
+        builder: (context, AsyncSnapshot snapshot)
+        {
+          if(snapshot.connectionState==ConnectionState.waiting)
+          {
+            return Center(
+              child: CircularProgressIndicator(),);
+          }
+          else
+          {
+            if(snapshot.hasData)
+            {
+              return GridView.builder(gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 4,
+                // crossAxisSpacing: 10,
+                childAspectRatio: 9/12,
+                mainAxisSpacing: 15,
+                ),
+                    itemCount: snapshot.data.length,
+                    itemBuilder: (context, index){
+                      return bookscardgrid(Bookmap.fromJson(snapshot.data[index]),context);
+
+                    }) ;
+            }
+            else
+            {
+              return Center(child: Text('No Data Available'),);
+            }
+          }
+        }),
+  );
+}
+
+
+
