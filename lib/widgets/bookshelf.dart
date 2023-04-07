@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:project2/models/data.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
-
+CarouselController buttonCarouselController = CarouselController();
 Widget bookshelf()
 {
   return Center(
@@ -22,7 +22,12 @@ Widget bookshelf()
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
 
-                  SizedBox(child: IconButton(icon: Icon(Icons.arrow_back_ios,color: Color(0xff969696).withOpacity(.6),),onPressed:(){}),
+                  SizedBox(child: IconButton(icon: Icon(Icons.arrow_back_ios,color: Color(0xff969696).withOpacity(.6),),
+                      onPressed:(){
+                        buttonCarouselController.nextPage(
+                            duration: Duration(milliseconds: 300), curve: Curves.linear);
+                      }
+                      ),
                   ),
                   Container(
 

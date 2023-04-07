@@ -27,9 +27,6 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> with TickerProviderStateMixin{
 
-
-
-
   var fetchnewdata;
   var trendingdata;
   var toprateddata;
@@ -40,8 +37,6 @@ class _HomeState extends State<Home> with TickerProviderStateMixin{
   var fantasydata;
   var youngadultdata;
   var scholasticdata;
-
-
 
   @override
   void initState() {
@@ -60,7 +55,6 @@ class _HomeState extends State<Home> with TickerProviderStateMixin{
     print("INIT DONE");
     super.initState();
   }
-
 
   @override
   Widget build(BuildContext context) {

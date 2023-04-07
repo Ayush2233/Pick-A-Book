@@ -17,5 +17,21 @@ Widget bookscard(Bookmap data,BuildContext context)
         child: Image.network('${data.coverPage}',fit: BoxFit.cover),
       )
   );
+
+}Widget bookscardgrid(Bookmap data,BuildContext context)
+{
+  return GestureDetector
+    (
+        onTap: ()
+        {
+          var Book= bookdetails(data: data);
+          Book.bottomup(context);
+        },
+        child: Container(
+        margin: EdgeInsets.fromLTRB(8,0,8,0),
+        height: 200,
+        child: Image.network('${data.coverPage}',fit: BoxFit.cover),
+      )
+  );
 }
 
