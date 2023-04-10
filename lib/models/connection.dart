@@ -71,13 +71,13 @@ class MongoDatabase{
     final result = await bookCollection.find(where.eq('book_average_rating', 3.5).limit(50)).toList();
     return result;
   }
-  
+
   static Future<List<Map<String, dynamic>>> fetchnewbooks() async
   {
     final result = await bookCollection.find(where.gte('publication_year',2017).limit(50)).toList();
     return result;
   }
-  
+
   static Future<List<Map<String, dynamic>>> fetchtopratedbooks() async
   {
     final result = await bookCollection.find(where.gte('book_average_rating',4.8)).toList();
@@ -106,6 +106,19 @@ class MongoDatabase{
     final result = await bookCollection.find(where.eq("genre","Comic").gte('book_average_rating', 4).ne('publisher','Marvel' ).limit(50)).toList();
     return result;
   }
+
+  static Future<List<Map<String, dynamic>>> fetchComicwithMarvelbooks() async
+  {
+    final result = await bookCollection.find(where.eq("genre","Comic").gte('book_average_rating', 4).limit(50)).toList();
+    return result;
+  }
+
+  static Future<List<Map<String, dynamic>>> fetchMysterybooks() async
+  {
+    final result = await bookCollection.find(where.eq("genre","Mystery Thriller & Crime").gte('book_average_rating', 4).ne('publisher','Marvel').limit(50)).toList();
+    return result;
+  }
+
   static Future<List<Map<String, dynamic>>> fetchFantbooks() async
   {
     final result = await bookCollection.find(where.eq("genre","Fantasy & Paranormal").gte('book_average_rating', 4).gt('ratings_count', 500).limit(50)).toList();
@@ -126,23 +139,39 @@ class MongoDatabase{
 
   static Future<List<Map<String, dynamic>>> fetchChildrenbooks() async
   {
-    final result = await bookCollection.find(where.eq("genre","Children").gt('book_average_rating', 3.6).gt('ratings_count', 500).limit(30)).toList();
+    final result = await bookCollection.find(where.eq("genre","Children").gt('book_average_rating', 3.6).gt('ratings_count', 500).limit(50)).toList();
     return result;
   }
 
+  static Future<List<Map<String, dynamic>>> fetchfantasybooks() async
+  {
+    final result = await bookCollection.find(where.eq("genre","Fantasy & Paranormal").gt('book_average_rating', 3.6).gt('ratings_count', 500).limit(50)).toList();
+    return result;
+  }
+
+  static Future<List<Map<String, dynamic>>> fetchHistorybooks() async
+  {
+    final result = await bookCollection.find(where.eq("genre","History & Biography").gt('book_average_rating', 3.6).gt('ratings_count', 500).limit(50)).toList();
+    return result;
+  }
+
+  static Future<List<Map<String, dynamic>>> fetchPoetrybooks() async
+  {
+    final result = await bookCollection.find(where.eq("genre","Poetry").gt('book_average_rating', 3.6).gt('ratings_count', 500).limit(50)).toList();
+    return result;
+  }
+
+      // .eq("genre","Poetry").gt('book_average_rating', 3.6).gt('ratings_count', 500).
   static Future<Map<String, dynamic>> fetchUserData() async
   {
     final result = await userCollection.findOne(where.eq("uid", Fireuser.uid));
     return result;
   }
   static Future<List<Map<String, dynamic>>> fetchPost() async{
-
     final pipeline = AggregationPipelineBuilder().addStage(Lookup(from: "Users", localField: "uid", foreignField: "uid", as: "Res")).build();
-
     final results = await DbCollection(db, "PostDetails").aggregateToStream(pipeline).toList();
     // print(results);
     results.forEach(print);
     return results;
   }
 }
-

@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:project2/models/data.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:project2/widgets/homeslider.dart';
+import 'package:project2/models/connection.dart';
+import 'package:project2/models/book_model.dart';
+
+
 
 
 class Search extends StatefulWidget {
@@ -9,11 +15,55 @@ class Search extends StatefulWidget {
   State<Search> createState() => _SearchState();
 }
 
-class _SearchState extends State<Search> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
+class _SearchState extends State<Search> with TickerProviderStateMixin{
 
+  var toprateddata;
+  var childrendata;
+  var mysterydata;
+  var youngadultdata;
+  var fantasydata;
+  var comicdata;
+  var historydata;
+  var romancedata;
+  var poetrydata;
+  var dynamicFuture;
+  var dynamicGrid;
+
+  @override
+
+  void initState() {
+    // TODO: implement initState
+
+    toprateddata= MongoDatabase.fetchtopratedbooks();
+    childrendata= MongoDatabase.fetchChildrenbooks();
+    mysterydata= MongoDatabase.fetchMysterybooks();
+    youngadultdata= MongoDatabase.fetchYoungadultbooks();
+    fantasydata= MongoDatabase.fetchfantasybooks();
+    comicdata= MongoDatabase.fetchComicwithMarvelbooks();
+    historydata= MongoDatabase.fetchHistorybooks();
+    romancedata= MongoDatabase.fetchRomancebooks();
+    poetrydata= MongoDatabase.fetchPoetrybooks();
+    dynamicFuture=[childrendata,mysterydata,youngadultdata,fantasydata,comicdata,historydata,romancedata,poetrydata];
+    dynamicGrid=toprateddata;
+
+    print("search init done");
+    super.initState();
+  }
+
+
+  List genrelist =["Children","Mystery","Young Adult","Fantasy","Comic","History","Romance","Poetry"];
+  var dynamicText="Top Rated";
+
+
+
+  bool isGrid = true;
+  @override
+
+  Widget build(BuildContext context) {
+
+
+
+    return Scaffold(
 
       body:SingleChildScrollView(
         child: Column(
@@ -40,35 +90,78 @@ class _SearchState extends State<Search> {
               ),
             ),),
 
-            SizedBox(height: 40,),
+            SizedBox(height: 20,),
 
             //GENRE BUTTONS
-            Container(height: 300,
+            Container(
             child: Column(
               children: [
+                Row(children: [SizedBox(width: 20,),
+                  Text('Genre',style: GoogleFonts.montserrat(fontSize: 20,fontWeight: FontWeight.w600),),],),
 
+                SizedBox(height: 20,),
                 //ROW 1 - 3 GENRE
                 Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                  SizedBox(width: 115,height: 43,child: OutlinedButton(onPressed: () {print("pressed");}, child: Text('Fiction',style: TextStyle(color: Colors.black,fontWeight: FontWeight.w700),)
-                    ,style:OutlinedButton.styleFrom(side: BorderSide(color: Color(0xFFDE6077)),shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10)))) ,)),
-                  SizedBox(width: 115,height: 43,child: OutlinedButton(onPressed: () {print("pressed");}, child: Text('Non-Fiction',style: TextStyle(color: Colors.black,fontWeight: FontWeight.w700),)
-                      ,style:OutlinedButton.styleFrom(side: BorderSide(color: Color(0xFFDE6077)),shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10)))) ,)),
-                  SizedBox(width: 115,height: 43,child: OutlinedButton(onPressed: () {print("pressed");}, child: Text('Romantic',style: TextStyle(color: Colors.black,fontWeight: FontWeight.w700),)
-                      ,style:OutlinedButton.styleFrom(side: BorderSide(color: Color(0xFFDE6077)),shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10)))) ,)),
+
+                    //CHILDREN
+                  SizedBox(width: 115,height: 43,child: OutlinedButton(
+                    onPressed: (){setState(() {
+                      dynamicText=genrelist[0];
+                      dynamicGrid=dynamicFuture[0];
+                    });},
+                    child: Text('Children',style: TextStyle(color: Colors.black,fontWeight: FontWeight.w700),)
+                    ,style:OutlinedButton.styleFrom(side: BorderSide(color: Color(0xFFDE6077)),
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10)))) ,)),
+
+                  //MYSTERY
+                  SizedBox(width: 115,height: 43,child: OutlinedButton(
+                    onPressed: () {setState(() {
+                      dynamicText=genrelist[1];
+                      dynamicGrid=dynamicFuture[1];
+                    });},
+                    child: Text('Mystery',style: TextStyle(color: Colors.black,fontWeight: FontWeight.w700),)
+                      ,style:OutlinedButton.styleFrom(side: BorderSide(color: Color(0xFFDE6077)),
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10)))) ,)),
+
+                  //YOUNG ADULT
+                  SizedBox(width: 115,height: 43,child: OutlinedButton(onPressed: () {setState(() {
+                    dynamicText=genrelist[2];
+                    dynamicGrid=dynamicFuture[2];
+                  });},
+                    child: Text('Young Adult',style: TextStyle(color: Colors.black,fontWeight: FontWeight.w700),)
+                      ,style:OutlinedButton.styleFrom(side: BorderSide(color: Color(0xFFDE6077)),
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10)))) ,)),
+
                 ],),
 
                 SizedBox(height: 10,),
 
                 //ROW 2 - GENREE
-                Row(                                                           //Row 2
+                Row(
                 children: [
                   SizedBox(width: 70,),
-                  SizedBox(width: 115,height: 43,child: OutlinedButton(onPressed: () {print("pressed");}, child: Text('Horror',style: TextStyle(color: Colors.black,fontWeight: FontWeight.w700),)
-                    ,style:OutlinedButton.styleFrom(side: BorderSide(color: Color(0xFFDE6077)),shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10)))) ,)),
+
+                  //FANTASY
+                  SizedBox(width: 115,height: 43,child: OutlinedButton(onPressed: () {setState(() {
+                    dynamicText=genrelist[3];
+                    dynamicGrid=dynamicFuture[3];
+                  });},
+                    child: Text('Fantasy',style: TextStyle(color: Colors.black,fontWeight: FontWeight.w700),)
+                    ,style:OutlinedButton.styleFrom(side: BorderSide(color: Color(0xFFDE6077)),
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10)))) ,)),
+
+
                   SizedBox(width: 40,),
-                  SizedBox(width: 115,height: 43,child: OutlinedButton(onPressed: () {print("pressed");}, child: Text('Comedy',style: TextStyle(color: Colors.black,fontWeight: FontWeight.w700),)
-                    ,style:OutlinedButton.styleFrom(side: BorderSide(color: Color(0xFFDE6077)),shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10)))) ,)),
+
+                  //COMIC
+                  SizedBox(width: 115,height: 43,child: OutlinedButton(onPressed: () {setState(() {
+                    dynamicText=genrelist[4];
+                    dynamicGrid=dynamicFuture[4];
+                  });},
+                    child: Text('Comic',style: TextStyle(color: Colors.black,fontWeight: FontWeight.w700),)
+                    ,style:OutlinedButton.styleFrom(side: BorderSide(color: Color(0xFFDE6077)),
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10)))) ,)),
                 ],),
 
                 SizedBox(height: 10,),
@@ -76,84 +169,81 @@ class _SearchState extends State<Search> {
                 //ROW 3
                 Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    SizedBox(width: 115,height: 43,child: OutlinedButton(onPressed: () {print("pressed");}, child: Text('Fantasy',style: TextStyle(color: Colors.black,fontWeight: FontWeight.w700),)
-                      ,style:OutlinedButton.styleFrom(side: BorderSide(color: Color(0xFFDE6077)),shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10)))) ,)),
-                    SizedBox(width: 115,height: 43,child: OutlinedButton(onPressed: () {print("pressed");}, child: Text('Mystery',style: TextStyle(color: Colors.black,fontWeight: FontWeight.w700),)
-                      ,style:OutlinedButton.styleFrom(side: BorderSide(color: Color(0xFFDE6077)),shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10)))) ,)),
-                    SizedBox(width: 115,height: 43,child: OutlinedButton(onPressed: () {print("pressed");}, child: Text('Thriller',style: TextStyle(color: Colors.black,fontWeight: FontWeight.w700),)
-                      ,style:OutlinedButton.styleFrom(side: BorderSide(color: Color(0xFFDE6077)),shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10)))) ,)),
-                  ],),
 
-                SizedBox(height: 10,),
+                    //HISTORY
+                    SizedBox(width: 115,height: 43,child: OutlinedButton(onPressed: () {setState(() {
+                      dynamicText=genrelist[5];
+                      dynamicGrid=dynamicFuture[5];
+                    });},
+                      child: Text('History',style: TextStyle(color: Colors.black,fontWeight: FontWeight.w700),)
+                      ,style:OutlinedButton.styleFrom(side: BorderSide(color: Color(0xFFDE6077)),
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10)))) ,)),
 
-                //ROW 4
-                Row(
-                  children: [
-                    SizedBox(width: 70,),
-                    SizedBox(width: 115,height: 43,child: OutlinedButton(onPressed: () {print("pressed");}, child: Text('Biography',style: TextStyle(color: Colors.black,fontWeight: FontWeight.w700),)
-                      ,style:OutlinedButton.styleFrom(side: BorderSide(color: Color(0xFFDE6077)),shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10)))) ,)),
-                    SizedBox(width: 40,),
-                    SizedBox(width: 115,height: 43,child: OutlinedButton(onPressed: () {print("pressed");}, child: Text('Art',style: TextStyle(color: Colors.black,fontWeight: FontWeight.w700),)
-                      ,style:OutlinedButton.styleFrom(side: BorderSide(color: Color(0xFFDE6077)),shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10)))) ,)),
-                  ],),
+                    //ROMANCE
+                    SizedBox(width: 115,height: 43,child: OutlinedButton(onPressed: () {setState(() {
+                      dynamicText=genrelist[6];
+                      dynamicGrid=dynamicFuture[6];
+                    });},
+                      child: Text('Romance',style: TextStyle(color: Colors.black,fontWeight: FontWeight.w700),)
+                      ,style:OutlinedButton.styleFrom(side: BorderSide(color: Color(0xFFDE6077)),
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10)))) ,)),
 
-                SizedBox(height: 10,),
-
-                //ROW 5
-
-                Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    SizedBox(width: 115,height: 43,child: OutlinedButton(onPressed: () {print("pressed");}, child: Text('Health',style: TextStyle(color: Colors.black,fontWeight: FontWeight.w700),)
-                      ,style:OutlinedButton.styleFrom(side: BorderSide(color: Color(0xFFDE6077)),shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10)))) ,)),
-                    SizedBox(width: 115,height: 43,child: OutlinedButton(onPressed: () {print("pressed");}, child: Text('History',style: TextStyle(color: Colors.black,fontWeight: FontWeight.w700),)
-                      ,style:OutlinedButton.styleFrom(side: BorderSide(color: Color(0xFFDE6077)),shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10)))) ,)),
-                    SizedBox(width: 115,height: 43,child: OutlinedButton(onPressed: () {print("pressed");}, child: Text('Politics',style: TextStyle(color: Colors.black,fontWeight: FontWeight.w700),)
-                      ,style:OutlinedButton.styleFrom(side: BorderSide(color: Color(0xFFDE6077)),shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10)))) ,)),
+                    //POETRY
+                    SizedBox(width: 115,height: 43,child: OutlinedButton(onPressed: () {setState(() {
+                      dynamicText=genrelist[7];
+                      dynamicGrid=dynamicFuture[7];
+                    });},
+                      child: Text('Poetry',style: TextStyle(color: Colors.black,fontWeight: FontWeight.w700),)
+                      ,style:OutlinedButton.styleFrom(side: BorderSide(color: Color(0xFFDE6077)),
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10)))) ,)),
                   ],),
 
               ],
             ),
             ),
 
-            // TOP RATED
+            SizedBox(height: 30,),
 
-            Container(height: 700,
-              child: Column(children: [
-
-                //TOP RATED TEXT
-                Row(children: [SizedBox(width: 30,),Text('Top Rated',style: TextStyle(fontSize: 20,fontWeight: FontWeight.w600),),],),
-
-                SizedBox(height: 20,),
-
-                //HORIZONTAL GRID
-
-                Container(height: 150,width: double.maxFinite,
-                child: ListView.builder(scrollDirection: Axis.horizontal
-                ,itemCount: covers.length,itemBuilder: (context,index){
-                    return Container(margin: EdgeInsets.only(left: 20),height: 180, child: Image.network(covers[index],fit: BoxFit.cover));
-                }),
+            Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+              Padding(
+                padding: const EdgeInsets.fromLTRB(20,0,0,0),
+                child: Text("$dynamicText",style: GoogleFonts.montserrat(fontSize: 20,fontWeight: FontWeight.w600),),
               ),
-                SizedBox(height: 20,),
 
-                Row(children: [SizedBox(width: 30,),Text('Top Rated',style: TextStyle(fontSize: 20,fontWeight: FontWeight.w600),),
-                  ],),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(0,0,20,0),
+                child: IconButton(onPressed: ()
+                {
+                  setState(() {
+                    isGrid=!isGrid;
+                  });
+                },
+                    icon: Icon(isGrid?Icons.list:Icons.grid_view)),
+              )
+            ],),
 
-                SizedBox(height: 20,),
+            SizedBox(height: 10,),
 
 
-                Container(height: 150,width: double.maxFinite,
-                  child: ListView.builder(scrollDirection: Axis.horizontal
-                      ,itemCount: covers.length,itemBuilder: (context,index){
-                        return Container(margin: EdgeInsets.only(left: 20),height: 180,child: Image.network(covers[index],fit: BoxFit.cover));
-                      }),
-                ),
 
-              ],)
-            )
+            Container(child:isGrid?futuregrid(dynamicGrid):futureslider(dynamicGrid),),
+
+            SizedBox(height: 20,),
+
+            // futureslider(toprateddata),
+
+
           ],
         ),
       ),
 
     );
+
+
   }
-}
+
+
+
+  }
+
