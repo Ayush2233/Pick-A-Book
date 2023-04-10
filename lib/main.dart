@@ -1,4 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
+import 'package:project2/screens/community.dart';
+import 'package:project2/screens/postUpload.dart';
 import 'package:project2/utilities/authpage.dart';
 import 'package:project2/models/connection.dart';
 import 'package:project2/screens/completeProfile.dart';
@@ -22,6 +24,11 @@ void main() async
   runApp(MaterialApp(
     home: Check(),
     theme: ThemeData(primarySwatch: Colors.pink,),
+
+    routes: {
+      '/post': (context) => postUpload(),
+      '/community' : (context) => community(),
+    },
 
     debugShowCheckedModeBanner: false,
   ));

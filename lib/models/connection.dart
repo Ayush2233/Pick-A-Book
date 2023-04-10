@@ -1,8 +1,8 @@
 import 'dart:developer';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:mongo_dart/mongo_dart.dart';
+import 'package:project2/models/post_model.dart';
 import 'package:project2/models/user_model.dart';
-import 'package:project2/screens/navigationcontroller.dart';
 
 // Connection Constants
 
@@ -11,6 +11,7 @@ const Mongo_url = "mongodb+srv://project2:project2@pickabookdata.es9jtrh.mongodb
 // Collections
 const userdata = "Users";
 const books = "bookdata";
+const post = "PostDetails";
 
 final Fireuser = FirebaseAuth.instance.currentUser!;
 
@@ -19,7 +20,7 @@ final Fireuser = FirebaseAuth.instance.currentUser!;
 
 class MongoDatabase{
 
-  static var db, userCollection, bookCollection;
+  static var db, userCollection, bookCollection, postCollection;
 
   static connect() async{
 
@@ -29,6 +30,7 @@ class MongoDatabase{
     inspect(db);
     bookCollection = db.collection(books);
     userCollection = db.collection(userdata);
+    postCollection = db.collection(post);
   }
 
   // Functions
@@ -48,6 +50,22 @@ class MongoDatabase{
     }
   }
 
+  static Future<String> addPost(PostDisplay data) async{
+    try {
+      var results = await postCollection.insertOne(data.toJson());
+      if(results.isSuccess){
+        return "data inserted";
+      }
+      else{
+        return "data not inserted";
+      }
+    }catch(e){
+      print(e.toString());
+      return e.toString();
+    }
+
+
+  }
   static Future<List<Map<String, dynamic>>> fetchbooks() async
   {
     final result = await bookCollection.find(where.eq('book_average_rating', 3.5).limit(50)).toList();
@@ -117,14 +135,14 @@ class MongoDatabase{
     final result = await userCollection.findOne(where.eq("uid", Fireuser.uid));
     return result;
   }
+  static Future<List<Map<String, dynamic>>> fetchPost() async{
 
-  // static Future<String> getName() async{
-  //   final result = await userCollection.findOne(where.eq("uid", Fireuser.uid));
-  //   final user_name = result["name"] as String;
-  //   return user_name;
-  // }
+    final pipeline = AggregationPipelineBuilder().addStage(Lookup(from: "Users", localField: "uid", foreignField: "uid", as: "Res")).build();
 
-
-
+    final results = await DbCollection(db, "PostDetails").aggregateToStream(pipeline).toList();
+    // print(results);
+    results.forEach(print);
+    return results;
+  }
 }
 
