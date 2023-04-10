@@ -59,7 +59,6 @@ class _bookmarkState extends State<bookmark> {
                 ),
                 Container(
                   margin: EdgeInsets.only(left: 20),
-
                   child: Column(
 
                     crossAxisAlignment: CrossAxisAlignment.start,
