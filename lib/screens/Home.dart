@@ -11,7 +11,7 @@ import 'package:bottom_sheet/bottom_sheet.dart';
 import 'package:like_button/like_button.dart';
 import 'package:project2/models/connection.dart';
 import 'bookdetails.dart';
-import 'navigationcontroller.dart';
+// import 'navigationcontroller.dart';
 import 'package:project2/widgets/bookcard.dart';
 
 
@@ -39,6 +39,8 @@ class _HomeState extends State<Home> with TickerProviderStateMixin{
   var youngadultdata;
   var scholasticdata;
   var searchdata;
+
+
   Usermap? map;
 
 
@@ -57,6 +59,8 @@ class _HomeState extends State<Home> with TickerProviderStateMixin{
     youngadultdata=MongoDatabase.fetchYoungadultbooks();
     scholasticdata=MongoDatabase.fetchscholasticbooks();
 
+
+
     print("INIT DONE");
 
     super.initState();
@@ -64,6 +68,8 @@ class _HomeState extends State<Home> with TickerProviderStateMixin{
 
   @override
   Widget build(BuildContext context) {
+
+
 
     TabController _tabController = TabController(length: 2, vsync: this);
 
@@ -93,13 +99,13 @@ class _HomeState extends State<Home> with TickerProviderStateMixin{
                   Text("Hi,${map?.name}",
                     style: GoogleFonts.montserrat(
                       fontSize: 15,
-                      color: darktheme?Colors.white:Color(0xff969696),),),
+                      color: Theme.of(context).textTheme.titleMedium?.color,),),
 
                   SizedBox(height: 5,),
 
                   Text("Discover Latest Books",
                     style: GoogleFonts.montserrat(
-                      color: darktheme?Colors.white:Colors.black,
+                      color: Theme.of(context).textTheme.titleLarge?.color,
                       fontSize: 25,
                       fontWeight: FontWeight.w600,
                       ),
@@ -121,11 +127,11 @@ class _HomeState extends State<Home> with TickerProviderStateMixin{
                 child: TabBar(
 
                     controller: _tabController,
-                    labelColor: Colors.black,
+                    labelColor: Theme.of(context).textTheme.titleSmall?.color,
                     isScrollable: true,
                     indicatorSize: TabBarIndicatorSize.label,
-                    indicator: UnderlineTabIndicator(borderSide: BorderSide(color: Color(0xffDE6077),width: 3.5),),
-                    unselectedLabelColor: Color(0xff969696),
+                    indicator: UnderlineTabIndicator(borderSide: BorderSide(color:Theme.of(context).primaryColor,width: 3.5),),
+                    unselectedLabelColor: Theme.of(context).textTheme.titleMedium?.color,
                     tabs:
                     [
                       Tab(text: "New",),
@@ -158,6 +164,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin{
               margin: EdgeInsets.symmetric(horizontal: 20),
               child: Text("Recommended for you",
                 style:GoogleFonts.montserrat(
+                  color: Theme.of(context).textTheme.titleLarge?.color,
                   fontSize: 20,
                   fontWeight: FontWeight.w600,
                   )),),
@@ -171,7 +178,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin{
 
             //TOP RATED
             Row(children: [SizedBox(width: 30,),
-              Text('Top Rated',style: GoogleFonts.montserrat(fontSize: 20,fontWeight: FontWeight.w600),),],),
+              Text('Top Rated',style: GoogleFonts.montserrat(fontSize: 20,fontWeight: FontWeight.w600,color: Theme.of(context).textTheme.titleLarge?.color,),),],),
 
             SizedBox(height: 20,),
 
@@ -181,7 +188,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin{
 
             //Fantasy
             Row(children: [SizedBox(width: 30,),
-              Text("Fantastic Fantasies",style: GoogleFonts.montserrat(fontSize: 20,fontWeight: FontWeight.w600),),],),
+              Text("Fantastic Fantasies",style: GoogleFonts.montserrat(fontSize: 20,fontWeight: FontWeight.w600,color: Theme.of(context).textTheme.titleLarge?.color,),),],),
 
             SizedBox(height: 20,),
 
@@ -192,7 +199,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin{
 
             //Comic World
             Row(children: [SizedBox(width: 30,),
-              Text('Comic World',style: GoogleFonts.montserrat(fontSize: 20,fontWeight: FontWeight.w600),),],),
+              Text('Comic World',style: GoogleFonts.montserrat(fontSize: 20,fontWeight: FontWeight.w600,color: Theme.of(context).textTheme.titleLarge?.color,),),],),
 
             SizedBox(height: 20,),
 
@@ -202,7 +209,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin{
 
             //Romance
             Row(children: [SizedBox(width: 30,),
-              Text("Top Romance Novels",style: GoogleFonts.montserrat(fontSize: 20,fontWeight: FontWeight.w600),),],),
+              Text("Top Romance Novels",style: GoogleFonts.montserrat(fontSize: 20,fontWeight: FontWeight.w600,color: Theme.of(context).textTheme.titleLarge?.color,),),],),
 
             SizedBox(height: 20,),
 
@@ -213,7 +220,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin{
 
             //MARVEL
             Row(children: [SizedBox(width: 30,),
-              Text('Explore the World of Marvel',style: GoogleFonts.montserrat(fontSize: 20,fontWeight: FontWeight.w600),),],),
+              Text('Explore the World of Marvel',style: GoogleFonts.montserrat(fontSize: 20,fontWeight: FontWeight.w600,color: Theme.of(context).textTheme.titleLarge?.color,),),],),
 
             SizedBox(height: 20,),
 
@@ -224,7 +231,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin{
 
             //Young Adult
             Row(children: [SizedBox(width: 30,),
-              Text('Young Adult',style: GoogleFonts.montserrat(fontSize: 20,fontWeight: FontWeight.w600),),],),
+              Text('Young Adult',style: GoogleFonts.montserrat(fontSize: 20,fontWeight: FontWeight.w600,color: Theme.of(context).textTheme.titleLarge?.color,),),],),
 
             SizedBox(height: 20,),
 
@@ -234,7 +241,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin{
 
 
             Row(children: [SizedBox(width: 30,),
-              Text('From Scolastic Inc.',style: GoogleFonts.montserrat(fontSize: 20,fontWeight: FontWeight.w600),),],),
+              Text('From Scolastic Inc.',style: GoogleFonts.montserrat(fontSize: 20,fontWeight: FontWeight.w600,color: Theme.of(context).textTheme.titleLarge?.color,),),],),
 
             SizedBox(height: 20,),
 
@@ -245,13 +252,18 @@ class _HomeState extends State<Home> with TickerProviderStateMixin{
 
             //Best Children's Books
             Row(children: [SizedBox(width: 30,),
-              Text("Best Children's Books",style: GoogleFonts.montserrat(fontSize: 20,fontWeight: FontWeight.w600),),],),
+              Text("Best Children's Books",style: GoogleFonts.montserrat(fontSize: 20,fontWeight: FontWeight.w600,color: Theme.of(context).textTheme.titleLarge?.color,),),],),
 
             SizedBox(height: 20,),
 
             futureslider(childrendata),
 
             SizedBox(height: 20,),
+
+            ElevatedButton(onPressed: (){
+              var x=Theme.of(context).scaffoldBackgroundColor;
+              print(x);},
+                child: Text("print"))
 
             // futureslider(searchdata),
             //

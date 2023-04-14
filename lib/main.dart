@@ -13,6 +13,9 @@ import 'screens/Home.dart';
 import 'screens/Search.dart';
 import 'screens/sign up.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'utilities/apptheme.dart';
+import 'utilities/appstartnotifier.dart';
+import 'package:provider/provider.dart';
 
 void main() async
 {
@@ -20,16 +23,51 @@ void main() async
   await Firebase.initializeApp();
   await MongoDatabase.connect();
 
+  runApp(
+      ChangeNotifierProvider<AppStateNotifier>
+          (
+        create: (context) => AppStateNotifier(),
+        child: app(),)
+  );
 
-  runApp(MaterialApp(
-    home: Check(),
-    theme: ThemeData(primarySwatch: Colors.pink,),
+  //
+  // runApp(MaterialApp(
+  //   home: Check(),
+  //   theme: ThemeClass.lightTheme,
+  //   darkTheme: ThemeClass.darkTheme,
+  //   // darkTheme: ThemeData.dark(),
+  //
+  //   routes: {
+  //     '/post': (context) => postUpload(),
+  //     '/community' : (context) => community(),
+  //   },
+  //
+  //   debugShowCheckedModeBanner: false,
+  // ));
+}
 
-    routes: {
-      '/post': (context) => postUpload(),
-      '/community' : (context) => community(),
-    },
+class app extends StatefulWidget {
+  const app({Key? key}) : super(key: key);
 
-    debugShowCheckedModeBanner: false,
-  ));
+  @override
+  State<app> createState() => _appState();
+}
+
+class _appState extends State<app> {
+  @override
+  Widget build(BuildContext context) {
+    return Consumer<AppStateNotifier>(
+        builder: (context, appState, child)
+    {
+      return MaterialApp(
+        title: 'Pick-A-Book',
+        debugShowCheckedModeBanner: false,
+        theme: ThemeClass.lightTheme,
+        darkTheme: ThemeClass.darkTheme,
+        themeMode: appState.isDarkModeon ? ThemeMode.dark : ThemeMode.light,
+        home: Check(),
+      );
+    }
+    );
+}
 }

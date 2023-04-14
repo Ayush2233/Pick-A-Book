@@ -194,7 +194,7 @@ class MongoDatabase{
 
   static Future<List<Map<String, dynamic>>> fetsearch(String x) async{
 
-    final result = await bookCollection.find(where.match('title', x,caseInsensitive:true).limit(10)).toList();
+    final result = await bookCollection.find(where.match('title', x,caseInsensitive:true).limit(200)).toList();
     result.forEach(print);
     return result;
   }

@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:project2/models/user_model.dart';
-
+import 'package:provider/provider.dart';
+import 'package:project2/utilities/appstartnotifier.dart';
 import '../models/data.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 import '../screens/sign up.dart';
 
-Widget returndrawer(Usermap x){
+Widget returndrawer(Usermap x,BuildContext context){
   return Drawer(
+    backgroundColor: Theme.of(context).drawerTheme.backgroundColor,
     child: Column(
 
       children:
@@ -23,12 +25,13 @@ Widget returndrawer(Usermap x){
               builder: (context) {
                 return Container(child: IconButton(onPressed: () {
                   Scaffold.of(context).closeEndDrawer();
-                }, icon: Icon(Icons.arrow_back),));
+                }, icon: Icon(Icons.arrow_back,color: Theme.of(context).textTheme.titleLarge?.color,),));
               }
           ),
 
           Container(margin: EdgeInsets.only(left: 80),
             child: Text("Profile", style: GoogleFonts.montserrat(
+                color: Theme.of(context).textTheme.titleLarge?.color,
                 fontSize: 15, fontWeight: FontWeight.w600),),)
 
         ],),
@@ -49,9 +52,10 @@ Widget returndrawer(Usermap x){
                 userimage,)),
               //USERNAME
               Text("${x.name}", style: GoogleFonts.montserrat(
+                  color: Theme.of(context).textTheme.titleLarge?.color,
                   fontSize: 18, fontWeight: FontWeight.bold),),
               //EMAIL
-              Text("${x.email}"),
+              Text("${x.email}",style: GoogleFonts.montserrat(color: Theme.of(context).textTheme.titleLarge?.color),),
             ],
           ),),
 
@@ -66,7 +70,7 @@ Widget returndrawer(Usermap x){
             [
               //EDIT PROFILE
               ListTile(leading: Icon(Icons.person_outline,
-                color: Colors.black,), title: Text("Edit Profile"),),
+                color: Theme.of(context).textTheme.titleLarge?.color,), title: Text("Edit Profile",style: GoogleFonts.montserrat(color: Theme.of(context).textTheme.titleLarge?.color),),),
 
               // SIGNOUT BUTTON
               ListTile(
@@ -75,11 +79,16 @@ Widget returndrawer(Usermap x){
                   sign = false;
                 },
                 leading: Icon(Icons.logout_outlined,
-                  color: Colors.black,),
-                title: Text("Sign Out"),),
+                  color:Theme.of(context).textTheme.titleLarge?.color,),
+                title: Text("Sign Out",style: GoogleFonts.montserrat(color: Theme.of(context).textTheme.titleLarge?.color),),),
 
-                ListTile(leading: Icon(Icons.thermostat,
-                color: Colors.black,), title: Text("Theme"),),
+                ListTile(leading: Switch(
+                  value: Provider.of<AppStateNotifier>(context,listen: false).isDarkModeon,
+                  onChanged: (boolVal) {
+                    Provider.of<AppStateNotifier>(context,listen: false).updateTheme(boolVal);
+                  },
+                ),
+                  title: Text("Theme",style: GoogleFonts.montserrat(color: Theme.of(context).textTheme.titleLarge?.color),),),
 
 
             ],
