@@ -17,13 +17,19 @@ class _postUploadState extends State<postUpload> {
   Reference root = FirebaseStorage.instance.ref();
   final _caption = TextEditingController();
   String url = "";
+
   @override
-  void dispose() {
+
+  void dispose()
+  {
     _caption.dispose();
     super.dispose();
   }
+
   Widget build(BuildContext context) {
+
     return Scaffold(
+
       appBar: AppBar(
         title: Text("Upload the image"),
         centerTitle: true,
@@ -37,19 +43,25 @@ class _postUploadState extends State<postUpload> {
           TextField(
             controller: _caption,
           ),
-          IconButton(onPressed: () async{
-            ImagePicker picker = ImagePicker();
-            XFile? file = await picker.pickImage(source: ImageSource.gallery);
-            String unique = DateTime.now().microsecondsSinceEpoch.toString();
-            Reference Posts = root.child("posts");
-            Reference postImage = Posts.child(unique);
-            if (file == null) return;
-            await postImage.putFile(File(file.path));
-            url = await postImage.getDownloadURL();
-          }, icon: Icon(Icons.camera_alt)),
+          IconButton(
+              onPressed: () async{
+                ImagePicker picker = ImagePicker();
+                XFile? file = await picker.pickImage(source: ImageSource.gallery);
+                String unique = DateTime.now().microsecondsSinceEpoch.toString();
+                Reference Posts = root.child("posts");
+                Reference postImage = Posts.child(unique);
+                if (file == null)
+                  {
+                    return;
+                  }
+                await postImage.putFile(File(file.path));
+                url = await postImage.getDownloadURL();
+                },
+              icon: Icon(Icons.camera_alt)),
 
-          TextButton(onPressed: (){
-            insertPost(Fireuser.uid, url, _caption.text.trim());
+          TextButton(onPressed: ()
+          {
+            insertPost(Fireuser.uid, url, _caption.text.trim(),0,DateTime.now());
             Navigator.pop(context);
           }, child: Text("Submit")),
         ],

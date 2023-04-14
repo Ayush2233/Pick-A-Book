@@ -12,7 +12,7 @@ Widget bookscard(Bookmap data,BuildContext context)
           Book.bottomup(context);
         },
         child: Container(
-        margin: EdgeInsets.only(left: 20),
+        margin: EdgeInsets.fromLTRB(10,0,10,0),
         height: 160,
         child: Image.network('${data.coverPage}',fit: BoxFit.cover),
       )

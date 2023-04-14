@@ -18,6 +18,7 @@ import 'package:project2/widgets/bookcard.dart';
 
 
 class Home extends StatefulWidget {
+
   const Home({Key? key}) : super(key: key);
 
 
@@ -37,10 +38,14 @@ class _HomeState extends State<Home> with TickerProviderStateMixin{
   var fantasydata;
   var youngadultdata;
   var scholasticdata;
+  var searchdata;
+  Usermap? map;
+
 
   @override
   void initState() {
     // TODO: implement initState
+    // fetchuser();
     fetchnewdata= MongoDatabase.fetchnewbooks();
     trendingdata=MongoDatabase.fetchtrendbooks();
     toprateddata= MongoDatabase.fetchtopratedbooks();
@@ -53,6 +58,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin{
     scholasticdata=MongoDatabase.fetchscholasticbooks();
 
     print("INIT DONE");
+
     super.initState();
   }
 
@@ -82,9 +88,9 @@ class _HomeState extends State<Home> with TickerProviderStateMixin{
 
                 crossAxisAlignment: CrossAxisAlignment.start,
 
-                children: 
+                children:
                 [
-                  Text("Hi,$user",
+                  Text("Hi,${map?.name}",
                     style: GoogleFonts.montserrat(
                       fontSize: 15,
                       color: darktheme?Colors.white:Color(0xff969696),),),
@@ -96,7 +102,8 @@ class _HomeState extends State<Home> with TickerProviderStateMixin{
                       color: darktheme?Colors.white:Colors.black,
                       fontSize: 25,
                       fontWeight: FontWeight.w600,
-                      ),)
+                      ),
+                  )
                 ],
               ),
             ),
@@ -245,6 +252,11 @@ class _HomeState extends State<Home> with TickerProviderStateMixin{
             futureslider(childrendata),
 
             SizedBox(height: 20,),
+
+            // futureslider(searchdata),
+            //
+            // SizedBox(height: 20,),
+
 
 
 

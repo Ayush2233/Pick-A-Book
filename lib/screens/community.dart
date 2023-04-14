@@ -5,6 +5,13 @@ import 'package:project2/screens/postUpload.dart';
 import 'package:project2/widgets/postCard.dart';
 import 'package:project2/models/connection.dart';
 import 'package:project2/models/postDisplayModel.dart';
+// import 'package:mongo_dart/mongo_dart.dart';
+
+
+
+
+
+
 class community extends StatefulWidget {
   const community({Key? key}) : super(key: key);
 
@@ -16,47 +23,76 @@ class community extends StatefulWidget {
 class _communityState extends State<community> {
 
   var postFuture ;
+
+
+
   @override
   void initState() {
     postFuture = MongoDatabase.fetchPost();
     super.initState();
   }
   @override
+
+
+
+
+
+
   Widget build(BuildContext context) {
 
     return Scaffold(
-      floatingActionButton: FloatingActionButton(child: Icon(Icons.add),onPressed: (){
-        Navigator.pushNamed(context,'/post');
-      },backgroundColor: Color(0xffDE6077),),
-      body: FutureBuilder(
-        future: postFuture,
 
-          builder: (context , AsyncSnapshot snapshot){
-            if(snapshot.connectionState==ConnectionState.waiting)
-            {
-              return Center(
-                child: CircularProgressIndicator(),);
-            }
-            else
-            {
-              if(snapshot.hasData)
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add),
+        onPressed: ()
+        {
+          Navigator.pushNamed(context,'/post');
+        },
+        backgroundColor: Color(0xffDE6077),
+      ),
+
+
+      body: RefreshIndicator(
+        onRefresh: () async
+        {
+          var x= MongoDatabase.fetchPost();
+          setState(()
+          {
+            postFuture = x;
+          });
+        },
+
+        child: FutureBuilder(
+
+          future: postFuture,
+
+            builder: (context , AsyncSnapshot snapshot){
+              if(snapshot.connectionState==ConnectionState.waiting)
               {
-                return ListView.builder(
-                    // scrollDirection: Axis.horizontal,
-                    itemCount: snapshot.data.length,
-                    itemBuilder: (context,index)
-                    {
-                      return postCard(PostDisplay1.fromJson(snapshot.data[index]));
-                    }
-                );
+                return Center(
+                  child: CircularProgressIndicator(),);
               }
               else
               {
-                return Center(child: Text('No Data Available'),);
+                if(snapshot.hasData)
+                {
+                  return ListView.builder(
+                      // scrollDirection: Axis.horizontal,
+                      itemCount: snapshot.data.length,
+                      itemBuilder: (context,index)
+                      {
+                        return postCard(PostDisplay1.fromJson(snapshot.data[index]),);
+                      }
+                  );
+                }
+                else
+                {
+                  return Center(child: Text('No Data Available'),);
+                }
               }
-            }
 
-      })
+        }),
+      )
     );
 
 

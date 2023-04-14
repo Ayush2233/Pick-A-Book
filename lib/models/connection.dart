@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:mongo_dart/mongo_dart.dart';
 import 'package:project2/models/post_model.dart';
 import 'package:project2/models/user_model.dart';
+import 'package:project2/screens/Search.dart';
 
 // Connection Constants
 
@@ -13,7 +14,7 @@ const userdata = "Users";
 const books = "bookdata";
 const post = "PostDetails";
 
-final Fireuser = FirebaseAuth.instance.currentUser!;
+final User Fireuser = FirebaseAuth.instance.currentUser!;
 
 
 
@@ -118,6 +119,12 @@ class MongoDatabase{
     final result = await bookCollection.find(where.eq("genre","Mystery Thriller & Crime").gte('book_average_rating', 4).ne('publisher','Marvel').limit(50)).toList();
     return result;
   }
+  static Future<Usermap> fetchUser() async
+  {
+    final result = await userCollection.findOne(where.eq("uid", Fireuser.uid));
+    return Usermap.fromJson(result);
+  }
+
 
   static Future<List<Map<String, dynamic>>> fetchFantbooks() async
   {
@@ -167,11 +174,28 @@ class MongoDatabase{
     final result = await userCollection.findOne(where.eq("uid", Fireuser.uid));
     return result;
   }
+
   static Future<List<Map<String, dynamic>>> fetchPost() async{
-    final pipeline = AggregationPipelineBuilder().addStage(Lookup(from: "Users", localField: "uid", foreignField: "uid", as: "Res")).build();
+
+    final pipeline = AggregationPipelineBuilder().addStage(Lookup(from: "Users", localField: "uid", foreignField: "uid", as: "result")).addStage(Sort({'time': -1})).build();
     final results = await DbCollection(db, "PostDetails").aggregateToStream(pipeline).toList();
     // print(results);
-    results.forEach(print);
+    // results.forEach(print);
     return results;
+  }
+
+  static updatepost(ObjectId pid) async{
+
+    var u = await postCollection.findOne({"_id": pid});
+    u['likes']+=1;
+    await postCollection.save(u);
+  }
+
+
+  static Future<List<Map<String, dynamic>>> fetsearch(String x) async{
+
+    final result = await bookCollection.find(where.match('title', x).limit(2));
+    result.forEach(print);
+    return result;
   }
 }

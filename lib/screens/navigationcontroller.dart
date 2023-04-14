@@ -26,7 +26,8 @@ class navcontroller extends StatefulWidget {
 class _navcontrollerState extends State<navcontroller> {
   var  currentUser;
   var fetchuser;
-  List<Widget> navlist =[];
+  var xyz;
+  List<Widget> navlist=[Home(),Search(),community(),bookmark(),marketplace()];
   int currentindex=0;
 
 
@@ -46,22 +47,25 @@ class _navcontrollerState extends State<navcontroller> {
     });
   }
 
+
+
   @override
   void initState() {
   fetchuser = MongoDatabase.fetchUserData();
-  // var x=Usermap.fromJson(fetchuser);
-  navlist=[Home(),Search(),community(),bookmark(),marketplace()];
 
-    super.initState();
+  super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+
+
     
 
     return Scaffold(
       backgroundColor: darktheme?Colors.black:Colors.white,
       appBar: AppBar(
+
         leading: Container(padding: EdgeInsets.only(left: 10),
           child: Image.asset('assets/images/logo.png'),),
         leadingWidth: 110,
@@ -116,7 +120,8 @@ class _navcontrollerState extends State<navcontroller> {
       endDrawer: FutureBuilder(
         future: fetchuser,
         builder: (context, AsyncSnapshot snapshot) {
-          if(snapshot.hasData) {
+          if(snapshot.hasData)
+          {
             return Container(
               child: returndrawer(Usermap.fromJson(snapshot.data)),
             );

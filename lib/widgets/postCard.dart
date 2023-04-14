@@ -1,14 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:mongo_dart/mongo_dart.dart';
 import 'package:project2/models/data.dart';
 import 'package:like_button/like_button.dart';
 import 'package:project2/models/postDisplayModel.dart';
+import 'package:project2/models/connection.dart';
+
+
+
 
 Widget postCard(PostDisplay1 x){
+
   return Padding(
-    padding: const EdgeInsets.only(top: 20),
+    padding: const EdgeInsets.only(bottom: 20),
+
     child: Container(
-      decoration: BoxDecoration(color: Colors.white, boxShadow: [
-        BoxShadow(
+      height: 400,
+      width: 360,
+      decoration: BoxDecoration(
+          color: Colors.white,
+          boxShadow: [
+            BoxShadow(
           // color: Colors.pink.withOpacity(0.1),
           color: Colors.black.withOpacity(0.1),
 
@@ -17,13 +28,13 @@ Widget postCard(PostDisplay1 x){
         )
       ]),
 
-      height: 400,
-      width: 360,
       // color: Colors.white,
       child: Padding(
         padding: const EdgeInsets.all(10.0),
         child: Column(
+
           children: [
+
             Container(
               // color: Colors.red,
               child: Padding(
@@ -37,7 +48,7 @@ Widget postCard(PostDisplay1 x){
                       width: 15,
                     ),
                     Text(
-                      "Vivaan",
+                      "${x.result[0].name}",
                       style: TextStyle(
                           fontSize: 17, fontWeight: FontWeight.w500),
                     )
@@ -52,7 +63,7 @@ Widget postCard(PostDisplay1 x){
 
             Row(
               children: [
-                Text('Recently I have read Lord of the Rings '),
+                Text('${x.caption}'),
               ],
             ),
             SizedBox(
@@ -74,17 +85,27 @@ Widget postCard(PostDisplay1 x){
                     height: 200,
                     child: ClipRRect(
                         borderRadius: BorderRadius.circular(5),
-                        child: Image.network(postimage[0],fit: BoxFit.cover,)
+                        child: Image.network('${x.image}',fit: BoxFit.cover,)
                     ))
               ],
             ),
             Row(
               children: [
                 LikeButton(
+
                   likeBuilder: (isliked)
                   {
                     return Icon(isliked?Icons.favorite:Icons.favorite_outline,size: 32,color: isliked?Colors.redAccent:Colors.black,);
                   },
+                  onTap: (isliked) async
+                  {
+                    var success = await MongoDatabase.updatepost(x.id);
+
+                    /// if failed, you can do nothing
+                    return !isliked;
+                  }
+                  ,
+                  likeCount: x.likes,
                 ),
                 IconButton(
                     onPressed: () {},

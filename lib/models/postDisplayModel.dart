@@ -10,6 +10,9 @@ PostDisplay1 postDisplay1FromJson(String str) => PostDisplay1.fromJson(json.deco
 
 String postDisplay1ToJson(PostDisplay1 data) => json.encode(data.toJson());
 
+
+
+int x=0;
 class PostDisplay1 {
   PostDisplay1({
     required this.id,
@@ -17,19 +20,25 @@ class PostDisplay1 {
     required this.caption,
     required this.image,
     required this.result,
+    required this.likes,
+    required this.time,
   });
 
   ObjectId id;
   String uid;
   String caption;
   String image;
-  List<Result> result;
+  int likes;
+  DateTime time;
+  List result;
 
   factory PostDisplay1.fromJson(Map<String, dynamic> json) => PostDisplay1(
     id: json["_id"],
     uid: json["uid"],
     caption: json["caption"],
     image: json["image"],
+    likes: json['likes'],
+    time: json['time'],
     result: List<Result>.from(json["result"].map((x) => Result.fromJson(x))),
   );
 
@@ -38,6 +47,7 @@ class PostDisplay1 {
     "uid": uid,
     "caption": caption,
     "image": image,
+    "likes": x,
     "result": List<dynamic>.from(result.map((x) => x.toJson())),
   };
 }

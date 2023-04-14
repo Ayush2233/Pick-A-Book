@@ -1,4 +1,5 @@
 import 'package:mongo_dart/mongo_dart.dart' as M;
+import 'package:project2/models/postDisplayModel.dart';
 
 import 'connection.dart';
 import 'user_model.dart';
@@ -20,13 +21,15 @@ Future<void> insertDB(String uid, String name , String email, int age, String ge
 
 }
 
-Future <void> insertPost(String uid , String image , String caption) async{
+Future <void> insertPost(String uid , String image , String caption, int likes,DateTime time) async{
   var _id = M.ObjectId();
   final data = PostDisplay(
       id: _id,
       uid: uid,
       caption: caption,
       image: image,
+      likes: likes,
+      time: DateTime.now(),
   );
   var results = await MongoDatabase.addPost(data);
 }

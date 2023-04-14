@@ -5,7 +5,7 @@ import 'bookcard.dart';
 import 'package:project2/models/book_model.dart';
 
 
-Widget futureslider(Future future)
+Widget futureslider(Future? future)
 {
   return Container(
     height: 150,
@@ -14,7 +14,7 @@ Widget futureslider(Future future)
         future: future,
         builder: (context, AsyncSnapshot snapshot)
         {
-          if(snapshot.connectionState==ConnectionState.waiting)
+          if(snapshot.connectionState==ConnectionState.waiting || future==null)
           {
             return Center(
               child: CircularProgressIndicator(),);

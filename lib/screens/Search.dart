@@ -28,6 +28,7 @@ class _SearchState extends State<Search> with TickerProviderStateMixin{
   var poetrydata;
   var dynamicFuture;
   var dynamicGrid;
+  var searchdata;
 
   @override
 
@@ -76,6 +77,14 @@ class _SearchState extends State<Search> with TickerProviderStateMixin{
 
                 //TEXT FIELD AND ICON
                 child: TextField(
+                  onChanged:(String x) async
+                  {
+                    var temp = await MongoDatabase.fetsearch(x);
+                    setState(() {
+                      searchdata=temp;
+                      dynamicGrid=searchdata;
+                    });
+                  },
                   decoration: InputDecoration(filled: true,fillColor: Color(0xFFf3f3f3),
                       suffixIcon: Icon(CupertinoIcons.search_circle_fill,color: Color(0xFFDE6077),size: 50,),
 
@@ -229,9 +238,6 @@ class _SearchState extends State<Search> with TickerProviderStateMixin{
 
             Container(child:isGrid?futuregrid(dynamicGrid):futureslider(dynamicGrid),),
 
-            SizedBox(height: 20,),
-
-            // futureslider(toprateddata),
 
 
           ],
