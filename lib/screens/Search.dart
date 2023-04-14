@@ -26,11 +26,24 @@ class _SearchState extends State<Search> with TickerProviderStateMixin{
   var historydata;
   var romancedata;
   var poetrydata;
+
   var dynamicFuture;
   var dynamicGrid;
+
   var searchdata;
+  String searchquery='';
 
   @override
+
+  Future<List<Map<String,dynamic>>> _performSearch(String query) async {
+    if (query.isEmpty) {
+      return [];
+    } else {
+      final searchResult = await MongoDatabase.fetsearch(query);
+      return searchResult;
+    }
+  }
+
 
   void initState() {
     // TODO: implement initState
@@ -52,12 +65,13 @@ class _SearchState extends State<Search> with TickerProviderStateMixin{
   }
 
 
-  List genrelist =["Children","Mystery","Young Adult","Fantasy","Comic","History","Romance","Poetry"];
+  List genrelist =["Children","Mystery","Young Adult","Fantasy","Comic","History","Romance","Poetry","Search Results"];
   var dynamicText="Top Rated";
 
 
 
   bool isGrid = true;
+  bool isSearch = false;
   @override
 
   Widget build(BuildContext context) {
@@ -77,12 +91,21 @@ class _SearchState extends State<Search> with TickerProviderStateMixin{
 
                 //TEXT FIELD AND ICON
                 child: TextField(
-                  onChanged:(String x) async
+                  onChanged:(value) async
                   {
-                    var temp = await MongoDatabase.fetsearch(x);
+                    // final z=await _performSearch(searchquery);
                     setState(() {
-                      searchdata=temp;
-                      dynamicGrid=searchdata;
+                      searchquery=value;
+                      dynamicText=genrelist[8];
+                      dynamicGrid=_performSearch(searchquery);
+                    });
+                  },
+                  onSubmitted: (value)
+                  {
+                    setState(() {
+                      searchquery=value;
+                      dynamicText=genrelist[8];
+                      dynamicGrid=_performSearch(searchquery);
                     });
                   },
                   decoration: InputDecoration(filled: true,fillColor: Color(0xFFf3f3f3),
@@ -237,6 +260,8 @@ class _SearchState extends State<Search> with TickerProviderStateMixin{
 
 
             Container(child:isGrid?futuregrid(dynamicGrid):futureslider(dynamicGrid),),
+            
+            // futureslider(_performSearch(searchquery)),
 
 
 
