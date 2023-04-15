@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:mongo_dart/mongo_dart.dart';
 import 'package:project2/models/post_model.dart';
 import 'package:project2/models/user_model.dart';
+import 'package:project2/models/sell_model.dart';
 import 'package:project2/screens/Search.dart';
 
 // Connection Constants
@@ -13,6 +14,7 @@ const Mongo_url = "mongodb+srv://project2:project2@pickabookdata.es9jtrh.mongodb
 const userdata = "Users";
 const books = "bookdata";
 const post = "PostDetails";
+const sell= 'sellList';
 
 final User Fireuser = FirebaseAuth.instance.currentUser!;
 
@@ -21,7 +23,7 @@ final User Fireuser = FirebaseAuth.instance.currentUser!;
 
 class MongoDatabase{
 
-  static var db, userCollection, bookCollection, postCollection;
+  static var db, userCollection, bookCollection, postCollection, sellCollection;
 
   static connect() async{
 
@@ -32,6 +34,7 @@ class MongoDatabase{
     bookCollection = db.collection(books);
     userCollection = db.collection(userdata);
     postCollection = db.collection(post);
+    sellCollection = db.collection(sell);
   }
 
   // Functions
@@ -51,22 +54,35 @@ class MongoDatabase{
     }
   }
 
-  static Future<String> addPost(PostDisplay data) async{
+  static Future<String> addPost(PostDisplay data) async {
     try {
       var results = await postCollection.insertOne(data.toJson());
-      if(results.isSuccess){
+      if (results.isSuccess) {
         return "data inserted";
       }
-      else{
+      else {
         return "data not inserted";
       }
-    }catch(e){
+    } catch (e) {
       print(e.toString());
       return e.toString();
     }
-
-
   }
+    static Future<String> sellList(Sellmodel data) async{
+      try {
+        var results = await sellCollection.insertOne(data.toJson());
+        if(results.isSuccess){
+          return "data inserted";
+        }
+        else{
+          return "data not inserted";
+        }
+      }catch(e){
+        print(e.toString());
+        return e.toString();
+      }
+    }
+
   static Future<List<Map<String, dynamic>>> fetchbooks() async
   {
     final result = await bookCollection.find(where.eq('book_average_rating', 3.5).limit(50)).toList();
@@ -179,6 +195,15 @@ class MongoDatabase{
 
     final pipeline = AggregationPipelineBuilder().addStage(Lookup(from: "Users", localField: "uid", foreignField: "uid", as: "result")).addStage(Sort({'time': -1})).build();
     final results = await DbCollection(db, "PostDetails").aggregateToStream(pipeline).toList();
+    // print(results);
+    // results.forEach(print);
+    return results;
+  }
+
+  static Future<List<Map<String, dynamic>>> fetchBuybooks() async{
+
+    final pipeline = AggregationPipelineBuilder().addStage(Lookup(from: "Users", localField: "uid", foreignField: "uid", as: "user")).addStage(Lookup(from: "bookdata", localField: "book_id", foreignField: "book_id", as: "books")).build();
+    final results = await DbCollection(db, "sellList").aggregateToStream(pipeline).toList();
     // print(results);
     // results.forEach(print);
     return results;
