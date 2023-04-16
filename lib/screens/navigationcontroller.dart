@@ -5,6 +5,7 @@ import 'package:project2/widgets/drawer.dart';
 import 'package:provider/provider.dart';
 import '../utilities/appstartnotifier.dart';
 import 'sign up.dart';
+import 'package:project2/models/user_model.dart';
 import 'package:project2/screens/marketplace.dart';
 import 'package:project2/screens/community.dart';
 import 'package:project2/screens/bookmark.dart';
@@ -31,8 +32,7 @@ class _navcontrollerState extends State<navcontroller> {
   var  currentUser;
   var scaffoldcolor;
   var fetchuser;
-  var xyz;
-  List<Widget> navlist=[Home(),Search(),community(),bookmark(),marketplace()];
+  // List<Widget> navlist=[Home(),Search(),community(),bookmark(),marketplace()];
   int currentindex=0;
 
 
@@ -51,7 +51,7 @@ class _navcontrollerState extends State<navcontroller> {
 
   @override
   void initState() {
-  fetchuser = MongoDatabase.fetchUserData();
+  fetchuser = MongoDatabase.fetchUserData(Fireuser.uid);
 
   super.initState();
   }
@@ -138,7 +138,31 @@ class _navcontrollerState extends State<navcontroller> {
         }
       ),
 
-      body: navlist.elementAt(currentindex),
+      body: FutureBuilder(
+          future: fetchuser,
+          builder: (BuildContext context,AsyncSnapshot snapshot)
+          {
+            if(snapshot.connectionState==ConnectionState.waiting)
+            {
+              return Center(
+                child: CircularProgressIndicator(),);
+            }
+            else
+            {
+              if(snapshot.hasData)
+              {
+                return [Home(userdetails: snapshot.data,),Search(),community(),bookmark(),marketplace()].elementAt(currentindex);
+              }
+              else
+              {
+                return Center(child: Text('No User Data Available'),);
+              }
+            }
+
+          }
+      ),
+
+      // body: navlist.elementAt(currentindex),
     );
   }
 }

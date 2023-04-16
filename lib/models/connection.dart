@@ -1,10 +1,12 @@
 import 'dart:developer';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:mongo_dart/mongo_dart.dart';
+import 'package:project2/models/book_model.dart';
 import 'package:project2/models/post_model.dart';
 import 'package:project2/models/user_model.dart';
 import 'package:project2/models/sell_model.dart';
 import 'package:project2/screens/Search.dart';
+
 
 // Connection Constants
 
@@ -15,15 +17,14 @@ const userdata = "Users";
 const books = "bookdata";
 const post = "PostDetails";
 const sell= 'sellList';
+const wish='Wishlists';
 
 final User Fireuser = FirebaseAuth.instance.currentUser!;
 
 
-
-
 class MongoDatabase{
 
-  static var db, userCollection, bookCollection, postCollection, sellCollection;
+  static var db, userCollection, bookCollection, postCollection, sellCollection,wishlistcollection;
 
   static connect() async{
 
@@ -35,6 +36,7 @@ class MongoDatabase{
     userCollection = db.collection(userdata);
     postCollection = db.collection(post);
     sellCollection = db.collection(sell);
+    wishlistcollection = db.collection(wish);
   }
 
   // Functions
@@ -68,6 +70,7 @@ class MongoDatabase{
       return e.toString();
     }
   }
+
     static Future<String> sellList(Sellmodel data) async{
       try {
         var results = await sellCollection.insertOne(data.toJson());
@@ -185,10 +188,11 @@ class MongoDatabase{
   }
 
       // .eq("genre","Poetry").gt('book_average_rating', 3.6).gt('ratings_count', 500).
-  static Future<Map<String, dynamic>> fetchUserData() async
+  static Future<Usermap> fetchUserData(String uid) async
   {
-    final result = await userCollection.findOne(where.eq("uid", Fireuser.uid));
-    return result;
+    final result = await userCollection.findOne(where.eq("uid",uid ));
+    final t = Usermap.fromJson(result);
+    return t;
   }
 
   static Future<List<Map<String, dynamic>>> fetchPost() async{
@@ -215,7 +219,6 @@ class MongoDatabase{
     u['likes']+=1;
     await postCollection.save(u);
   }
-
 
   static Future<List<Map<String, dynamic>>> fetsearch(String x) async{
 

@@ -16,6 +16,7 @@ Future<void> insertDB(String uid, String name , String email, int age, String ge
     email: email,
     age: age,
     gender: gender,
+
   );
   var results = await MongoDatabase.adduser(data);
 

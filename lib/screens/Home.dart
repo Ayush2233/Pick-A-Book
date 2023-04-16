@@ -18,8 +18,8 @@ import 'package:project2/widgets/bookcard.dart';
 
 
 class Home extends StatefulWidget {
-
-  const Home({Key? key}) : super(key: key);
+  final Usermap userdetails;
+  const Home({required this.userdetails,Key? key}) : super(key: key);
 
 
   @override
@@ -41,9 +41,6 @@ class _HomeState extends State<Home> with TickerProviderStateMixin{
   var searchdata;
 
 
-  Usermap? map;
-
-
   @override
   void initState() {
     // TODO: implement initState
@@ -58,8 +55,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin{
     fantasydata=MongoDatabase.fetchFantbooks();
     youngadultdata=MongoDatabase.fetchYoungadultbooks();
     scholasticdata=MongoDatabase.fetchscholasticbooks();
-
-
+    // MongoDatabase.fetchwantlist(Fireuser.uid);
 
     print("INIT DONE");
 
@@ -96,7 +92,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin{
 
                 children:
                 [
-                  Text("Hi,${map?.name}",
+                  Text("Hi,${widget.userdetails.name}",
                     style: GoogleFonts.montserrat(
                       fontSize: 15,
                       color: Theme.of(context).textTheme.titleMedium?.color,),),
@@ -260,10 +256,9 @@ class _HomeState extends State<Home> with TickerProviderStateMixin{
 
             SizedBox(height: 20,),
 
-            ElevatedButton(onPressed: (){
-              var x=Theme.of(context).scaffoldBackgroundColor;
-              print(x);},
-                child: Text("print"))
+
+
+
 
             // futureslider(searchdata),
             //

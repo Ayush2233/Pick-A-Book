@@ -6,6 +6,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:project2/models/book_model.dart';
 import 'package:bottom_sheet/bottom_sheet.dart';
 
+import '../models/connection.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class bookdetails
 {
