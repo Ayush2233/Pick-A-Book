@@ -129,7 +129,7 @@ class _navcontrollerState extends State<navcontroller> {
           if(snapshot.hasData)
           {
             return Container(
-              child: returndrawer(Usermap.fromJson(snapshot.data),context),
+              child: returndrawer(snapshot.data,context),
             );
           }
           else{
