@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:mongo_dart/mongo_dart.dart';
 import 'package:project2/models/data.dart';
 import 'package:like_button/like_button.dart';
@@ -8,49 +9,37 @@ import 'package:project2/models/connection.dart';
 
 
 
-Widget postCard(PostDisplay1 x){
+Widget postCard(PostDisplay1 x,BuildContext context){
 
   return Padding(
     padding: const EdgeInsets.only(bottom: 20),
 
     child: Container(
-      height: 400,
-      width: 360,
-      decoration: BoxDecoration(
-          color: Colors.white,
-          boxShadow: [
-            BoxShadow(
-          // color: Colors.pink.withOpacity(0.1),
-          color: Colors.black.withOpacity(0.1),
-
-          spreadRadius: 1,
-          blurRadius: 2,
-        )
-      ]),
-
-      // color: Colors.white,
+      // height: 450,
+      // width: 360,
+            // color: Colors.white,
       child: Padding(
-        padding: const EdgeInsets.all(10.0),
+        padding: const EdgeInsets.fromLTRB(0,6,0,6),
         child: Column(
 
           children: [
-
+            // Avtar Image and username
             Container(
               // color: Colors.red,
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 10),
+                padding: const EdgeInsets.symmetric(horizontal: 4),
                 child: Row(
                   children: [
                     CircleAvatar(
                       backgroundImage: NetworkImage(userimage),
+                      radius: 15,
                     ),
                     SizedBox(
                       width: 15,
                     ),
                     Text(
                       "${x.result[0].name}",
-                      style: TextStyle(
-                          fontSize: 17, fontWeight: FontWeight.w500),
+                      style: GoogleFonts.montserrat(fontSize: 15,fontWeight: FontWeight.w600,color: Theme.of(context).textTheme.titleLarge!.color)
                     )
                   ],
                 ),
@@ -58,37 +47,43 @@ Widget postCard(PostDisplay1 x){
             ),
 
             SizedBox(
-              height: 10,
+              height: 8,
             ),
 
-            Row(
-              children: [
-                Text('${x.caption}'),
-              ],
-            ),
-            SizedBox(
-              height: 20,
+
+            Container(
+                width: double.maxFinite,
+                height: 350,
+                child: Image.network(
+                  '${x.image}',
+                  fit: BoxFit.cover,
+                  loadingBuilder: (context, child, loadingProgress)
+                  {
+                    if (loadingProgress == null)
+                   {
+                     return child;
+                   }
+                    else
+                    {
+                      return CircularProgressIndicator();
+                    }
+                  }
+
+                  )
+
             ),
 
-            // SizedBox(height: 20,),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(
-                    decoration: BoxDecoration(
-                      borderRadius:
-                      BorderRadius.all(Radius.circular(300)),
-                    ),
-                    // margin: EdgeInsets.only(top: 20),
-                    // height: 200,
-                    width: 360,
-                    height: 200,
-                    child: ClipRRect(
-                        borderRadius: BorderRadius.circular(5),
-                        child: Image.network('${x.image}',fit: BoxFit.cover,)
-                    ))
-              ],
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                children: [
+
+                  Text('${x.caption}',
+                      style: GoogleFonts.montserrat(color: Theme.of(context).textTheme.titleLarge!.color)),
+                ],
+              ),
             ),
+
             Row(
               children: [
                 LikeButton(
@@ -97,14 +92,14 @@ Widget postCard(PostDisplay1 x){
                   {
                     return Icon(isliked?Icons.favorite:Icons.favorite_outline,size: 32,color: isliked?Colors.redAccent:Colors.black,);
                   },
-                  onTap: (isliked) async
-                  {
-                    var success = await MongoDatabase.updatepost(x.id);
+                  // onTap: (isliked) async
+                  // {
+                  //   var success = await MongoDatabase.updatepost(x.id);
+                  //
+                  //   /// if failed, you can do nothing
+                  //   return !isliked;
+                  // }
 
-                    /// if failed, you can do nothing
-                    return !isliked;
-                  }
-                  ,
                   likeCount: x.likes,
                 ),
                 IconButton(

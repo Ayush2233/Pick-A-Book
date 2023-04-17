@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:project2/screens/community.dart';
+import 'package:project2/screens/edit_profile.dart';
 import 'package:project2/screens/postUpload.dart';
 import 'package:project2/utilities/authpage.dart';
 import 'package:project2/models/connection.dart';
@@ -66,6 +67,10 @@ class _appState extends State<app> {
         darkTheme: ThemeClass.darkTheme,
         themeMode: appState.isDarkModeon ? ThemeMode.dark : ThemeMode.light,
         home: Check(),
+          routes: {
+          '/post': (context) => postUpload(),
+            '/editprofile':(context)=>EditProfilePage(),
+          },
       );
     }
     );

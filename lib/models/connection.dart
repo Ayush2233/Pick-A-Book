@@ -213,11 +213,13 @@ class MongoDatabase{
     return results;
   }
 
-  static updatepost(ObjectId pid) async{
+  static Future<dynamic> updatepost(ObjectId pid) async{
 
     var u = await postCollection.findOne({"_id": pid});
     u['likes']+=1;
     await postCollection.save(u);
+    return true;
+
   }
 
   static Future<List<Map<String, dynamic>>> fetsearch(String x) async{
@@ -226,4 +228,5 @@ class MongoDatabase{
     result.forEach(print);
     return result;
   }
+
 }

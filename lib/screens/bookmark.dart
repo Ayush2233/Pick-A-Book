@@ -25,12 +25,8 @@ class _bookmarkState extends State<bookmark> {
 
     return Scaffold(
 
-        body: FutureBuilder(
-            future: data,
-            builder: (BuildContext context,AsyncSnapshot snapshot)
-            {
-              return ListView.separated(
-                itemCount: snapshot.data.length,
+        body: ListView.separated(
+                itemCount: 5,
                 separatorBuilder: (context,index)
                 {
                   return Divider(height:30, thickness: 0.5,color: Colors.black,);
@@ -68,14 +64,15 @@ class _bookmarkState extends State<bookmark> {
                               Text('⭐   4.5 ',style: TextStyle(fontSize: 15),),
                         ],
                       ),
-                    )
+                    ),
+                        SizedBox(width: 130,),
+                        Container(child: IconButton(onPressed: (){}, icon: Icon(Icons.delete)),)
                   ],
                 ),
               );
             },
-          );
-            }
-        )
+          )
+
 
     );
   }

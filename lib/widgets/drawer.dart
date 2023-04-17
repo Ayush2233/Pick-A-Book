@@ -69,8 +69,17 @@ Widget returndrawer(Usermap x,BuildContext context){
             children:
             [
               //EDIT PROFILE
-              ListTile(leading: Icon(Icons.person_outline,
-                color: Theme.of(context).textTheme.titleLarge?.color,), title: Text("Edit Profile",style: GoogleFonts.montserrat(color: Theme.of(context).textTheme.titleLarge?.color),),),
+              ListTile(
+                onTap:()
+                {
+                  Navigator.pushNamed(context,'/editprofile');
+
+                },
+
+                leading: Icon(Icons.person_outline,
+                color: Theme.of(context).textTheme.titleLarge?.color,), title: Text("Edit Profile",style: GoogleFonts.montserrat(color: Theme.of(context).textTheme.titleLarge?.color),)
+
+                ,),
 
               // SIGNOUT BUTTON
               ListTile(
