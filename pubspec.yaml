@@ -36,6 +36,7 @@ dependencies:
   bottom_sheet: ^3.1.2
   like_button: ^2.0.5
   confetti: ^0.7.0
+  smooth_page_indicator: ^1.0.1
 
 
 
