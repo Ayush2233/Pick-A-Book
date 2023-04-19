@@ -59,9 +59,6 @@ class _navcontrollerState extends State<navcontroller> {
   @override
   Widget build(BuildContext context) {
 
-
-    
-
     return Scaffold(
       backgroundColor: darktheme?Colors.black:Colors.white,
       appBar: AppBar(
