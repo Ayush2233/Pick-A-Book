@@ -1,6 +1,15 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:project2/models/connection.dart';
+
+import 'package:splash_view/splash_view.dart';
+import 'screens/splashscreen.dart';
+import 'package:project2/screens/completeProfile.dart';
+import 'screens/splashscreen.dart';
+import 'package:project2/screens/navigationcontroller.dart';
+import 'package:project2/screens/signin.dart';
+
 import 'package:project2/screens/sellSearch.dart';
+
 import 'package:project2/utilities/check.dart';
 import 'package:flutter/material.dart';
 import 'utilities/apptheme.dart';
@@ -20,6 +29,17 @@ void main() async
         child: app(),)
   );
 
+
+  runApp(MaterialApp(
+    home: SplashView(
+      logo: Splashscreen(),
+      backgroundColor: Colors.white,
+      loadingIndicator: CircularProgressIndicator(),
+      done: Done(Check())
+    ),
+
+    theme: ThemeData(primarySwatch: Colors.pink,),
+
   //
   // runApp(MaterialApp(
   //   home: Check(),
@@ -35,6 +55,7 @@ void main() async
   //   debugShowCheckedModeBanner: false,
   // ));
 }
+
 
 class app extends StatefulWidget {
   const app({Key? key}) : super(key: key);
