@@ -17,17 +17,7 @@ class Search extends StatefulWidget {
 
 class _SearchState extends State<Search> with TickerProviderStateMixin{
 
-  var toprateddata;
-  var childrendata;
-  var mysterydata;
-  var youngadultdata;
-  var fantasydata;
-  var comicdata;
-  var historydata;
-  var romancedata;
-  var poetrydata;
-
-  var dynamicFuture;
+   var dynamicFuture;
   var dynamicGrid;
 
   var searchdata;
@@ -48,17 +38,8 @@ class _SearchState extends State<Search> with TickerProviderStateMixin{
   void initState() {
     // TODO: implement initState
 
-    toprateddata= MongoDatabase.fetchtopratedbooks();
-    childrendata= MongoDatabase.fetchChildrenbooks();
-    mysterydata= MongoDatabase.fetchMysterybooks();
-    youngadultdata= MongoDatabase.fetchYoungadultbooks();
-    fantasydata= MongoDatabase.fetchfantasybooks();
-    comicdata= MongoDatabase.fetchComicwithMarvelbooks();
-    historydata= MongoDatabase.fetchHistorybooks();
-    romancedata= MongoDatabase.fetchRomancebooks();
-    poetrydata= MongoDatabase.fetchPoetrybooks();
-    dynamicFuture=[childrendata,mysterydata,youngadultdata,fantasydata,comicdata,historydata,romancedata,poetrydata];
-    dynamicGrid=toprateddata;
+    dynamicFuture=[MongoDatabase.fetchChildrenbooks(),MongoDatabase.fetchMysterybooks(),MongoDatabase.fetchYoungadultbooks(),MongoDatabase.fetchfantasybooks(),MongoDatabase.fetchComicwithMarvelbooks(),MongoDatabase.fetchHistorybooks(),MongoDatabase.fetchRomancebooks(),MongoDatabase.fetchPoetrybooks()];
+    dynamicGrid=MongoDatabase.fetchtopratedbooks();
 
     print("search init done");
     super.initState();

@@ -103,6 +103,7 @@ class MongoDatabase{
     final result = await bookCollection.find(where.gte('book_average_rating',4.8)).toList();
     return result;
   }
+
   static Future<List<Map<String, dynamic>>> fetchtrendbooks() async
   {
     final result = await bookCollection.find(where.gte('book_average_rating',4).gte('ratings_count', 1000).limit(100)).toList();

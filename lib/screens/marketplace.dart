@@ -107,8 +107,8 @@ class _marketplaceState extends State<marketplace> with TickerProviderStateMixin
 
               //TAB BAR VIEW (TAB AREAS)
               Container(
-                width: double.maxFinite,
-                height: double.maxFinite,
+                // width: double.maxFinite,
+                // height: double.maxFinite,
                 // color: Colors.black,
                 child: TabBarView(
                     controller: _tabController,

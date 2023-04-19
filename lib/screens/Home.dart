@@ -1,17 +1,9 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:project2/models/book_model.dart';
-import 'package:project2/models/data.dart';
 import 'package:project2/models/user_model.dart';
 import 'package:project2/widgets/bookshelf.dart';
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:project2/widgets/homeslider.dart';
-import 'package:bottom_sheet/bottom_sheet.dart';
-import 'package:like_button/like_button.dart';
 import 'package:project2/models/connection.dart';
-import 'bookdetails.dart';
-// import 'navigationcontroller.dart';
 import 'package:project2/widgets/bookcard.dart';
 
 
@@ -28,37 +20,10 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> with TickerProviderStateMixin{
 
-  var fetchnewdata;
-  var trendingdata;
-  var toprateddata;
-  var childrendata;
-  var marveldata;
-  var Romancedata;
-  var comicdata;
-  var fantasydata;
-  var youngadultdata;
-  var scholasticdata;
-  var searchdata;
-
-
+  // final GlobalKey _first = GlobalKey();
   @override
   void initState() {
     // TODO: implement initState
-    // fetchuser();
-    fetchnewdata= MongoDatabase.fetchnewbooks();
-    trendingdata=MongoDatabase.fetchtrendbooks();
-    toprateddata= MongoDatabase.fetchtopratedbooks();
-    childrendata= MongoDatabase.fetchChildrenbooks();
-    marveldata= MongoDatabase.fetchmarvelbooks();
-    Romancedata=MongoDatabase.fetchRomancebooks();
-    comicdata=MongoDatabase.fetchComicbooks();
-    fantasydata=MongoDatabase.fetchFantbooks();
-    youngadultdata=MongoDatabase.fetchYoungadultbooks();
-    scholasticdata=MongoDatabase.fetchscholasticbooks();
-    // MongoDatabase.fetchwantlist(Fireuser.uid);
-
-    print("INIT DONE");
-
     super.initState();
   }
 
@@ -147,8 +112,8 @@ class _HomeState extends State<Home> with TickerProviderStateMixin{
                   controller: _tabController,
                   children:
               [
-                carouselslider(fetchnewdata),
-                carouselslider(trendingdata),
+                carouselslider(MongoDatabase.fetchnewbooks()),
+                carouselslider(MongoDatabase.fetchtrendbooks()),
               ]
               ),
             ),
@@ -178,7 +143,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin{
 
             SizedBox(height: 20,),
 
-            futureslider(toprateddata),
+            futureslider(MongoDatabase.fetchtopratedbooks()),
 
             SizedBox(height: 20,),
 
@@ -188,7 +153,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin{
 
             SizedBox(height: 20,),
 
-            futureslider(fantasydata),
+            futureslider(MongoDatabase.fetchfantasybooks()),
 
             SizedBox(height: 20,),
 
@@ -199,7 +164,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin{
 
             SizedBox(height: 20,),
 
-            futureslider(comicdata),
+            futureslider(MongoDatabase.fetchComicbooks()),
 
             SizedBox(height: 20,),
 
@@ -209,7 +174,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin{
 
             SizedBox(height: 20,),
 
-            futureslider(Romancedata),
+            futureslider(MongoDatabase.fetchRomancebooks()),
 
             SizedBox(height: 20,),
 
@@ -220,7 +185,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin{
 
             SizedBox(height: 20,),
 
-            futureslider(marveldata),
+            futureslider(MongoDatabase.fetchmarvelbooks()),
 
             SizedBox(height: 20,),
 
@@ -231,7 +196,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin{
 
             SizedBox(height: 20,),
 
-            futureslider(youngadultdata),
+            futureslider(MongoDatabase.fetchYoungadultbooks()),
 
             SizedBox(height: 20,),
 
@@ -241,7 +206,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin{
 
             SizedBox(height: 20,),
 
-            futureslider(scholasticdata),
+            futureslider(MongoDatabase.fetchscholasticbooks()),
 
             SizedBox(height: 20,),
 
@@ -252,7 +217,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin{
 
             SizedBox(height: 20,),
 
-            futureslider(childrendata),
+            futureslider(MongoDatabase.fetchChildrenbooks()),
 
             SizedBox(height: 20,),
 
