@@ -43,12 +43,12 @@ class _communityState extends State<community> {
     return Scaffold(
 
       floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add),
         onPressed: ()
         {
           Navigator.pushNamed(context,'/post');
         },
         backgroundColor: Color(0xffDE6077),
+        child: Icon(Icons.add),
       ),
 
 

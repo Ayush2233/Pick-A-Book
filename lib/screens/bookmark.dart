@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:project2/models/connection.dart';
 
+import '../models/user_model.dart';
+
 
 class bookmark extends StatefulWidget {
-  const bookmark({Key? key}) : super(key: key);
+  final Usermap userdetails;
+  const bookmark({required this.userdetails, Key? key}) : super(key: key);
 
   @override
   State<bookmark> createState() => _bookmarkState();

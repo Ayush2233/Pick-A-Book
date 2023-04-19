@@ -18,11 +18,13 @@ class _marketplaceState extends State<marketplace> with TickerProviderStateMixin
 
   var bookdata;
   var selldata;
+  var userSellings;
 
   @override
   void initState() {
     bookdata= MongoDatabase.fetchbooks();
     selldata= MongoDatabase.fetchBuybooks();
+    userSellings = MongoDatabase.fetchUserSellings();
     // TODO: implement initState
     super.initState();
   }
@@ -34,7 +36,9 @@ class _marketplaceState extends State<marketplace> with TickerProviderStateMixin
     return Scaffold(
       // extendBodyBehindAppBar: true,
       floatingActionButton: FloatingActionButton(
-        onPressed: (){},
+        onPressed: (){
+          Navigator.pushNamed(context, "/sellSearch");
+        },
         tooltip: 'Increment',
         child: Icon(Icons.add),
       ),
@@ -52,7 +56,7 @@ class _marketplaceState extends State<marketplace> with TickerProviderStateMixin
 
           child: Column(
 
-            crossAxisAlignment: CrossAxisAlignment.start,
+            // crossAxisAlignment: CrossAxisAlignment.start,
 
             children:
             [
@@ -60,23 +64,16 @@ class _marketplaceState extends State<marketplace> with TickerProviderStateMixin
               Container(
                 padding: EdgeInsets.symmetric(horizontal: 20),
 
-                child: Column(
-
-                  crossAxisAlignment: CrossAxisAlignment.start,
-
-                  children:
-                  [
-
-                    Text("Marketplace",
+                child: Text("Marketplace",
                       style: GoogleFonts.montserrat(
                         fontSize: 25,
                         fontWeight: FontWeight.w600,
                       ),)
-                  ],
-                ),
+
+
               ),
 
-              SizedBox(height: 0,),
+
 
               //TABS (NEW AND TRENDING)
 
@@ -115,7 +112,7 @@ class _marketplaceState extends State<marketplace> with TickerProviderStateMixin
                     children:
                     [
                       futurebuygrid(selldata),
-                      futuregrid(bookdata),
+                      userSellGrid(userSellings),
                     ]
                 ),
 

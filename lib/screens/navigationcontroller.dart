@@ -151,7 +151,7 @@ class _navcontrollerState extends State<navcontroller> {
             {
               if(snapshot.hasData)
               {
-                return [Home(userdetails: snapshot.data,),Search(),community(),bookmark(),marketplace()].elementAt(currentindex);
+                return [Home(userdetails: snapshot.data,),Search(),community(),bookmark(userdetails: snapshot.data),marketplace()].elementAt(currentindex);
               }
               else
               {

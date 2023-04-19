@@ -16,7 +16,6 @@ Future<void> insertDB(String uid, String name , String email, int age, String ge
     email: email,
     age: age,
     gender: gender,
-
   );
   var results = await MongoDatabase.adduser(data);
 
@@ -35,8 +34,8 @@ Future <void> insertPost(String uid , String image , String caption, int likes,D
   var results = await MongoDatabase.addPost(data);
 }
 
-Future <void> sellitem(String uid, int bookId) async{
+Future <void> sellitem(String uid, int bookId , String title , String bookDescription, String coverPage, String authorName) async{
   var _id = M.ObjectId();
-  final data = Sellmodel(id: _id, uid: uid, bookId: bookId);
+  final data = Sellmodel(id: _id, uid: uid, bookId: bookId, title: title, bookDescription: bookDescription, coverPage: coverPage, authorName: authorName);
   var results = await MongoDatabase.sellList(data);
 }

@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:project2/models/app_to_db.dart';
 import 'package:project2/models/book_model.dart';
+import 'package:project2/models/marketPlaceModel.dart';
+import 'package:project2/models/sell_model.dart';
 import 'package:project2/screens/bookdetails.dart';
 import '../models/connection.dart';
 
-Widget sellcard(Bookmap data, BuildContext context) {
+Widget userSellCard(Sellmodel data, BuildContext context) {
   return GestureDetector
     (
     onTap: () {
-      var Book = bookdetails(data: data);
-      Book.bottomup(context);
+      // var Book = bookdetails(data: data);
+      // Book.bottomup(context);
     },
     child: Container(
 
@@ -20,9 +22,9 @@ Widget sellcard(Bookmap data, BuildContext context) {
             Image.network('${data.coverPage}', fit: BoxFit.cover),
             SizedBox(height: 5,),
             TextButton(onPressed: () {
-              sellitem(Fireuser.uid.toString(), data.bookId, data.title, data.description, data.coverPage, data.author);
+              // sellitem(Fireuser.uid.toString(), data.bookId, data.title, data.description, data.coverPage, data.author);
             }
-                , child: Text('SELL'))
+                , child: Text('Remove'))
           ],
           // Image.network('${data.coverPage}',fit: BoxFit.cover),
         )),
