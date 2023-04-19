@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:project2/models/book_model.dart';
 import 'package:project2/screens/bookdetails.dart';
 
+import '../models/user_model.dart';
+
 Widget bookscard(Bookmap data,BuildContext context)
 {
   return GestureDetector
@@ -18,7 +20,9 @@ Widget bookscard(Bookmap data,BuildContext context)
       )
   );
 
-}Widget bookscardgrid(Bookmap data,BuildContext context)
+}
+
+Widget bookscardgrid(Bookmap data,BuildContext context)
 {
   return GestureDetector
     (

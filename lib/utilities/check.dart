@@ -15,6 +15,7 @@ class Check extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     MongoDatabase s;
     return Scaffold(
       body: StreamBuilder<User?>(stream: FirebaseAuth.instance.userChanges(),

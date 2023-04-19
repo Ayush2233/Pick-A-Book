@@ -1,9 +1,12 @@
 import 'dart:developer';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:mongo_dart/mongo_dart.dart';
+import 'package:project2/models/book_model.dart';
 import 'package:project2/models/post_model.dart';
 import 'package:project2/models/user_model.dart';
+import 'package:project2/models/sell_model.dart';
 import 'package:project2/screens/Search.dart';
+
 
 // Connection Constants
 
@@ -13,15 +16,15 @@ const Mongo_url = "mongodb+srv://project2:project2@pickabookdata.es9jtrh.mongodb
 const userdata = "Users";
 const books = "bookdata";
 const post = "PostDetails";
+const sell= 'sellList';
+const wish='Wishlist';
 
 final User Fireuser = FirebaseAuth.instance.currentUser!;
 
 
-
-
 class MongoDatabase{
 
-  static var db, userCollection, bookCollection, postCollection;
+  static var db, userCollection, bookCollection, postCollection, sellCollection,wishListCollection;
 
   static connect() async{
 
@@ -32,6 +35,8 @@ class MongoDatabase{
     bookCollection = db.collection(books);
     userCollection = db.collection(userdata);
     postCollection = db.collection(post);
+    sellCollection = db.collection(sell);
+    wishListCollection = db.collection(wish);
   }
 
   // Functions
@@ -51,22 +56,36 @@ class MongoDatabase{
     }
   }
 
-  static Future<String> addPost(PostDisplay data) async{
+  static Future<String> addPost(PostDisplay data) async {
     try {
       var results = await postCollection.insertOne(data.toJson());
-      if(results.isSuccess){
+      if (results.isSuccess) {
         return "data inserted";
       }
-      else{
+      else {
         return "data not inserted";
       }
-    }catch(e){
+    } catch (e) {
       print(e.toString());
       return e.toString();
     }
-
-
   }
+
+    static Future<String> sellList(Sellmodel data) async{
+      try {
+        var results = await sellCollection.insertOne(data.toJson());
+        if(results.isSuccess){
+          return "data inserted";
+        }
+        else{
+          return "data not inserted";
+        }
+      }catch(e){
+        print(e.toString());
+        return e.toString();
+      }
+    }
+
   static Future<List<Map<String, dynamic>>> fetchbooks() async
   {
     final result = await bookCollection.find(where.eq('book_average_rating', 3.5).limit(50)).toList();
@@ -84,6 +103,7 @@ class MongoDatabase{
     final result = await bookCollection.find(where.gte('book_average_rating',4.8)).toList();
     return result;
   }
+
   static Future<List<Map<String, dynamic>>> fetchtrendbooks() async
   {
     final result = await bookCollection.find(where.gte('book_average_rating',4).gte('ratings_count', 1000).limit(100)).toList();
@@ -169,10 +189,11 @@ class MongoDatabase{
   }
 
       // .eq("genre","Poetry").gt('book_average_rating', 3.6).gt('ratings_count', 500).
-  static Future<Map<String, dynamic>> fetchUserData() async
+  static Future<Usermap> fetchUserData(String uid) async
   {
-    final result = await userCollection.findOne(where.eq("uid", Fireuser.uid));
-    return result;
+    final result = await userCollection.findOne(where.eq("uid",uid ));
+    final t = Usermap.fromJson(result);
+    return t;
   }
 
   static Future<List<Map<String, dynamic>>> fetchPost() async{
@@ -184,18 +205,48 @@ class MongoDatabase{
     return results;
   }
 
-  static updatepost(ObjectId pid) async{
+  static Future<List<Map<String, dynamic>>> fetchBuybooks() async{
+
+    final pipeline = AggregationPipelineBuilder().addStage(Lookup(from: "Users", localField: "uid", foreignField: "uid", as: "user")).build();
+    final results = await DbCollection(db, "sellList").aggregateToStream(pipeline).toList();
+    // print(results);
+    // results.forEach(print);
+    return results;
+  }
+
+  static Future<dynamic> updatepost(ObjectId pid) async{
 
     var u = await postCollection.findOne({"_id": pid});
     u['likes']+=1;
     await postCollection.save(u);
-  }
+    return true;
 
+  }
 
   static Future<List<Map<String, dynamic>>> fetsearch(String x) async{
 
-    final result = await bookCollection.find(where.match('title', x,caseInsensitive:true).limit(10)).toList();
+    final result = await bookCollection.find(where.match('title', x,caseInsensitive:true).limit(200)).toList();
     result.forEach(print);
     return result;
   }
+  static Future<List<Map<String, dynamic>>> fetsellsearch(String x) async{
+
+    final result = await sellCollection.find(where.match('title', x,caseInsensitive:true).limit(200)).toList();
+    result.forEach(print);
+    return result;
+  }
+
+  static Future<List<Map<String, dynamic>>> fetchUserSellings() async{
+
+    final results = await sellCollection.find(where.match("uid", Fireuser.uid)).toList();
+    return results;
+  }
+  // Future<void> submitWishlist() async {
+  //   await userCollection.update(
+  //     where.eq('uid', Fireuser.uid),
+  //     modify.set('bookId', "0000" ),
+  //   );
+  // }
+
+
 }

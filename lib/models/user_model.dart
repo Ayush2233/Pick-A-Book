@@ -1,10 +1,11 @@
+
 import 'dart:convert';
 
 import 'package:mongo_dart/mongo_dart.dart';
 
-Usermap mongoInsertFromJson(String str) => Usermap.fromJson(json.decode(str));
+Usermap usermapFromJson(String str) => Usermap.fromJson(json.decode(str));
 
-String mongoInsertToJson(Usermap data) => json.encode(data.toJson());
+String usermapToJson(Usermap data) => json.encode(data.toJson());
 
 class Usermap {
     Usermap({
@@ -14,14 +15,18 @@ class Usermap {
         required this.email,
         required this.age,
         required this.gender,
+
     });
 
     ObjectId id;
-    String? uid;
+    String uid;
     String name;
     String email;
     int age;
     String gender;
+
+
+
 
     factory Usermap.fromJson(Map<String, dynamic> json) => Usermap(
         id: json["_id"],
@@ -30,6 +35,7 @@ class Usermap {
         email: json["email"],
         age: json["age"],
         gender: json["gender"],
+
     );
 
     Map<String, dynamic> toJson() => {
@@ -39,5 +45,6 @@ class Usermap {
         "email": email,
         "age": age,
         "gender": gender,
+
     };
 }

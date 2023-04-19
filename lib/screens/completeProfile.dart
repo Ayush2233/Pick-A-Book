@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'sign up.dart';
@@ -21,6 +22,7 @@ class _completeProfileState extends State<completeProfile> {
   final _age = TextEditingController();
   final _gender = TextEditingController();
   final user = FirebaseAuth.instance.currentUser!;
+
 
   @override
   void dispose() {

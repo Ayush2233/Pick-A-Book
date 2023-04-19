@@ -17,17 +17,7 @@ class Search extends StatefulWidget {
 
 class _SearchState extends State<Search> with TickerProviderStateMixin{
 
-  var toprateddata;
-  var childrendata;
-  var mysterydata;
-  var youngadultdata;
-  var fantasydata;
-  var comicdata;
-  var historydata;
-  var romancedata;
-  var poetrydata;
-
-  var dynamicFuture;
+   var dynamicFuture;
   var dynamicGrid;
 
   var searchdata;
@@ -48,17 +38,8 @@ class _SearchState extends State<Search> with TickerProviderStateMixin{
   void initState() {
     // TODO: implement initState
 
-    toprateddata= MongoDatabase.fetchtopratedbooks();
-    childrendata= MongoDatabase.fetchChildrenbooks();
-    mysterydata= MongoDatabase.fetchMysterybooks();
-    youngadultdata= MongoDatabase.fetchYoungadultbooks();
-    fantasydata= MongoDatabase.fetchfantasybooks();
-    comicdata= MongoDatabase.fetchComicwithMarvelbooks();
-    historydata= MongoDatabase.fetchHistorybooks();
-    romancedata= MongoDatabase.fetchRomancebooks();
-    poetrydata= MongoDatabase.fetchPoetrybooks();
-    dynamicFuture=[childrendata,mysterydata,youngadultdata,fantasydata,comicdata,historydata,romancedata,poetrydata];
-    dynamicGrid=toprateddata;
+    dynamicFuture=[MongoDatabase.fetchChildrenbooks(),MongoDatabase.fetchMysterybooks(),MongoDatabase.fetchYoungadultbooks(),MongoDatabase.fetchfantasybooks(),MongoDatabase.fetchComicwithMarvelbooks(),MongoDatabase.fetchHistorybooks(),MongoDatabase.fetchRomancebooks(),MongoDatabase.fetchPoetrybooks()];
+    dynamicGrid=MongoDatabase.fetchtopratedbooks();
 
     print("search init done");
     super.initState();
@@ -91,6 +72,8 @@ class _SearchState extends State<Search> with TickerProviderStateMixin{
 
                 //TEXT FIELD AND ICON
                 child: TextField(
+
+                  style: TextStyle(color: Colors.white),
                   onChanged:(value) async
                   {
                     // final z=await _performSearch(searchquery);
@@ -102,17 +85,21 @@ class _SearchState extends State<Search> with TickerProviderStateMixin{
                   },
                   onSubmitted: (value)
                   {
+
                     setState(() {
                       searchquery=value;
                       dynamicText=genrelist[8];
                       dynamicGrid=_performSearch(searchquery);
                     });
                   },
-                  decoration: InputDecoration(filled: true,fillColor: Color(0xFFf3f3f3),
-                      suffixIcon: Icon(CupertinoIcons.search_circle_fill,color: Color(0xFFDE6077),size: 50,),
+                  decoration: InputDecoration(
+                      filled: true,fillColor: Theme.of(context).textTheme.titleSmall?.color,
+                      suffixIcon: Icon(CupertinoIcons.search_circle_fill,color: Colors.white,size: 47,),
+
 
                       hintText: 'Search Book...',
-                      hintStyle: TextStyle(fontSize: 13),
+                      hintStyle: TextStyle(fontSize: 13,color: Colors.white),
+
 
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(100)),
@@ -126,75 +113,118 @@ class _SearchState extends State<Search> with TickerProviderStateMixin{
 
             //GENRE BUTTONS
             Container(
+
             child: Column(
               children: [
-                Row(children: [SizedBox(width: 20,),
-                  Text('Genre',style: GoogleFonts.montserrat(fontSize: 20,fontWeight: FontWeight.w600),),],),
+                Row(children: [
+                  SizedBox(width: 20,),
+
+                  Text('Genre',style: GoogleFonts.montserrat(fontSize: 20,fontWeight: FontWeight.w600,color: Theme.of(context).textTheme.titleLarge?.color),),],),
 
                 SizedBox(height: 20,),
                 //ROW 1 - 3 GENRE
                 Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
 
-                    //CHILDREN
-                  SizedBox(width: 115,height: 43,child: OutlinedButton(
-                    onPressed: (){setState(() {
+
+                  InkWell(
+                    onTap: (){setState(()
+                    {
                       dynamicText=genrelist[0];
                       dynamicGrid=dynamicFuture[0];
                     });},
-                    child: Text('Children',style: TextStyle(color: Colors.black,fontWeight: FontWeight.w700),)
-                    ,style:OutlinedButton.styleFrom(side: BorderSide(color: Color(0xFFDE6077)),
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10)))) ,)),
+                    child: SizedBox(
+                      height: 90,
+                      width: 90,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          
+                          Image.asset('assets/images/children.png',),
+                          Text("Children",style: GoogleFonts.montserrat(color: Theme.of(context).textTheme.titleLarge?.color))
+                        ],
+                      )
+                    ),
+                  ),
 
-                  //MYSTERY
-                  SizedBox(width: 115,height: 43,child: OutlinedButton(
-                    onPressed: () {setState(() {
-                      dynamicText=genrelist[1];
-                      dynamicGrid=dynamicFuture[1];
-                    });},
-                    child: Text('Mystery',style: TextStyle(color: Colors.black,fontWeight: FontWeight.w700),)
-                      ,style:OutlinedButton.styleFrom(side: BorderSide(color: Color(0xFFDE6077)),
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10)))) ,)),
+                  InkWell(
+                      onTap: (){setState(()
+                      {
+                        dynamicText=genrelist[1];
+                        dynamicGrid=dynamicFuture[1];
+                      });},
+                      child: SizedBox(
+                          height: 90,
+                          width: 90,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
 
-                  //YOUNG ADULT
-                  SizedBox(width: 115,height: 43,child: OutlinedButton(onPressed: () {setState(() {
-                    dynamicText=genrelist[2];
-                    dynamicGrid=dynamicFuture[2];
-                  });},
-                    child: Text('Young Adult',style: TextStyle(color: Colors.black,fontWeight: FontWeight.w700),)
-                      ,style:OutlinedButton.styleFrom(side: BorderSide(color: Color(0xFFDE6077)),
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10)))) ,)),
+                              Image.asset('assets/images/mystery.png',height: 70,),
+                              Text("Thriller",style: GoogleFonts.montserrat(color: Theme.of(context).textTheme.titleLarge?.color))
+                            ],
+                          )
+                      ),
+                    ),
+                  InkWell(
+                      onTap: (){setState(()
+                      {
+                        dynamicText=genrelist[2];
+                        dynamicGrid=dynamicFuture[2];
+                      });},
+                      child: SizedBox(
+                          height: 90,
+                          width: 90,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+
+                              Image.asset('assets/images/younga.png',height: 70,),
+                              Text("Young Adult",style: GoogleFonts.montserrat(color: Theme.of(context).textTheme.titleLarge?.color))
+                            ],
+                          )
+                      ),
+                    ),
+
+                  InkWell(
+                      onTap: (){setState(()
+                      {
+                        dynamicText=genrelist[3];
+                        dynamicGrid=dynamicFuture[3];
+                      });},
+                      child: SizedBox(
+                          height: 90,
+                          width: 90,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+
+                              Image.asset('assets/images/fantasy.png',height: 70,),
+                              Text("Fantasy",style: GoogleFonts.montserrat(color: Theme.of(context).textTheme.titleLarge?.color))
+                            ],
+                          )
+                      ),
+                    ),
+
 
                 ],),
 
                 SizedBox(height: 10,),
 
                 //ROW 2 - GENREE
-                Row(
-                children: [
-                  SizedBox(width: 70,),
-
-                  //FANTASY
-                  SizedBox(width: 115,height: 43,child: OutlinedButton(onPressed: () {setState(() {
-                    dynamicText=genrelist[3];
-                    dynamicGrid=dynamicFuture[3];
-                  });},
-                    child: Text('Fantasy',style: TextStyle(color: Colors.black,fontWeight: FontWeight.w700),)
-                    ,style:OutlinedButton.styleFrom(side: BorderSide(color: Color(0xFFDE6077)),
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10)))) ,)),
-
-
-                  SizedBox(width: 40,),
-
-                  //COMIC
-                  SizedBox(width: 115,height: 43,child: OutlinedButton(onPressed: () {setState(() {
-                    dynamicText=genrelist[4];
-                    dynamicGrid=dynamicFuture[4];
-                  });},
-                    child: Text('Comic',style: TextStyle(color: Colors.black,fontWeight: FontWeight.w700),)
-                    ,style:OutlinedButton.styleFrom(side: BorderSide(color: Color(0xFFDE6077)),
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10)))) ,)),
-                ],),
+                // Row(
+                // children: [
+                //   SizedBox(width: 70,),
+                //
+                //   //FANTASY
+                //
+                //
+                //
+                //   SizedBox(width: 40,),
+                //
+                //   //COMIC
+                //
+                // ],),
 
                 SizedBox(height: 10,),
 
@@ -202,32 +232,91 @@ class _SearchState extends State<Search> with TickerProviderStateMixin{
                 Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
 
+
+                    InkWell(
+                      onTap: (){setState(()
+                      {
+                        dynamicText=genrelist[4];
+                        dynamicGrid=dynamicFuture[4];
+                      });},
+                      child: SizedBox(
+                          height: 90,
+                          width: 70,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+
+                              Image.asset('assets/images/comic.png',height: 70,),
+                              Text("Comics",style: GoogleFonts.montserrat(color: Theme.of(context).textTheme.titleLarge?.color))
+                            ],
+                          )
+                      ),
+                    ),
+
                     //HISTORY
-                    SizedBox(width: 115,height: 43,child: OutlinedButton(onPressed: () {setState(() {
-                      dynamicText=genrelist[5];
-                      dynamicGrid=dynamicFuture[5];
-                    });},
-                      child: Text('History',style: TextStyle(color: Colors.black,fontWeight: FontWeight.w700),)
-                      ,style:OutlinedButton.styleFrom(side: BorderSide(color: Color(0xFFDE6077)),
-                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10)))) ,)),
+                    InkWell(
+                      onTap: (){setState(()
+                      {
+                        dynamicText=genrelist[5];
+                        dynamicGrid=dynamicFuture[5];
+                      });},
+                      child: SizedBox(
+                          height: 90,
+                          width: 70,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+
+                              Image.asset('assets/images/history.png',height: 70,),
+                              Text("History",style: GoogleFonts.montserrat(color: Theme.of(context).textTheme.titleLarge?.color))
+                            ],
+                          )
+                      ),
+                    ),
 
                     //ROMANCE
-                    SizedBox(width: 115,height: 43,child: OutlinedButton(onPressed: () {setState(() {
-                      dynamicText=genrelist[6];
-                      dynamicGrid=dynamicFuture[6];
-                    });},
-                      child: Text('Romance',style: TextStyle(color: Colors.black,fontWeight: FontWeight.w700),)
-                      ,style:OutlinedButton.styleFrom(side: BorderSide(color: Color(0xFFDE6077)),
-                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10)))) ,)),
+                    InkWell(
+                      onTap: (){setState(()
+                      {
+                        dynamicText=genrelist[6];
+                        dynamicGrid=dynamicFuture[6];
+                      });},
+                      child: SizedBox(
+                          height: 90,
+                          width: 70,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+
+                              Image.asset('assets/images/rom.png',height: 70,),
+                              Text("Romance",style: GoogleFonts.montserrat(color: Theme.of(context).textTheme.titleLarge?.color)),
+                            ],
+                          )
+                      ),
+                    ),
 
                     //POETRY
-                    SizedBox(width: 115,height: 43,child: OutlinedButton(onPressed: () {setState(() {
-                      dynamicText=genrelist[7];
-                      dynamicGrid=dynamicFuture[7];
-                    });},
-                      child: Text('Poetry',style: TextStyle(color: Colors.black,fontWeight: FontWeight.w700),)
-                      ,style:OutlinedButton.styleFrom(side: BorderSide(color: Color(0xFFDE6077)),
-                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10)))) ,)),
+                    InkWell(
+                      onTap: (){setState(()
+                      {
+                        dynamicText=genrelist[7];
+                        dynamicGrid=dynamicFuture[7];
+                      });},
+                      child: SizedBox(
+                          height: 90,
+                          width: 90,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+
+                              Image.asset('assets/images/poetry.png',height: 70,),
+                              // SizedBox(height: 4,),
+                              Text("Poetry",style: GoogleFonts.montserrat(color: Theme.of(context).textTheme.titleLarge?.color),)
+                            ],
+                          )
+                      ),
+                    ),
+
                   ],),
 
               ],
@@ -240,7 +329,7 @@ class _SearchState extends State<Search> with TickerProviderStateMixin{
               children: [
               Padding(
                 padding: const EdgeInsets.fromLTRB(20,0,0,0),
-                child: Text("$dynamicText",style: GoogleFonts.montserrat(fontSize: 20,fontWeight: FontWeight.w600),),
+                child: Text("$dynamicText",style: GoogleFonts.montserrat(fontSize: 20,fontWeight: FontWeight.w600,color: Theme.of(context).textTheme.titleLarge?.color),),
               ),
 
               Padding(
@@ -251,7 +340,7 @@ class _SearchState extends State<Search> with TickerProviderStateMixin{
                     isGrid=!isGrid;
                   });
                 },
-                    icon: Icon(isGrid?Icons.list:Icons.grid_view)),
+                    icon: Icon(isGrid?Icons.list:Icons.grid_view,color: Theme.of(context).textTheme.titleLarge?.color)),
               )
             ],),
 
