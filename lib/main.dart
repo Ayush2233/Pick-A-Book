@@ -30,31 +30,7 @@ void main() async
   );
 
 
-  runApp(MaterialApp(
-    home: SplashView(
-      logo: Splashscreen(),
-      backgroundColor: Colors.white,
-      loadingIndicator: CircularProgressIndicator(),
-      done: Done(Check())
-    ),
-
-    theme: ThemeData(primarySwatch: Colors.pink,),
-
-  //
-  // runApp(MaterialApp(
-  //   home: Check(),
-  //   theme: ThemeClass.lightTheme,
-  //   darkTheme: ThemeClass.darkTheme,
-  //   // darkTheme: ThemeData.dark(),
-  //
-  //   routes: {
-  //     '/post': (context) => postUpload(),
-  //     '/community' : (context) => community(),
-  //   },
-  //
-  //   debugShowCheckedModeBanner: false,
-  // ));
-}
+ }
 
 
 class app extends StatefulWidget {
@@ -76,7 +52,12 @@ class _appState extends State<app> {
         theme: ThemeClass.lightTheme,
         darkTheme: ThemeClass.darkTheme,
         themeMode: appState.isDarkModeon ? ThemeMode.dark : ThemeMode.light,
-        home: Check(),
+        home: SplashView(
+            logo: Splashscreen(),
+            backgroundColor: Colors.white,
+            loadingIndicator: CircularProgressIndicator(),
+            done: Done(Check())
+        ),
         routes: {
           "/sellSearch" : (context) => sellSearch(),
         },
