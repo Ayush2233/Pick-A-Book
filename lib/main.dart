@@ -1,19 +1,8 @@
 import 'package:firebase_core/firebase_core.dart';
-import 'package:project2/screens/community.dart';
-import 'package:project2/screens/edit_profile.dart';
-import 'package:project2/screens/postUpload.dart';
-import 'package:project2/utilities/authpage.dart';
 import 'package:project2/models/connection.dart';
-import 'package:project2/screens/completeProfile.dart';
-import 'package:project2/screens/navigationcontroller.dart';
-import 'package:project2/screens/signin.dart';
+import 'package:project2/screens/sellSearch.dart';
 import 'package:project2/utilities/check.dart';
-import 'screens/Home.dart';
 import 'package:flutter/material.dart';
-import 'screens/Home.dart';
-import 'screens/Search.dart';
-import 'screens/sign up.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'utilities/apptheme.dart';
 import 'utilities/appstartnotifier.dart';
 import 'package:provider/provider.dart';
@@ -67,10 +56,9 @@ class _appState extends State<app> {
         darkTheme: ThemeClass.darkTheme,
         themeMode: appState.isDarkModeon ? ThemeMode.dark : ThemeMode.light,
         home: Check(),
-          routes: {
-          '/post': (context) => postUpload(),
-            '/editprofile':(context)=>EditProfilePage(),
-          },
+        routes: {
+          "/sellSearch" : (context) => sellSearch(),
+        },
       );
     }
     );

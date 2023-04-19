@@ -17,14 +17,14 @@ const userdata = "Users";
 const books = "bookdata";
 const post = "PostDetails";
 const sell= 'sellList';
-const wish='Wishlists';
+const wish='Wishlist';
 
 final User Fireuser = FirebaseAuth.instance.currentUser!;
 
 
 class MongoDatabase{
 
-  static var db, userCollection, bookCollection, postCollection, sellCollection,wishlistcollection;
+  static var db, userCollection, bookCollection, postCollection, sellCollection,wishListCollection;
 
   static connect() async{
 
@@ -36,7 +36,7 @@ class MongoDatabase{
     userCollection = db.collection(userdata);
     postCollection = db.collection(post);
     sellCollection = db.collection(sell);
-    wishlistcollection = db.collection(wish);
+    wishListCollection = db.collection(wish);
   }
 
   // Functions
@@ -206,7 +206,7 @@ class MongoDatabase{
 
   static Future<List<Map<String, dynamic>>> fetchBuybooks() async{
 
-    final pipeline = AggregationPipelineBuilder().addStage(Lookup(from: "Users", localField: "uid", foreignField: "uid", as: "user")).addStage(Lookup(from: "bookdata", localField: "book_id", foreignField: "book_id", as: "books")).build();
+    final pipeline = AggregationPipelineBuilder().addStage(Lookup(from: "Users", localField: "uid", foreignField: "uid", as: "user")).build();
     final results = await DbCollection(db, "sellList").aggregateToStream(pipeline).toList();
     // print(results);
     // results.forEach(print);
@@ -228,5 +228,24 @@ class MongoDatabase{
     result.forEach(print);
     return result;
   }
+  static Future<List<Map<String, dynamic>>> fetsellsearch(String x) async{
+
+    final result = await sellCollection.find(where.match('title', x,caseInsensitive:true).limit(200)).toList();
+    result.forEach(print);
+    return result;
+  }
+
+  static Future<List<Map<String, dynamic>>> fetchUserSellings() async{
+
+    final results = await sellCollection.find(where.match("uid", Fireuser.uid)).toList();
+    return results;
+  }
+  // Future<void> submitWishlist() async {
+  //   await userCollection.update(
+  //     where.eq('uid', Fireuser.uid),
+  //     modify.set('bookId', "0000" ),
+  //   );
+  // }
+
 
 }

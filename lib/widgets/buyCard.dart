@@ -3,14 +3,14 @@ import 'package:project2/models/app_to_db.dart';
 import 'package:project2/models/book_model.dart';
 import 'package:project2/screens/bookdetails.dart';
 import '../models/connection.dart';
-import 'package:project2/models/buyModel.dart';
+import 'package:project2/models/marketPlaceModel.dart';
 
-Widget buycard( BuyModel data, BuildContext context) {
+Widget buycard( MarketPlaceModel data, BuildContext context) {
   return GestureDetector
     (
     onTap: () {
-      var Book = bookdetails(data: data.books[0]);
-      Book.bottomup(context);
+      // var Book = bookdetails(data: data.books[0]);
+      // Book.bottomup(context);
     },
     child: Container(
 
@@ -18,7 +18,7 @@ Widget buycard( BuyModel data, BuildContext context) {
         height: 160,
         child: Column(
           children: [
-            Image.network( '${data.books[0].coverPage}', fit: BoxFit.cover),
+            Image.network( '${data.coverPage}', fit: BoxFit.cover),
             SizedBox(height: 5,),
             TextButton(onPressed: () {
             }

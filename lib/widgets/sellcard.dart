@@ -20,7 +20,7 @@ Widget sellcard(Bookmap data, BuildContext context) {
             Image.network('${data.coverPage}', fit: BoxFit.cover),
             SizedBox(height: 5,),
             TextButton(onPressed: () {
-              sellitem(Fireuser.uid.toString(), data.bookId);
+              sellitem(Fireuser.uid.toString(), data.bookId, data.title, data.description, data.coverPage, data.author);
             }
                 , child: Text('SELL'))
           ],

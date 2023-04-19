@@ -1,11 +1,11 @@
+
 import 'dart:convert';
 
 import 'package:mongo_dart/mongo_dart.dart';
-import 'package:project2/models/book_model.dart';
 
-Usermap mongoInsertFromJson(String str) => Usermap.fromJson(json.decode(str));
+Usermap usermapFromJson(String str) => Usermap.fromJson(json.decode(str));
 
-String mongoInsertToJson(Usermap data) => json.encode(data.toJson());
+String usermapToJson(Usermap data) => json.encode(data.toJson());
 
 class Usermap {
     Usermap({
@@ -16,11 +16,10 @@ class Usermap {
         required this.age,
         required this.gender,
 
-
     });
 
     ObjectId id;
-    String? uid;
+    String uid;
     String name;
     String email;
     int age;
