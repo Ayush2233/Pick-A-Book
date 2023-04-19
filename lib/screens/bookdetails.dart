@@ -6,6 +6,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:project2/models/book_model.dart';
 import 'package:bottom_sheet/bottom_sheet.dart';
 
+import '../models/connection.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class bookdetails
 {
@@ -16,12 +18,12 @@ class bookdetails
   {
     return Scaffold(
 
-      backgroundColor: Colors.white,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
 
       appBar: AppBar(
 
         // backgroundColor: Colors.black,
-        backgroundColor: Color(0xffDE6077),
+        backgroundColor: Theme.of(context).textTheme.titleSmall?.color,
         elevation: 0,
         actions:
         [
@@ -84,7 +86,7 @@ class bookdetails
 
               //GENRE
               Container(
-                decoration: BoxDecoration(color: Color(0xffDE6077), borderRadius: BorderRadius.all(Radius.circular(20))),
+                decoration: BoxDecoration(color: Theme.of(context).textTheme.titleSmall?.color, borderRadius: BorderRadius.all(Radius.circular(20))),
                 padding: EdgeInsets.fromLTRB(10, 7, 10, 7),
 
                 child: Text("${data.genre}",
@@ -102,7 +104,7 @@ class bookdetails
                 child: Text("${data.title}",
                   textAlign: TextAlign.center,
                   style: GoogleFonts.montserrat(
-                    color: Colors.black,
+                    color: Theme.of(context).textTheme.titleLarge?.color,
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
                   ),
@@ -116,7 +118,7 @@ class bookdetails
                 child: Text("${data.author}",
                   textAlign: TextAlign.center,
                   style: GoogleFonts.montserrat(
-                    color: Colors.black,
+                    color: Theme.of(context).textTheme.titleLarge?.color,
                     fontSize: 15,
                   ),),
               ),
@@ -126,7 +128,7 @@ class bookdetails
               // Rating Box
               Container(
                 decoration: BoxDecoration(
-                    color: Colors.black,
+                    color: Theme.of(context).textTheme.titleSmall?.color,
                     borderRadius: BorderRadius.all(Radius.circular(20))
                 ),
                 height: 80,
@@ -212,7 +214,7 @@ class bookdetails
                   Text(
                     "Introduction",
                     style: TextStyle(
-                        color: Colors.black,
+                        color: Theme.of(context).textTheme.titleLarge?.color,
                         fontSize: 18,
                         fontWeight: FontWeight.w500
                     ),
@@ -221,7 +223,7 @@ class bookdetails
                   Text(
                     "${data.description}",
                     style: TextStyle(
-                      color: Colors.black,
+                      color: Theme.of(context).textTheme.titleLarge?.color,
                       fontSize: 15,
                     ),
                   ),
@@ -230,7 +232,7 @@ class bookdetails
                   Text(
                     "Details",
                     style: TextStyle(
-                        color: Colors.black,
+                        color: Theme.of(context).textTheme.titleLarge?.color,
                         fontSize: 18,
                         fontWeight: FontWeight.w500
                     ),
@@ -240,7 +242,7 @@ class bookdetails
                     "Published Year : ${data.publicationYear} \n"
                         "Publisher : ${data.publisher}",
                     style: TextStyle(
-                      color: Colors.black,
+                      color: Theme.of(context).textTheme.titleLarge?.color,
                       fontSize: 15,
                     ),
                   ),

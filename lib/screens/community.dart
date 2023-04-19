@@ -132,56 +132,60 @@ class _communityState extends State<community> {
     return Scaffold(
 
       floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add),
         onPressed: ()
         {
           // Navigator.pushNamed(context,'/post');
           showInformationDialogue(context);
         },
         backgroundColor: Color(0xffDE6077),
+        child: Icon(Icons.add),
       ),
 
 
-      body: RefreshIndicator(
-        onRefresh: () async
-        {
-          var x= MongoDatabase.fetchPost();
-          setState(()
+      body: Padding(
+        padding: const EdgeInsets.fromLTRB(0,8,0,8),
+        child: RefreshIndicator(
+
+          onRefresh: () async
           {
-            postFuture = x;
-          });
-        },
+            var x= MongoDatabase.fetchPost();
+            setState(()
+            {
+              postFuture = x;
+            });
+          },
 
-        child: FutureBuilder(
+          child: FutureBuilder(
 
-          future: postFuture,
+            future: postFuture,
 
-            builder: (context , AsyncSnapshot snapshot){
-              if(snapshot.connectionState==ConnectionState.waiting)
-              {
-                return Center(
-                  child: CircularProgressIndicator(),);
-              }
-              else
-              {
-                if(snapshot.hasData)
+              builder: (context , AsyncSnapshot snapshot){
+                if(snapshot.connectionState==ConnectionState.waiting)
                 {
-                  return ListView.builder(
-                      // scrollDirection: Axis.horizontal,
-                      itemCount: snapshot.data.length,
-                      itemBuilder: (context,index)
-                      {
-                        return postCard(PostDisplay1.fromJson(snapshot.data[index]),);
-                      }
-                  );
+                  return Center(
+                    child: CircularProgressIndicator(),);
                 }
                 else
                 {
-                  return Center(child: Text('No Data Available'),);
+                  if(snapshot.hasData)
+                  {
+                    return ListView.builder(
+                        // scrollDirection: Axis.horizontal,
+                        itemCount: snapshot.data.length,
+                        itemBuilder: (context,index)
+                        {
+                          return postCard(PostDisplay1.fromJson(snapshot.data[index]),context);
+                        }
+                    );
+                  }
+                  else
+                  {
+                    return Center(child: Text('No Data Available'),);
+                  }
                 }
-              }
 
-        }),
+          }),
+        ),
       )
     );
 
