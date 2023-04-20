@@ -9,6 +9,7 @@ class ThemeClass{
 
 
       primarySwatch: Colors.pink,
+      primaryColor: Colors.pink,
 
       textTheme: TextTheme(
         titleMedium: TextStyle(color: Color(0xff969696)),
@@ -33,6 +34,7 @@ class ThemeClass{
       canvasColor: Colors.white,
 
       primarySwatch: Colors.deepPurple,
+      primaryColor: Colors.deepPurple,
 
       textTheme: TextTheme(
         titleMedium: TextStyle(color: Color(0xff969696)),

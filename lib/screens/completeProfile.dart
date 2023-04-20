@@ -8,6 +8,7 @@ import 'package:project2/models/app_to_db.dart';
 import 'package:project2/screens/Home.dart';
 import 'package:project2/screens/navigationcontroller.dart';
 
+
 class completeProfile extends StatefulWidget {
   const completeProfile({Key? key}) : super(key: key);
 
@@ -31,6 +32,12 @@ class _completeProfileState extends State<completeProfile> {
     _gender.dispose();
     super.dispose();
   }
+
+  final List<String> gender = [
+    'Male',
+    'Female',
+  ];
+
   Widget build(BuildContext context) {
 
     return Scaffold(
@@ -111,15 +118,15 @@ class _completeProfileState extends State<completeProfile> {
                             // GENDER
                             SizedBox(
                               width: 155,
-                              child: TextField(
-                                controller: _gender,
-                                decoration: InputDecoration(
-                                    filled: true,
-                                    fillColor: Color(0xFFf3f3f3),
-                                    prefixIcon: Icon(Icons.male),
-                                    labelText: "Gender",
-                                    border: InputBorder.none),
-                              ),
+                                child: TextField(
+                                  controller: _gender,
+                                  decoration: InputDecoration(
+                                      filled: true,
+                                      fillColor: Color(0xFFf3f3f3),
+                                      prefixIcon: Icon(Icons.male),
+                                      labelText: "Gender",
+                                      border: InputBorder.none),
+                                ),
                             )
                           ],
                         ),
