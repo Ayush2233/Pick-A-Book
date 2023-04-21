@@ -60,6 +60,7 @@ class Result {
     required this.email,
     required this.age,
     required this.gender,
+    required this.wishlist,
   });
 
   ObjectId id;
@@ -68,6 +69,7 @@ class Result {
   String email;
   int age;
   String gender;
+  List<int> wishlist;
 
   factory Result.fromJson(Map<String, dynamic> json) => Result(
     id: json["_id"],
@@ -76,6 +78,7 @@ class Result {
     email: json["email"],
     age: json["age"],
     gender: json["gender"],
+    wishlist: List<int>.from(json["wishlist"].map((x) => x)),
   );
 
   Map<String, dynamic> toJson() => {
@@ -85,5 +88,6 @@ class Result {
     "email": email,
     "age": age,
     "gender": gender,
+    "wishlist": List<dynamic>.from(wishlist.map((x) => x)),
   };
 }

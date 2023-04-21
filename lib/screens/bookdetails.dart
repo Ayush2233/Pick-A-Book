@@ -39,7 +39,15 @@ class bookdetails
                   color: isliked?Colors.yellowAccent:Colors.white,
 
                 );
+                
               },
+                onTap: (isliked) async
+              {
+                var success = await MongoDatabase.updateWishList(data.bookId);
+
+                /// if failed, you can do nothing
+                return !isliked;
+              }
             ),
           ),
 

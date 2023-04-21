@@ -241,12 +241,9 @@ class MongoDatabase{
     final results = await sellCollection.find(where.match("uid", Fireuser.uid)).toList();
     return results;
   }
-  // Future<void> submitWishlist() async {
-  //   await userCollection.update(
-  //     where.eq('uid', Fireuser.uid),
-  //     modify.set('bookId', "0000" ),
-  //   );
-  // }
 
+  static Future<void> updateWishList(int a) async{
+    await userCollection.updateOne(where.eq("uid", Fireuser.uid), modify.push('wishlist',a));
+  }
 
 }
