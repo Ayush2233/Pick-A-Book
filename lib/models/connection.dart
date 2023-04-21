@@ -226,13 +226,13 @@ class MongoDatabase{
   static Future<List<Map<String, dynamic>>> fetsearch(String x) async{
 
     final result = await bookCollection.find(where.match('title', x,caseInsensitive:true).limit(200)).toList();
-    result.forEach(print);
+    // result.forEach(print);
     return result;
   }
   static Future<List<Map<String, dynamic>>> fetsellsearch(String x) async{
 
     final result = await sellCollection.find(where.match('title', x,caseInsensitive:true).limit(200)).toList();
-    result.forEach(print);
+    // result.forEach(print);
     return result;
   }
 
@@ -245,5 +245,18 @@ class MongoDatabase{
   static Future<void> updateWishList(int a) async{
     await userCollection.updateOne(where.eq("uid", Fireuser.uid), modify.push('wishlist',a));
   }
+  
+  static Future<List<Map<String , dynamic>>> fetchWishList() async{
+    final pipeline = AggregationPipelineBuilder().addStage(
+        Match({"uid" : Fireuser.uid})).addStage(
+        Unwind(Field("wishlist"))).addStage(
+        Lookup(from: "bookdata", localField: "wishlist", foreignField: "book_id", as: "result")).build();
+
+    final results = await DbCollection(db, "Users").aggregateToStream(pipeline).toList();
+    print(results);
+    return results;
+  }
+
+
 
 }
