@@ -18,6 +18,7 @@ class _LoginState extends State<Login> {
 
   final _email = TextEditingController();
   final _password = TextEditingController();
+  bool passvisible= true;
 
   Future signin() async{
     try {
@@ -103,15 +104,37 @@ class _LoginState extends State<Login> {
 
                   SizedBox(width: 350,child: TextField(controller: _email,
                     decoration: InputDecoration(
-                      filled: true,fillColor: Color(0xFFf3f3f3),prefixIcon: Icon(Icons.email_outlined),labelText: 'Email',border: InputBorder.none,),
+                      filled: true,
+                      fillColor: Color(0xFFf3f3f3),
+                      prefixIcon: Icon(Icons.email_outlined),
+                      labelText: 'Email',
+                      border: InputBorder.none,),
                   )
                   ),
 
                   SizedBox(height: 15,),
 
-                  SizedBox(width: 350,child: TextField(controller: _password, obscureText: true,
+                  SizedBox(width: 350,child:
+                  TextField(
+                    controller: _password,
+                    obscureText: passvisible,
                     decoration: InputDecoration(
-                      filled: true,fillColor: Color(0xFFf3f3f3),suffixIcon: Icon(CupertinoIcons.eye_slash_fill),prefixIcon: Icon(CupertinoIcons.lock),labelText: 'Password',border: InputBorder.none,),
+                      filled: true,fillColor: Color(0xFFf3f3f3),
+                      suffixIcon: IconButton(
+                        onPressed: (){
+                          setState(() {
+                            if(passvisible){
+                              passvisible = false;
+                            }else{
+                              passvisible = true;
+                            }
+                          });
+                        },
+                        icon: Icon(passvisible?CupertinoIcons.eye_slash_fill:CupertinoIcons.eye),
+                      ),
+                      prefixIcon: Icon(CupertinoIcons.lock),
+                      labelText: 'Password',
+                      border: InputBorder.none,),
                   )
                   ),
                   SizedBox(height: 15,),
