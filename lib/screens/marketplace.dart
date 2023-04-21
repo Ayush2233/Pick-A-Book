@@ -1,9 +1,6 @@
-import 'dart:ffi';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:project2/models/connection.dart';
-import 'package:project2/models/data.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:project2/widgets/grid.dart';
 
 

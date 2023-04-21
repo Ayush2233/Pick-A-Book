@@ -1,6 +1,8 @@
+// To parse this JSON data, do
+//
+//     final usermap = usermapFromJson(jsonString);
 
 import 'dart:convert';
-
 import 'package:mongo_dart/mongo_dart.dart';
 
 Usermap usermapFromJson(String str) => Usermap.fromJson(json.decode(str));
@@ -15,7 +17,7 @@ class Usermap {
         required this.email,
         required this.age,
         required this.gender,
-
+        required this.wishlist,
     });
 
     ObjectId id;
@@ -24,9 +26,7 @@ class Usermap {
     String email;
     int age;
     String gender;
-
-
-
+    List<int> wishlist;
 
     factory Usermap.fromJson(Map<String, dynamic> json) => Usermap(
         id: json["_id"],
@@ -35,7 +35,7 @@ class Usermap {
         email: json["email"],
         age: json["age"],
         gender: json["gender"],
-
+        wishlist: List<int>.from(json["wishlist"].map((x) => x)),
     );
 
     Map<String, dynamic> toJson() => {
@@ -45,6 +45,6 @@ class Usermap {
         "email": email,
         "age": age,
         "gender": gender,
-
+        "wishlist": List<dynamic>.from(wishlist.map((x) => x)),
     };
 }
