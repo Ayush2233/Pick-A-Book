@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:project2/widgets/homeslider.dart';
 import 'package:project2/models/connection.dart';
 import 'package:project2/models/book_model.dart';
+import 'genreresult.dart';
 
 
 
@@ -19,8 +20,7 @@ class _SearchState extends State<Search> with TickerProviderStateMixin{
 
    var dynamicFuture;
   var dynamicGrid;
-
-  var searchdata;
+  
   String searchquery='';
 
   @override
@@ -62,7 +62,8 @@ class _SearchState extends State<Search> with TickerProviderStateMixin{
     return Scaffold(
 
       body:SingleChildScrollView(
-        child: Column(
+        child:
+        Column(
           children: [
 
             // SEARCH TEXT FIELD
@@ -79,17 +80,19 @@ class _SearchState extends State<Search> with TickerProviderStateMixin{
                     // final z=await _performSearch(searchquery);
                     setState(() {
                       searchquery=value;
-                      dynamicText=genrelist[8];
-                      dynamicGrid=_performSearch(searchquery);
+                      isSearch=true;
+                      // dynamicText=genrelist[8];
+                      // dynamicGrid=_performSearch(searchquery);
                     });
                   },
                   onSubmitted: (value)
                   {
 
                     setState(() {
+                      isSearch=true;
                       searchquery=value;
-                      dynamicText=genrelist[8];
-                      dynamicGrid=_performSearch(searchquery);
+                      // dynamicText=genrelist[8];
+                      // dynamicGrid=_performSearch(searchquery);
                     });
                   },
                   decoration: InputDecoration(
@@ -109,247 +112,242 @@ class _SearchState extends State<Search> with TickerProviderStateMixin{
               ),
             ),),
 
+
+
             SizedBox(height: 20,),
-
-            //GENRE BUTTONS
             Container(
-
-            child: Column(
-              children: [
-                Row(children: [
-                  SizedBox(width: 20,),
-
-                  Text('Genre',style: GoogleFonts.montserrat(fontSize: 20,fontWeight: FontWeight.w600,color: Theme.of(context).textTheme.titleLarge?.color),),],),
-
-                SizedBox(height: 20,),
-                //ROW 1 - 3 GENRE
-                Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-
-
-                  InkWell(
-                    onTap: (){setState(()
-                    {
-                      dynamicText=genrelist[0];
-                      dynamicGrid=dynamicFuture[0];
-                    });},
-                    child: SizedBox(
-                      height: 90,
-                      width: 90,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          
-                          Image.asset('assets/images/children.png',),
-                          Text("Children",style: GoogleFonts.montserrat(color: Theme.of(context).textTheme.titleLarge?.color))
-                        ],
-                      )
-                    ),
-                  ),
-
-                  InkWell(
-                      onTap: (){setState(()
-                      {
-                        dynamicText=genrelist[1];
-                        dynamicGrid=dynamicFuture[1];
-                      });},
-                      child: SizedBox(
-                          height: 90,
-                          width: 90,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-
-                              Image.asset('assets/images/mystery.png',height: 70,),
-                              Text("Thriller",style: GoogleFonts.montserrat(color: Theme.of(context).textTheme.titleLarge?.color))
-                            ],
-                          )
-                      ),
-                    ),
-                  InkWell(
-                      onTap: (){setState(()
-                      {
-                        dynamicText=genrelist[2];
-                        dynamicGrid=dynamicFuture[2];
-                      });},
-                      child: SizedBox(
-                          height: 90,
-                          width: 90,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-
-                              Image.asset('assets/images/younga.png',height: 70,),
-                              Text("Young Adult",style: GoogleFonts.montserrat(color: Theme.of(context).textTheme.titleLarge?.color))
-                            ],
-                          )
-                      ),
-                    ),
-
-                  InkWell(
-                      onTap: (){setState(()
-                      {
-                        dynamicText=genrelist[3];
-                        dynamicGrid=dynamicFuture[3];
-                      });},
-                      child: SizedBox(
-                          height: 90,
-                          width: 90,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-
-                              Image.asset('assets/images/fantasy.png',height: 70,),
-                              Text("Fantasy",style: GoogleFonts.montserrat(color: Theme.of(context).textTheme.titleLarge?.color))
-                            ],
-                          )
-                      ),
-                    ),
-
-
-                ],),
-
-                SizedBox(height: 10,),
-
-                //ROW 2 - GENREE
-                // Row(
-                // children: [
-                //   SizedBox(width: 70,),
-                //
-                //   //FANTASY
-                //
-                //
-                //
-                //   SizedBox(width: 40,),
-                //
-                //   //COMIC
-                //
-                // ],),
-
-                SizedBox(height: 10,),
-
-                //ROW 3
-                Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-
-
-                    InkWell(
-                      onTap: (){setState(()
-                      {
-                        dynamicText=genrelist[4];
-                        dynamicGrid=dynamicFuture[4];
-                      });},
-                      child: SizedBox(
-                          height: 90,
-                          width: 70,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-
-                              Image.asset('assets/images/comic.png',height: 70,),
-                              Text("Comics",style: GoogleFonts.montserrat(color: Theme.of(context).textTheme.titleLarge?.color))
-                            ],
-                          )
-                      ),
-                    ),
-
-                    //HISTORY
-                    InkWell(
-                      onTap: (){setState(()
-                      {
-                        dynamicText=genrelist[5];
-                        dynamicGrid=dynamicFuture[5];
-                      });},
-                      child: SizedBox(
-                          height: 90,
-                          width: 70,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-
-                              Image.asset('assets/images/history.png',height: 70,),
-                              Text("History",style: GoogleFonts.montserrat(color: Theme.of(context).textTheme.titleLarge?.color))
-                            ],
-                          )
-                      ),
-                    ),
-
-                    //ROMANCE
-                    InkWell(
-                      onTap: (){setState(()
-                      {
-                        dynamicText=genrelist[6];
-                        dynamicGrid=dynamicFuture[6];
-                      });},
-                      child: SizedBox(
-                          height: 90,
-                          width: 70,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-
-                              Image.asset('assets/images/rom.png',height: 70,),
-                              Text("Romance",style: GoogleFonts.montserrat(color: Theme.of(context).textTheme.titleLarge?.color)),
-                            ],
-                          )
-                      ),
-                    ),
-
-                    //POETRY
-                    InkWell(
-                      onTap: (){setState(()
-                      {
-                        dynamicText=genrelist[7];
-                        dynamicGrid=dynamicFuture[7];
-                      });},
-                      child: SizedBox(
-                          height: 90,
-                          width: 90,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-
-                              Image.asset('assets/images/poetry.png',height: 70,),
-                              // SizedBox(height: 4,),
-                              Text("Poetry",style: GoogleFonts.montserrat(color: Theme.of(context).textTheme.titleLarge?.color),)
-                            ],
-                          )
-                      ),
-                    ),
-
-                  ],),
-
-              ],
-            ),
-            ),
-
-            SizedBox(height: 30,),
-
-            Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-              Padding(
-                padding: const EdgeInsets.fromLTRB(20,0,0,0),
-                child: Text("$dynamicText",style: GoogleFonts.montserrat(fontSize: 20,fontWeight: FontWeight.w600,color: Theme.of(context).textTheme.titleLarge?.color),),
-              ),
-
-              Padding(
-                padding: const EdgeInsets.fromLTRB(0,0,20,0),
-                child: IconButton(onPressed: ()
-                {
-                  setState(() {
-                    isGrid=!isGrid;
-                  });
-                },
-                    icon: Icon(isGrid?Icons.list:Icons.grid_view,color: Theme.of(context).textTheme.titleLarge?.color)),
+              alignment: Alignment.topLeft,
+              margin: EdgeInsets.fromLTRB(8, 0, 0, 0),
+              child: isSearch?Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text("Search Results",style: GoogleFonts.montserrat(fontSize:25,fontWeight: FontWeight.bold,color: Theme.of(context).textTheme.titleLarge?.color)),
+                  IconButton(
+                      onPressed: (){
+                        setState(() {
+                          isGrid=!isGrid;
+                        });
+                      },
+                      icon:Icon(isGrid?Icons.list:Icons.grid_view,color:Theme.of(context).textTheme.titleLarge!.color,)
+                  )
+                ],
               )
-            ],),
+                  
+                  :Text("Explore Genres",
 
-            SizedBox(height: 10,),
+                  style: GoogleFonts.montserrat(fontSize:25,fontWeight: FontWeight.bold,color: Theme.of(context).textTheme.titleLarge?.color)),
+            ),
 
 
 
-            Container(child:isGrid?futuregrid(dynamicGrid):futureslider(dynamicGrid),),
-            
+            SizedBox(height: 25,),
+
+            isSearch?(isGrid?futuregrid(_performSearch(searchquery)):futurelistview(_performSearch(searchquery))):Column(children: [
+                // Fantasy ROmance
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+
+                    GestureDetector(
+                      onTap: (){
+                        Navigator.of(context).push(MaterialPageRoute(builder: (context) =>
+                            genreresult(genrefuture: MongoDatabase.fetchfantasybooks(),genrestring: "Fantasy and Paranormal",)));
+                      },
+                      child: Container(
+                        width: 165,
+                        decoration: BoxDecoration(
+
+                            borderRadius: BorderRadius.circular(10)),
+                        // color: Colors.red,
+                        child: ClipRRect(
+                            borderRadius: BorderRadius.circular(10),
+                            child: Image.asset('assets/images/fant.png',)),
+
+                      ),
+                    ),
+
+                    GestureDetector(
+                      onTap: (){
+                        Navigator.of(context).push(MaterialPageRoute(builder: (context) =>
+                            genreresult(genrefuture: MongoDatabase.fetchRomancebooks(),genrestring: "Romance",)));
+                      },
+                      child: Container(
+                        width: 195,
+                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),
+                        // color: Colors.red,
+                        child: ClipRRect(
+                            borderRadius: BorderRadius.circular(10),
+                            child: Image.asset('assets/images/roman.png',)),
+
+                      ),
+                    ),
+                  ],
+                ),
+
+                // Children comics
+                SizedBox(height: 8,),
+
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    GestureDetector(
+                      onTap: (){
+                        Navigator.of(context).push(MaterialPageRoute(builder: (context) =>
+                            genreresult(genrefuture: MongoDatabase.fetchChildrenbooks(),genrestring: "Children",)));
+                      },
+                      child: Container(
+                        width: 195,
+                        // color: Colors.red,
+                        decoration: BoxDecoration(
+
+                            borderRadius: BorderRadius.circular(10)),
+                        // color: Colors.red,
+                        child: ClipRRect(
+                            borderRadius: BorderRadius.circular(10),
+                            child: Image.asset('assets/images/child.png',)),
+
+                      ),
+                    ),
+
+                    GestureDetector(
+                      onTap: (){
+                        Navigator.of(context).push(MaterialPageRoute(builder: (context) =>
+                            genreresult(genrefuture: MongoDatabase.fetchComicbooks(),genrestring: "Comics",)));
+                      },
+                      child: Container(
+                        width: 165,
+                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),
+                        // color: Colors.red,
+                        child: ClipRRect(
+                            borderRadius: BorderRadius.circular(10),
+                            child: Image.asset('assets/images/comicc.png',)),
+
+                      ),
+                    ),
+                  ],
+                ),
+
+                //Mystery History
+                SizedBox(height: 8,),
+
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    GestureDetector(
+
+
+                      onTap: (){
+                        Navigator.of(context).push(MaterialPageRoute(builder: (context) =>
+                            genreresult(genrefuture: MongoDatabase.fetchMysterybooks(),genrestring: "Mystery & Thriller",)));
+                      },
+                      child: Container(
+
+                        width: 185,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10)),
+                        // color: Colors.red,
+                        child: ClipRRect(
+                            borderRadius: BorderRadius.circular(10),
+                            child: Image.asset('assets/images/myst.png',)),
+
+                      ),
+                    ),
+
+                    GestureDetector(
+                      onTap: (){
+                        Navigator.of(context).push(MaterialPageRoute(builder: (context) =>
+                            genreresult(genrefuture: MongoDatabase.fetchHistorybooks(),genrestring: "History and Biography",)));
+                      },
+                      child: Container(
+                        width: 175,
+                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),
+                        // color: Colors.red,
+                        child: ClipRRect(
+                            borderRadius: BorderRadius.circular(10),
+                            child: Image.asset('assets/images/hist.png',)),
+
+                      ),
+                    ),
+                  ],
+                ),
+
+                SizedBox(height: 8,),
+
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    GestureDetector(
+                      onTap: (){
+                        Navigator.of(context).push(MaterialPageRoute(builder: (context) =>
+                            genreresult(genrefuture: MongoDatabase.fetchPoetrybooks(),genrestring: "Poetry",)));
+                      },
+                      child: Container(
+                        width: 170
+                        ,
+                        // color: Colors.red,
+                        decoration: BoxDecoration(
+
+                            borderRadius: BorderRadius.circular(10)),
+                        // color: Colors.red,
+                        child: ClipRRect(
+                            borderRadius: BorderRadius.circular(10),
+                            child: Image.asset('assets/images/portt.png',)),
+
+                      ),
+                    ),
+
+                    GestureDetector(
+                      onTap: (){
+                        Navigator.of(context).push(MaterialPageRoute(builder: (context) =>
+                            genreresult(genrefuture: MongoDatabase.fetchYoungadultbooks(),genrestring: "Young Adult",)));
+                      },
+                      child: Container(
+
+                        width: 190,
+                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),
+                        // color: Colors.red,
+                        child: ClipRRect(
+                            borderRadius: BorderRadius.circular(10),
+                            child: Image.asset('assets/images/yaa.png',)),
+
+                      ),
+                    ),
+                  ],
+                ),
+
+
+              ],),
+
+
+
+
+
+            // SizedBox(height: 20,),
+            //
+            //
+            // Container(
+            //   decoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),
+            //   // color: Colors.red,
+            //   child: ClipRRect(
+            //       borderRadius: BorderRadius.circular(10),
+            //       child: Image.asset('assets/images/read.png',)),
+            //
+            // ),
+
+
+
+            // Poetry and young adult
+
+
+
+
+
+            // Container(child:isGrid?futuregrid(dynamicGrid):futureslider(dynamicGrid),),
+
             // futureslider(_performSearch(searchquery)),
 
 

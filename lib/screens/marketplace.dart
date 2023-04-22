@@ -1,6 +1,10 @@
+import 'dart:ffi';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:project2/models/connection.dart';
+import 'package:project2/models/data.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:project2/widgets/grid.dart';
 
 
@@ -13,6 +17,7 @@ class marketplace extends StatefulWidget {
 
 class _marketplaceState extends State<marketplace> with TickerProviderStateMixin {
 
+  bool isScrolled = true;
   var bookdata;
   var selldata;
   var userSellings;
@@ -32,12 +37,14 @@ class _marketplaceState extends State<marketplace> with TickerProviderStateMixin
 
     return Scaffold(
       // extendBodyBehindAppBar: true,
-      floatingActionButton: FloatingActionButton(
-        onPressed: (){
-          Navigator.pushNamed(context, "/sellSearch");
-        },
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: (){Navigator.pushNamed(context, "/sellSearch");},
+        isExtended: isScrolled,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(35)),
+        label: const Text('Sell Books'),
+        icon:const Icon(Icons.add),
+
+
       ),
 
       body: RefreshIndicator(
@@ -49,72 +56,93 @@ class _marketplaceState extends State<marketplace> with TickerProviderStateMixin
             selldata = x;
           });
         },
-        child: SingleChildScrollView(
+        child: NotificationListener<UserScrollNotification>(
+          onNotification: (notification){
+            if(notification.direction==ScrollDirection.forward){
+              setState(() {
+                isScrolled=true;
 
-          child: Column(
+              });
+              print('hello');
+            }
+            else if(notification.direction==ScrollDirection.reverse){
+              setState(() {
+                isScrolled=false;
 
-            // crossAxisAlignment: CrossAxisAlignment.start,
+              });
+              print(isScrolled);
+            }
+            return true;
+          },
+          child: SingleChildScrollView(
 
-            children:
-            [
+            child: Column(
 
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: 20),
+              // crossAxisAlignment: CrossAxisAlignment.start,
 
-                child: Text("Marketplace",
+              children:
+              [
+
+                Container(
+                    padding: EdgeInsets.symmetric(horizontal: 20),
+
+                    child: Text("Marketplace",
                       style: GoogleFonts.montserrat(
                         fontSize: 25,
                         fontWeight: FontWeight.w600,
                       ),)
 
 
-              ),
+                ),
 
 
 
-              //TABS (NEW AND TRENDING)
+                //TABS (NEW AND TRENDING)
 
-              Container(
-                padding: EdgeInsets.only(left: 20),
-                child: Align(
+                Container(
+                  padding: EdgeInsets.only(left: 20),
+                  child: Align(
 
-                  alignment: Alignment.centerLeft,
+                    alignment: Alignment.centerLeft,
 
-                  child: TabBar(
+                    child: TabBar(
 
+                        controller: _tabController,
+                        labelColor: Colors.black,
+                        isScrollable: true,
+                        indicatorSize: TabBarIndicatorSize.label,
+                        indicator: UnderlineTabIndicator(borderSide: BorderSide(
+                            color: Color(0xffDE6077), width: 3.5),),
+                        unselectedLabelColor: Color(0xff969696),
+                        tabs:
+                        [
+                          Tab(text: "Buy",),
+                          Tab(text: "Sell",),
+                        ]),
+                  ),
+                ),
+
+                SizedBox(height: 0,),
+
+                //TAB BAR VIEW (TAB AREAS)
+                Container(
+                  width: double.maxFinite,
+                  height: double.maxFinite,
+                  // color: Colors.black,
+                  child: TabBarView(
                       controller: _tabController,
-                      labelColor: Colors.black,
-                      isScrollable: true,
-                      indicatorSize: TabBarIndicatorSize.label,
-                      indicator: UnderlineTabIndicator(borderSide: BorderSide(
-                          color: Color(0xffDE6077), width: 3.5),),
-                      unselectedLabelColor: Color(0xff969696),
-                      tabs:
+                      children:
                       [
-                        Tab(text: "Buy",),
-                        Tab(text: "Sell",),
-                      ]),
-                ),
-              ),
 
-              SizedBox(height: 0,),
 
-              //TAB BAR VIEW (TAB AREAS)
-              Container(
-                width: double.maxFinite,
-                height: double.maxFinite,
-                // color: Colors.black,
-                child: TabBarView(
-                    controller: _tabController,
-                    children:
-                    [
-                      futurebuygrid(selldata),
-                      userSellGrid(userSellings),
-                    ]
-                ),
+                        futurebuygrid(selldata),
+                        userSellGrid(userSellings),
+                      ]
+                  ),
 
-              )
-            ],
+                )
+              ],
+            ),
           ),
         ),
       ),

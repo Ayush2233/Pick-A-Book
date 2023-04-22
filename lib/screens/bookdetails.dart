@@ -35,7 +35,7 @@ class bookdetails
               likeBuilder: (isliked)
               {
                 return Icon(
-                  Icons.bookmark_add,
+                  isliked?Icons.favorite:Icons.favorite_outline,
                   color: isliked?Colors.yellowAccent:Colors.white,
 
                 );
@@ -59,7 +59,7 @@ class bookdetails
               likeBuilder: (isliked)
               {
                 return Icon(
-                  Icons.bookmark_added,
+                  Icons.checklist,
                   color: isliked?Colors.yellowAccent:Colors.white,
 
                 );

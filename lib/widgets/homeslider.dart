@@ -91,7 +91,9 @@ Widget carouselslider(Future future)
 Widget futuregrid(future)
 {
   return Container(
-    height: 600,
+    // height: double.maxFinite,
+    // height: 600,
+    height: 700,
     child: FutureBuilder(
         future: future,
         builder: (context, AsyncSnapshot snapshot)
@@ -106,7 +108,7 @@ Widget futuregrid(future)
             if(snapshot.hasData)
             {
               return GridView.builder(gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 4,
+                    crossAxisCount: 3,
                 // crossAxisSpacing: 10,
                 childAspectRatio: 9/12,
                 mainAxisSpacing: 15,
@@ -116,6 +118,42 @@ Widget futuregrid(future)
                       return bookscardgrid(Bookmap.fromJson(snapshot.data[index]),context);
 
                     }) ;
+            }
+            else
+            {
+              return Center(child: Text('No Data Available'),);
+            }
+          }
+        }),
+  );
+}
+
+Widget futurelistview(Future? future)
+{
+  return Container(
+    height: 800,
+    // width: double.maxFinite,
+    child: FutureBuilder(
+        future: future,
+        builder: (context, AsyncSnapshot snapshot)
+        {
+          if(snapshot.connectionState==ConnectionState.waiting || future==null)
+          {
+            return Center(
+              child: CircularProgressIndicator(),);
+          }
+          else
+          {
+            if(snapshot.hasData)
+            {
+              return ListView.builder(
+                  // scrollDirection: Axis.horizontal,
+                  itemCount: snapshot.data.length,
+                  itemBuilder: (context,index)
+                  {
+                    return booktile(Bookmap.fromJson(snapshot.data[index]),context);
+                  }
+              );
             }
             else
             {

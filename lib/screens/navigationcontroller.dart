@@ -113,7 +113,7 @@ class _navcontrollerState extends State<navcontroller> {
 
             TabItem(icon: Image.asset(dark_mode?'assets/icons/search_d.png':'assets/icons/search1.png')),
 
-            TabItem(icon: Image.asset(dark_mode?'assets/icons/group_d.png':'assets/icons/group1.png')),
+            TabItem(icon: Image.asset(dark_mode?'assets/icons/feed_d.png':'assets/icons/feed.png')),
 
             TabItem(icon: Image.asset(dark_mode?'assets/icons/saved_d.png':'assets/icons/bookmark1.png')),
 
