@@ -31,6 +31,8 @@ class _SignUpState extends State<SignUp> {
 
   // final _user=FirebaseAuth.instance.currentUser;
   bool success = false;
+  bool passwordVisible = true;
+  bool confirmpass= true;
 
 
   bool confirm() {
@@ -80,6 +82,7 @@ class _SignUpState extends State<SignUp> {
     // _controller.dispose();
     super.dispose();
   }
+
 
 
   Widget build(BuildContext context) {
@@ -148,11 +151,22 @@ class _SignUpState extends State<SignUp> {
                           width: 340,
                           child: TextField(
                             controller: _password,
-                            obscureText: true,
+                            obscureText: passwordVisible,
                             decoration: InputDecoration(
                               filled: true,
                               fillColor: Color(0xFFf3f3f3),
-                              suffixIcon: Icon(CupertinoIcons.eye_slash_fill),
+                              suffixIcon: IconButton(
+                                onPressed: (){
+                                  setState(() {
+                                    if(passwordVisible){
+                                      passwordVisible = false;
+                                    }else{
+                                      passwordVisible = true;
+                                    }
+                                  });
+                                },
+                                icon: Icon(passwordVisible?CupertinoIcons.eye_slash_fill:CupertinoIcons.eye),
+                              ),
                               prefixIcon: Icon(CupertinoIcons.lock),
                               labelText: 'Password',
                               border: InputBorder.none,
@@ -168,11 +182,22 @@ class _SignUpState extends State<SignUp> {
                           width: 340,
                           child: TextField(
                             controller: _confirm,
-                            obscureText: true,
+                            obscureText: confirmpass,
                             decoration: InputDecoration(
                               filled: true,
                               fillColor: Color(0xFFf3f3f3),
-                              suffixIcon: Icon(CupertinoIcons.eye_slash_fill),
+                              suffixIcon: IconButton(
+                                onPressed: (){
+                                  setState(() {
+                                    if(confirmpass){ //if passenable == true, make it false
+                                      confirmpass = false;
+                                    }else{
+                                      confirmpass = true; //if passenable == false, make it true
+                                    }
+                                  });
+                                },
+                                icon: Icon(confirmpass?CupertinoIcons.eye_slash_fill:CupertinoIcons.eye),
+                              ),
                               prefixIcon: Icon(CupertinoIcons.lock),
                               labelText: 'Confirm Password',
                               border: InputBorder.none,
