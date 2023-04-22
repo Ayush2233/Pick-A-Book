@@ -16,44 +16,119 @@ class bookmark extends StatefulWidget {
 var data;
 
 
-class _bookmarkState extends State<bookmark> {
+
+class _bookmarkState extends State<bookmark>  with TickerProviderStateMixin{
   @override
 
-  var wishlist;
-
   void initState() {
-    data=MongoDatabase.fetchHistorybooks();
-    wishlist = MongoDatabase.fetchWishList();
+
+
     // TODO: implement initState
 
     super.initState();
   }
   Widget build(BuildContext context) {
 
+    TabController _listtabcontroller = TabController(length: 2, vsync: this);
+
 
     return Scaffold(
 
-        body: FutureBuilder(
-          future: wishlist,
-          builder: (context , AsyncSnapshot snapshot){
-            if (snapshot.connectionState == ConnectionState.waiting){
-              return CircularProgressIndicator();
-            }
-            else{
-              if(snapshot.hasData){
-                return ListView.builder(
-                    itemCount: snapshot.data.length,
-                    itemBuilder: (context , index)
-                    {
-                      return wishListCard(WishListDisplayModel.fromJson(snapshot.data[index]), context);
-                    }
-                );
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
 
-              }else{
-                return Text("No data");
-              }
-            }
-          },
+              Container(
+                // padding: EdgeInsets.only(left: 20),
+                child: Align(
+
+                  alignment: Alignment.centerLeft,
+
+                  child: TabBar(
+
+                      controller: _listtabcontroller,
+                      labelColor: Theme.of(context).textTheme.titleSmall?.color,
+                      isScrollable: true,
+                      indicatorSize: TabBarIndicatorSize.label,
+                      indicator: UnderlineTabIndicator(borderSide: BorderSide(color:Theme.of(context).primaryColor,width: 3.5),),
+                      unselectedLabelColor: Theme.of(context).textTheme.titleMedium?.color,
+                      tabs:
+                      [
+                        Tab(text: "Want to Read",),
+                        Tab(text: "Already Read",),
+                      ] ),
+                ),
+              ),
+
+              SizedBox(height: 15,),
+              Container(
+
+                width: double.maxFinite,
+                height: double.maxFinite,
+                // color: Colors.black,
+                child: TabBarView(
+                    controller: _listtabcontroller,
+                    children:
+                    [
+
+
+                      Container(
+                        // height: 700,
+                        child: FutureBuilder(
+                          future: MongoDatabase.fetchWishList(),
+                          builder: (context , AsyncSnapshot snapshot){
+                            if (snapshot.connectionState == ConnectionState.waiting){
+                              return Align(alignment: Alignment.center,child:Column(crossAxisAlignment: CrossAxisAlignment.center,children: [SizedBox(height: 200,),CircularProgressIndicator()],));
+                            }
+                            else{
+                              if(snapshot.hasData){
+                                return ListView.builder(
+                                    physics: NeverScrollableScrollPhysics(),
+                                    itemCount: snapshot.data.length,
+                                    itemBuilder: (context , index)
+                                    {
+                                      return wishListCard(WishListDisplayModel.fromJson(snapshot.data[index]), context);
+                                    }
+                                );
+
+                              }else{
+                                return Text("No data");
+                              }
+                            }
+                          },
+                        ),
+                      ),
+                      FutureBuilder(
+                        future: MongoDatabase.fetchWishList(),
+                        builder: (context , AsyncSnapshot snapshot){
+                          if (snapshot.connectionState == ConnectionState.waiting){
+                            return CircularProgressIndicator();
+                          }
+                          else{
+                            if(snapshot.hasData){
+                              return ListView.builder(
+                                  itemCount: snapshot.data.length,
+                                  itemBuilder: (context , index)
+                                  {
+                                    return wishListCard(WishListDisplayModel.fromJson(snapshot.data[index]), context);
+                                  }
+                              );
+
+                            }else{
+                              return Text("No data");
+                            }
+                          }
+                        },
+                      ),
+
+                    ]
+                ),
+
+              ),
+
+
+            ],
+          ),
         )
 
 

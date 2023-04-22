@@ -97,7 +97,7 @@ class _marketplaceState extends State<marketplace> with TickerProviderStateMixin
 
 
 
-                //TABS (NEW AND TRENDING)
+                //TABS ()
 
                 Container(
                   padding: EdgeInsets.only(left: 20),

@@ -1,51 +1,68 @@
+import 'package:google_fonts/google_fonts.dart';
 import 'package:project2/models/wishListDisplayModel.dart';
 import 'package:flutter/material.dart';
-Widget wishListCard(WishListDisplayModel x , BuildContext context){
+import 'package:project2/screens/bookdetails.dart';
 
-  return Column(
-    children: [
-      Container(
+
+Widget wishListCard(WishListDisplayModel x,BuildContext context)
+{
+  return GestureDetector
+    (
+     child: Container(
+        // color: ,
+
+        margin: EdgeInsets.fromLTRB(0, 5, 0, 5),
         child: Row(
+
           children: [
+            Container(width: 100,child: Image.network(x.result[0].coverPage,fit:BoxFit.cover),),
+            SizedBox(width: 10,),
+
             Container(
-              height: 180,
-              width: 90,
-              decoration: BoxDecoration(
-                  boxShadow:[BoxShadow(
-                    color: Colors.black,
-                    spreadRadius: 1,
-                    blurRadius: 2,
-                  )
-                  ]
-              ),
-              child: Image.network(x.result[0].coverPage),
-            ),
-            Container(
-              margin: EdgeInsets.only(left: 20),
-              width: 100,
+              // color: Colors.red,
+              width: 250,
+
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text("${x.result[0].title}",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
+                  Text(
+                    '${x.result[0].title}',
+                    // textAlign: TextAlign.left,
+                    style: GoogleFonts.montserrat(fontWeight: FontWeight.bold,color: Theme.of(context).textTheme.titleLarge!.color),
+                    maxLines: 3,
+                  ),
 
                   SizedBox(height: 10,),
 
-                  Text("${x.result[0].authorName}",style: TextStyle(fontSize: 15),),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text('${x.result[0].authorName}',
+                          style: GoogleFonts.montserrat(color: Theme.of(context).textTheme.titleLarge!.color)
 
-                  SizedBox(height: 10,),
+                      ),
+                      // SizedBox(width: 50,),
 
-                  Text('${x.result[0].ratingsCount} ',style: TextStyle(fontSize: 15),),
+                      Row(
+                        children: [
+                          Text('${x.result[0].bookAverageRating}',style: GoogleFonts.montserrat(color: Theme.of(context).textTheme.titleLarge!.color)),
+                          Icon(Icons.star,color: Colors.orange,),
+
+                        ],
+                      ),
+
+                      IconButton(onPressed: (){}, icon: Icon(Icons.delete,color: Theme.of(context).textTheme.titleLarge!.color,))
+
+                    ],
+                  )
                 ],
               ),
-            ),
-            SizedBox(width: 130,),
-            Container(child: IconButton(onPressed: (){}, icon: Icon(Icons.delete)),)
+            )
           ],
-        ),
-      ),
-      SizedBox(height: 10,)
-    ],
-  );
 
+
+        ),
+      )
+  );
 }

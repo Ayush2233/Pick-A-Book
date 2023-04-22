@@ -40,62 +40,6 @@ Widget bookscardgrid(Bookmap data,BuildContext context)
   );
 }
 
-Widget bookstile(Bookmap x,BuildContext context)
-{
-  return GestureDetector
-    (
-      onTap: ()
-      {
-        var Book= bookdetails(data: x);
-        Book.bottomup(context);
-      },
-
-      child: Column(
-        children: [
-          Container(
-            child: Row(
-              children: [
-                Container(
-
-                  height:150,
-
-                  child: Image.network(x.coverPage,fit: BoxFit.cover,),
-                ),
-
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-
-                    Text("${x.title}",
-                      style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold),
-                      softWrap: true,
-                      maxLines: 4,
-                      // overflow: TextOverflow.ellipsis,
-
-
-                    ),
-
-                    SizedBox(height: 10,),
-
-                    Text("${x.author}",style: TextStyle(fontSize: 15),),
-
-                    SizedBox(height: 10,),
-
-                    Text('${x.bookAverageRating} ',style: TextStyle(fontSize: 15),),
-                  ],
-                ),
-
-
-                SizedBox(width: 130,),
-                Container(child: IconButton(onPressed: (){}, icon: Icon(Icons.delete)),)
-              ],),
-          ),
-          // SizedBox(height: 10,)
-        ],
-      ),
-  );
-}
 
 Widget booktile(Bookmap x,BuildContext context)
 {
@@ -137,12 +81,15 @@ Widget booktile(Bookmap x,BuildContext context)
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text('${x.author}'),
+                      Text('${x.author}',
+                        style: GoogleFonts.montserrat(color: Theme.of(context).textTheme.titleLarge!.color)
+
+                      ),
                       // SizedBox(width: 50,),
 
                       Row(
                         children: [
-                          Text('${x.bookAverageRating}'),
+                          Text('${x.bookAverageRating}',style: GoogleFonts.montserrat(color: Theme.of(context).textTheme.titleLarge!.color)),
                           Icon(Icons.star,color: Colors.orange,),
                           SizedBox(width: 10,)
                         ],
