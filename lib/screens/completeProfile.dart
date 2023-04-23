@@ -156,6 +156,7 @@ class _completeProfileState extends State<completeProfile> {
                         insertDB(user.uid.toString(), _name.text.trim(),
                             user.email.toString(), int.parse(_age.text.trim()),
                             _gender.text.trim());
+                        insertUserForRating(user.uid.toString());
                         setState(() {
                           sign=false;
                         });

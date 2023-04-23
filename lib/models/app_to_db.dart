@@ -4,6 +4,7 @@ import 'sell_model.dart';
 import 'connection.dart';
 import 'user_model.dart';
 import 'post_model.dart';
+import 'ratingModel.dart';
 
 Future<void> insertDB(String uid, String name , String email, int age, String gender) async
 {
@@ -39,4 +40,10 @@ Future <void> sellitem(String uid, int bookId , String title , String bookDescri
   var _id = M.ObjectId();
   final data = Sellmodel(id: _id, uid: uid, bookId: bookId, title: title, bookDescription: bookDescription, coverPage: coverPage, authorName: authorName);
   var results = await MongoDatabase.sellList(data);
+}
+
+Future <void> insertUserForRating(String uid) async{
+  var _id = M.ObjectId();
+  final data = RatingModel(id: _id, uid: uid, ratings: []);
+  var results = await MongoDatabase.addRatingList(data);
 }

@@ -64,6 +64,10 @@ class bookdetails
 
                 );
               },
+              onTap: (isLiked) async{
+                // var success = await MongoDatabase.updateRating(data.bookId, 4.5);
+                return !isLiked;
+              },
             ),
           ),
 
