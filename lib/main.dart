@@ -60,6 +60,7 @@ class _appState extends State<app> {
         ),
         routes: {
           "/sellSearch" : (context) => sellSearch(),
+          "/completeProfile": (context) => completeProfile(),
         },
       );
     }

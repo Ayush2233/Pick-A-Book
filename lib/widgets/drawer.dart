@@ -5,7 +5,6 @@ import 'package:provider/provider.dart';
 import 'package:project2/utilities/appstartnotifier.dart';
 import '../models/data.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-
 import '../screens/sign up.dart';
 
 Widget returndrawer(Usermap x,BuildContext context){
@@ -55,7 +54,8 @@ Widget returndrawer(Usermap x,BuildContext context){
                   color: Theme.of(context).textTheme.titleLarge?.color,
                   fontSize: 18, fontWeight: FontWeight.bold),),
               //EMAIL
-              Text("${x.email}",style: GoogleFonts.montserrat(color: Theme.of(context).textTheme.titleLarge?.color),),
+              Text("${x.email}",
+                style: GoogleFonts.montserrat(color: Theme.of(context).textTheme.titleLarge?.color),),
             ],
           ),),
 
@@ -77,7 +77,9 @@ Widget returndrawer(Usermap x,BuildContext context){
                 },
 
                 leading: Icon(Icons.person_outline,
-                color: Theme.of(context).textTheme.titleLarge?.color,), title: Text("Edit Profile",style: GoogleFonts.montserrat(color: Theme.of(context).textTheme.titleLarge?.color),)
+                color: Theme.of(context).textTheme.titleLarge?.color,),
+                title: Text("Edit Profile",
+                  style: GoogleFonts.montserrat(color: Theme.of(context).textTheme.titleLarge?.color),)
 
                 ,),
 
@@ -103,6 +105,10 @@ Widget returndrawer(Usermap x,BuildContext context){
             ],
           ),
         ),
+
+        // TextButton(onPressed: (){
+        //   Navigator.pushNamed(context,'/completeProfile');
+        // }, child: Text("complete profile"))
 
       ],
     ),
