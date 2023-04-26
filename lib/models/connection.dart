@@ -6,6 +6,7 @@ import 'package:project2/models/post_model.dart';
 import 'package:project2/models/user_model.dart';
 import 'package:project2/models/sell_model.dart';
 import 'package:project2/screens/Search.dart';
+import 'package:project2/models/ratingModel.dart';
 
 
 // Connection Constants
@@ -18,13 +19,14 @@ const books = "bookdata";
 const post = "PostDetails";
 const sell= 'sellList';
 const wish='Wishlist';
+const rating = 'ratings';
 
 final User Fireuser = FirebaseAuth.instance.currentUser!;
 
 
 class MongoDatabase{
 
-  static var db, userCollection, bookCollection, postCollection, sellCollection,wishListCollection;
+  static var db, userCollection, bookCollection, postCollection, sellCollection,wishListCollection, ratingCollection;
 
   static connect() async{
 
@@ -37,6 +39,7 @@ class MongoDatabase{
     postCollection = db.collection(post);
     sellCollection = db.collection(sell);
     wishListCollection = db.collection(wish);
+    ratingCollection = db.collection(rating);
   }
 
   // Functions
@@ -85,6 +88,23 @@ class MongoDatabase{
         return e.toString();
       }
     }
+
+    static Future<String> addRatingList(RatingModel data) async
+    {
+    try{
+      var results = await ratingCollection.insertOne(data.toJson());
+      if(results.isSuccess){
+        return "data inserted";
+      }
+      else {
+        return "data not inserted";
+      }
+
+    }catch(e){
+      print(e.toString());
+      return e.toString();
+    }
+  }
 
   static Future<List<Map<String, dynamic>>> fetchbooks() async
   {
@@ -253,10 +273,14 @@ class MongoDatabase{
         Lookup(from: "bookdata", localField: "wishlist", foreignField: "book_id", as: "result")).build();
 
     final results = await DbCollection(db, "Users").aggregateToStream(pipeline).toList();
-    print(results);
     return results;
   }
 
+  static Future<void> updateRating(int book_id, double rating) async{
+    var data = {"book_id": book_id, "rate": rating};
+    await ratingCollection.updateOne(where.eq("uid", Fireuser.uid),
+    modify.addToSet("ratings", data));
+  }
 
 
 }
