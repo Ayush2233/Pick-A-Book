@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:project2/utilities/check.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+
+import '../main.dart';
 
 class OnBoardingScreen extends StatefulWidget {
   const OnBoardingScreen({Key? key}) : super(key: key);
@@ -91,7 +94,13 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                           backgroundColor: Colors.pink,
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(30))),
-                      onPressed: () {},
+                      onPressed: () {
+                        setState(() {
+                          initScreen =1;
+                        });
+                        Navigator.of(context).push(MaterialPageRoute(builder: (context)=> Check()));
+
+                      },
                       child: Text(
                         "Get Started",
                         style: TextStyle(fontSize: 18),
