@@ -15,12 +15,20 @@ import 'package:flutter/material.dart';
 import 'utilities/apptheme.dart';
 import 'utilities/appstartnotifier.dart';
 import 'package:provider/provider.dart';
+import 'package:project2/screens/onboarding.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+int? initScreen  ;
 
 void main() async
 {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   await MongoDatabase.connect();
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  initScreen = await prefs.getInt("initScreen");
+  await prefs.setInt("initScreen", 1);
+  print('initScreen ${initScreen}');
 
   runApp(
       ChangeNotifierProvider<AppStateNotifier>
@@ -28,8 +36,6 @@ void main() async
         create: (context) => AppStateNotifier(),
         child: app(),)
   );
-
-
  }
 
 
@@ -56,11 +62,13 @@ class _appState extends State<app> {
             logo: Splashscreen(),
             backgroundColor: Colors.white,
             loadingIndicator: CircularProgressIndicator(),
-            done: Done(Check())
+            done: Done(initScreen == 0 || initScreen ==null ? OnBoardingScreen() : Check())
         ),
         routes: {
           "/sellSearch" : (context) => sellSearch(),
           "/completeProfile": (context) => completeProfile(),
+          // "/" : (context) => Check(),
+          // "/onboarding" : (context) => OnBoardingScreen(),
         },
       );
     }
