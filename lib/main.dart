@@ -66,7 +66,7 @@ class _appState extends State<app> {
         ),
         routes: {
           "/sellSearch" : (context) => sellSearch(),
-          "/completeProfile": (context) => completeProfile(),
+          // "/completeProfile": (context) => completeProfile(),
           // "/" : (context) => Check(),
           // "/onboarding" : (context) => OnBoardingScreen(),
         },

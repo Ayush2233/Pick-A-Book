@@ -51,6 +51,7 @@ dependencies:
   splash_view: ^2.0.1
   cached_network_image: ^3.2.3
   dropdown_textfield: ^1.0.8
+  flutter_rating_bar: ^4.0.1
 
 #  cloud_firestore: ^4.4.4
   mongo_dart: ^0.9.1
