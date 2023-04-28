@@ -5,6 +5,8 @@ import 'package:like_button/like_button.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:project2/models/book_model.dart';
 import 'package:bottom_sheet/bottom_sheet.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:project2/models/connection.dart';
 
 import '../models/connection.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -13,9 +15,12 @@ class bookdetails
 {
   Bookmap data;
   bookdetails({required this.data});
+  double? _ratingValue;
+
 
   Widget _bottomslider(BuildContext context,ScrollController scrollcontroller,double bottomsheetoffset)
   {
+
     return Scaffold(
 
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
@@ -88,9 +93,93 @@ class bookdetails
 
               // IMAGE
               Center(
-                child: Container(
-                  child:Image.network("${data.coverPage}",fit: BoxFit.cover,),
-                  width: 135,
+                child: Stack(
+                  children: [
+                    Image.network("${data.coverPage}",fit: BoxFit.cover,),
+                    Positioned(
+                      width: 45,
+                        bottom: 1,right: 1,
+                        child:
+                        ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.black,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(50)
+                            )
+                          ),
+                          child: Icon(Icons.star_rate,color: Colors.yellow,),
+
+                          onPressed: (){
+                            showDialog(context: context, builder: (context){
+                              return AlertDialog(
+
+                                backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10))),
+
+                                content: StatefulBuilder(
+                                  builder: (BuildContext context, StateSetter setState){
+
+                                    return Container(
+                                      height: 250,
+                                      child: Column(
+                                        children: [
+
+                                          Padding(
+                                            padding: const EdgeInsets.fromLTRB(0,40,0,0),
+                                            child: Text("Rate This Book",
+                                            style: TextStyle(
+                                              fontSize: 20,
+                                              color: Theme.of(context).textTheme.titleLarge?.color
+                                            ),),
+                                          ),
+
+                                          SizedBox(height: 40,),
+
+                                          RatingBar(
+                                              initialRating: 0,
+                                              direction: Axis.horizontal,
+                                              allowHalfRating: true,
+                                              itemCount: 5,
+                                              ratingWidget: RatingWidget(
+                                                  full: const Icon(Icons.star, color: Colors.orange),
+                                                  half: const Icon(
+                                                    Icons.star_half,
+                                                    color: Colors.orange,
+                                                  ),
+                                                  empty: const Icon(
+                                                    Icons.star_outline,
+                                                    color: Colors.orange,
+                                                  )),
+                                              onRatingUpdate: (value) {
+                                                setState(() {
+                                                  _ratingValue = value;
+                                                });
+                                              }),
+                                          SizedBox(height: 50,),
+
+                                          ElevatedButton(onPressed: (){
+                                            MongoDatabase.updateRating(data.bookId, _ratingValue!);
+                                            Navigator.of(context).pop();
+                                          },
+                                            child: Text("Submit",
+                                            style: TextStyle(
+                                            color: Colors.white
+                                          ),),
+                                            style: ElevatedButton.styleFrom(
+                                            backgroundColor: Theme.of(context).primaryColor
+                                          ),)
+                                        ],
+                                      ),
+                                    );
+                                  },
+                                ),
+                              );
+                            });
+                          },
+                        )
+                    ),
+                  ],
+
                 ),
               ),
 
@@ -281,4 +370,5 @@ class bookdetails
       builder: _bottomslider,);
   }
 }
+
 
