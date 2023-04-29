@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:project2/models/user_model.dart';
@@ -29,6 +30,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin{
   @override
   void initState() {
     ratinglist = MongoDatabase.fetchRecommendation();
+    print(FirebaseAuth.instance.currentUser?.uid);
     // TODO: implement initState
     super.initState();
   }
@@ -176,8 +178,8 @@ class _HomeState extends State<Home> with TickerProviderStateMixin{
 
             SizedBox(height: 20,),
 
-            // futureslider12(recData),
-            // SizedBox(height: 20,),
+            futureslider12(recData),
+            SizedBox(height: 20,),
             futureslider(MongoDatabase.fetchtopratedbooks()),
 
             SizedBox(height: 20,),

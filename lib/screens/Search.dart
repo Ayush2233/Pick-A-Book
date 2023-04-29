@@ -16,8 +16,7 @@ class Search extends StatefulWidget {
 
 class _SearchState extends State<Search> with TickerProviderStateMixin{
 
-   var dynamicFuture;
-  var dynamicGrid;
+
   
   String searchquery='';
 
@@ -36,16 +35,12 @@ class _SearchState extends State<Search> with TickerProviderStateMixin{
   void initState() {
     // TODO: implement initState
 
-    dynamicFuture=[MongoDatabase.fetchChildrenbooks(),MongoDatabase.fetchMysterybooks(),MongoDatabase.fetchYoungadultbooks(),MongoDatabase.fetchfantasybooks(),MongoDatabase.fetchComicwithMarvelbooks(),MongoDatabase.fetchHistorybooks(),MongoDatabase.fetchRomancebooks(),MongoDatabase.fetchPoetrybooks()];
-    dynamicGrid=MongoDatabase.fetchtopratedbooks();
+
 
     print("search init done");
     super.initState();
   }
 
-
-  List genrelist =["Children","Mystery","Young Adult","Fantasy","Comic","History","Romance","Poetry","Search Results"];
-  var dynamicText="Top Rated";
 
 
 
@@ -77,12 +72,11 @@ class _SearchState extends State<Search> with TickerProviderStateMixin{
                   style: TextStyle(color: Colors.white),
                   onChanged:(value) async
                   {
-                    // final z=await _performSearch(searchquery);
+
                     setState(() {
                       searchquery=value;
                       isSearch=true;
-                      // dynamicText=genrelist[8];
-                      // dynamicGrid=_performSearch(searchquery);
+
                     });
                   },
                   onSubmitted: (value)
@@ -91,8 +85,7 @@ class _SearchState extends State<Search> with TickerProviderStateMixin{
                     setState(() {
                       isSearch=true;
                       searchquery=value;
-                      // dynamicText=genrelist[8];
-                      // dynamicGrid=_performSearch(searchquery);
+
                     });
                   },
                   decoration: InputDecoration(

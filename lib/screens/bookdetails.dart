@@ -157,8 +157,8 @@ class bookdetails
                                               }),
                                           SizedBox(height: 50,),
 
-                                          ElevatedButton(onPressed: (){
-                                            MongoDatabase.updateRating(data.bookId, _ratingValue!);
+                                          ElevatedButton(onPressed: ()async {
+                                            await MongoDatabase.updateRating(data.bookId, _ratingValue!);
                                             Navigator.of(context).pop();
                                           },
                                             child: Text("Submit",
