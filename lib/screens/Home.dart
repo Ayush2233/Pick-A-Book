@@ -136,53 +136,54 @@ class _HomeState extends State<Home> with TickerProviderStateMixin{
           
           //  RECOMMENDED FOR YOU
             Container(
-              margin: EdgeInsets.symmetric(horizontal: 20),
-              child: Text("Recommended for you",
-                style:GoogleFonts.montserrat(
-                  color: Theme.of(context).textTheme.titleLarge?.color,
-                  fontSize: 20,
-                  fontWeight: FontWeight.w600,
-                  )),),
+              margin: EdgeInsets.symmetric(horizontal: 10),
+              child: Row(
+                children: [
+                  Text("Recommended for you",
+                    style:GoogleFonts.montserrat(
+                      color: Theme.of(context).textTheme.titleLarge?.color,
+                      fontSize: 20,
+                      fontWeight: FontWeight.w600,
+                      )),
+                  SizedBox(width: 75,),
+
+                  FutureBuilder(
+                      future: ratinglist,
+                      builder: (context, AsyncSnapshot snapshot){
+                        if( snapshot.hasData){
+                          return IconButton(onPressed: (){
+                            var x= recommendBook(snapshot.data);
+                            setState(() {
+                              recData= x;
+                            });
+                          }, icon: Icon(Icons.auto_fix_high));
+                        }
+                        else{
+                          return IconButton(onPressed: (){}, icon:Icon(Icons.disabled_by_default));
+                        }
+
+                      }),
+                ],
+              ),),
+          SizedBox(height: 10,),
 
           //  BOOKSHELF
-            bookshelf(),
+          //   FutureBuilder(
+          //       future: ratinglist,
+          //       builder: (context, AsyncSnapshot snapshot){
+          //         if( snapshot.hasData){
+                    bookshelf(recData,MongoDatabase.fetchtopratedbooks()),
+                //   }
+                //   else{
+                //     return Text("hello");
+                //   }
+                //
+                // }),
 
             SizedBox(height: 25,),
 
 
-            FutureBuilder(
-              future: ratinglist,
-                builder: (context, AsyncSnapshot snapshot){
-                if( snapshot.hasData){
-                  return TextButton(onPressed: (){
-                    var x= recommendBook(snapshot.data);
-                    setState(() {
-                      recData= x;
-                    });
-                  }, child: Text("app"));
-                }
-                else{
-                  return Text("hello");
-                }
-
-            }),
-
-
-            SizedBox(height: 20,),
-
             //HORIZONTAL GRID
-
-            //TOP RATED
-            Row(children: [SizedBox(width: 30,),
-              Text('Top Rated',style: GoogleFonts.montserrat(fontSize: 20,fontWeight: FontWeight.w600,color: Theme.of(context).textTheme.titleLarge?.color,),),],),
-
-            SizedBox(height: 20,),
-
-            futureslider12(recData),
-            SizedBox(height: 20,),
-            futureslider(MongoDatabase.fetchtopratedbooks()),
-
-            SizedBox(height: 20,),
 
             //Fantasy
             Row(children: [SizedBox(width: 30,),

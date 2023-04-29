@@ -120,7 +120,7 @@ class MongoDatabase{
 
   static Future<List<Map<String, dynamic>>> fetchtopratedbooks() async
   {
-    final result = await bookCollection.find(where.gte('book_average_rating',4.8)).toList();
+    final result = await bookCollection.find(where.gte('book_average_rating',4).gte('ratings_count', 200)).toList();
     return result;
   }
 
@@ -298,7 +298,7 @@ class MongoDatabase{
   static Future <Map<String, dynamic>> fetchRecommendation() async{
     final results = await ratingCollection.findOne(where.eq("uid", Fireuser.uid));
     // final t = RatingModel.fromJson(results);
-    print(results);
+    // print(results);
     return results;
   }
 
