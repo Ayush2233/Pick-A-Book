@@ -1,4 +1,7 @@
+
+
 import 'package:google_fonts/google_fonts.dart';
+import 'package:project2/models/connection.dart';
 import 'package:project2/models/wishListDisplayModel.dart';
 import 'package:flutter/material.dart';
 import 'package:project2/screens/bookdetails.dart';
@@ -52,7 +55,9 @@ Widget wishListCard(WishListDisplayModel x,BuildContext context)
                         ],
                       ),
 
-                      IconButton(onPressed: (){}, icon: Icon(Icons.delete,color: Theme.of(context).textTheme.titleLarge!.color,))
+                      IconButton(onPressed: (){
+                        MongoDatabase.removeWishlistElement(x.result[0].bookId);
+                      }, icon: Icon(Icons.delete,color: Theme.of(context).textTheme.titleLarge!.color,))
 
                     ],
                   )

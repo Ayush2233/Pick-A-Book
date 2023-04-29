@@ -262,8 +262,15 @@ class MongoDatabase{
     return results;
   }
 
+  static Future<void> removeUserSelling(int bookid) async {
+    await sellCollection.deleteOne(where.eq("book_id", bookid));
+  }
+
   static Future<void> updateWishList(int a) async{
     await userCollection.updateOne(where.eq("uid", Fireuser.uid), modify.push('wishlist',a));
+  }
+  static Future<void> removeWishlistElement(int bookid) async{
+    await userCollection.updateOne(where.eq("uid", Fireuser.uid), modify.pull('wishlist',bookid));
   }
   
   static Future<List<Map<String , dynamic>>> fetchWishList() async{
@@ -281,6 +288,8 @@ class MongoDatabase{
     await ratingCollection.updateOne(where.eq("uid", Fireuser.uid),
     modify.addToSet("ratings", data));
   }
+
+
 
 
 }

@@ -23,6 +23,7 @@ Widget userSellCard(Sellmodel data, BuildContext context) {
             SizedBox(height: 5,),
             TextButton(onPressed: () {
               // sellitem(Fireuser.uid.toString(), data.bookId, data.title, data.description, data.coverPage, data.author);
+              MongoDatabase.removeUserSelling(data.bookId);
             }
                 , child: Text('Remove'))
           ],
