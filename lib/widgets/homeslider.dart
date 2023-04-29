@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:project2/models/user_model.dart';
 import 'bookcard.dart';
 import 'package:project2/models/book_model.dart';
+import 'package:project2/models/RrecBookModel.dart';
 
 
 Widget futureslider(Future? future)
@@ -152,6 +153,44 @@ Widget futurelistview(Future? future)
                   itemBuilder: (context,index)
                   {
                     return booktile(Bookmap.fromJson(snapshot.data[index]),context);
+                  }
+              );
+            }
+            else
+            {
+              return Center(child: Text('No Data Available'),);
+            }
+          }
+        }),
+  );
+}
+
+
+
+Widget futureslider12(Future? future)
+{
+  return Container(
+    height: 150,
+    width: double.maxFinite,
+    child: FutureBuilder(
+        future: future,
+        builder: (context, AsyncSnapshot snapshot)
+        {
+          if(snapshot.connectionState==ConnectionState.waiting || future==null)
+          {
+            return Center(
+              child: CircularProgressIndicator(),);
+          }
+          else
+          {
+            if(snapshot.hasData)
+            {
+              return ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: snapshot.data.length,
+                  itemBuilder: (context,index)
+                  {
+                    return bookscard12(Bookmap1.fromJson(snapshot.data[index]),context);
                   }
               );
             }

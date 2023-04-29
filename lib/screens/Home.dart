@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:project2/models/user_model.dart';
@@ -5,6 +6,9 @@ import 'package:project2/widgets/bookshelf.dart';
 import 'package:project2/widgets/homeslider.dart';
 import 'package:project2/models/connection.dart';
 import 'package:project2/widgets/bookcard.dart';
+
+import '../models/flaskApp.dart';
+
 
 
 
@@ -21,8 +25,12 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> with TickerProviderStateMixin{
 
   // final GlobalKey _first = GlobalKey();
+  var ratinglist;
+  var recData;
   @override
   void initState() {
+    ratinglist = MongoDatabase.fetchRecommendation();
+    print(FirebaseAuth.instance.currentUser?.uid);
     // TODO: implement initState
     super.initState();
   }
@@ -141,6 +149,27 @@ class _HomeState extends State<Home> with TickerProviderStateMixin{
 
             SizedBox(height: 25,),
 
+
+            FutureBuilder(
+              future: ratinglist,
+                builder: (context, AsyncSnapshot snapshot){
+                if( snapshot.hasData){
+                  return TextButton(onPressed: (){
+                    var x= recommendBook(snapshot.data);
+                    setState(() {
+                      recData= x;
+                    });
+                  }, child: Text("app"));
+                }
+                else{
+                  return Text("hello");
+                }
+
+            }),
+
+
+            SizedBox(height: 20,),
+
             //HORIZONTAL GRID
 
             //TOP RATED
@@ -149,6 +178,8 @@ class _HomeState extends State<Home> with TickerProviderStateMixin{
 
             SizedBox(height: 20,),
 
+            futureslider12(recData),
+            SizedBox(height: 20,),
             futureslider(MongoDatabase.fetchtopratedbooks()),
 
             SizedBox(height: 20,),
@@ -226,19 +257,6 @@ class _HomeState extends State<Home> with TickerProviderStateMixin{
             futureslider(MongoDatabase.fetchChildrenbooks()),
 
             SizedBox(height: 20,),
-
-
-
-
-
-            // futureslider(searchdata),
-            //
-            // SizedBox(height: 20,),
-
-
-
-
-
 
           ],
         ),

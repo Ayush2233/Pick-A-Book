@@ -285,12 +285,22 @@ class MongoDatabase{
   }
 
   static Future<void> updateRating(int book_id, double rating) async{
-    var data = {"book_id": book_id, "rate": rating};
-    await ratingCollection.updateOne(where.eq("uid", Fireuser.uid),
-    modify.addToSet("ratings", data));
+    try {
+      var data = {"book_id": book_id, "rate": rating};
+      await ratingCollection.updateOne(where.eq("uid", Fireuser.uid),
+          modify.addToSet("ratings", data));
+      print('success');
+    }
+    catch(e)
+    {print(e);}
   }
 
-
+  static Future <Map<String, dynamic>> fetchRecommendation() async{
+    final results = await ratingCollection.findOne(where.eq("uid", Fireuser.uid));
+    // final t = RatingModel.fromJson(results);
+    print(results);
+    return results;
+  }
 
 
 }

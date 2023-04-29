@@ -31,38 +31,38 @@ class _LoginState extends State<Login> {
         case "ERROR_EMAIL_ALREADY_IN_USE":
         case "account-exists-with-different-credential":
         case "email-already-in-use":
-        ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text("email-already-in-use")));
+          ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(content: Text("email-already-in-use")));
           break;
         case "ERROR_WRONG_PASSWORD":
         case "wrong-password":
-        ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text("Wrong email/password combination")));
+          ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(content: Text("Wrong email/password combination")));
           break;
         case "ERROR_USER_NOT_FOUND":
         case "user-not-found":
-        ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text("No user found with this email")));
+          ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(content: Text("No user found with this email")));
           break;
         case "ERROR_USER_DISABLED":
         case "user-disabled":
-        ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text("User disabled")));
+          ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(content: Text("User disabled")));
           break;
         case "ERROR_TOO_MANY_REQUESTS":
         case "operation-not-allowed":
-        ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text("Too many requests to log into this account")));
+          ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(content: Text("Too many requests to log into this account")));
           break;
         case "ERROR_OPERATION_NOT_ALLOWED":
         case "operation-not-allowed":
-        ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text("error, please try again later")));
+          ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(content: Text("error, please try again later")));
           break;
         case "ERROR_INVALID_EMAIL":
         case "invalid-email":
-        ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text("Email address is invalid.")));
+          ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(content: Text("Email address is invalid.")));
           break;
         default:
           ScaffoldMessenger.of(context).showSnackBar(
@@ -150,9 +150,9 @@ class _LoginState extends State<Login> {
             Container(height: 60,child: SizedBox(width: 350,
               child:
               ElevatedButton(
-                 onPressed: ()
-                 {
-                   signin();},
+                  onPressed: ()
+                  {
+                    signin();},
                   style: ElevatedButton.styleFrom(
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
                       side: BorderSide(color: Colors.pink,width: 2),
@@ -192,17 +192,17 @@ class _LoginState extends State<Login> {
 
             // CONTINUE TEXT
             Container(child:
-              Column(children: [
-                Center(child: Text('------------ or continue with ------------'
+            Column(children: [
+              Center(child: Text('------------ or continue with ------------'
                 ,style: TextStyle(fontSize: 15),),),
 
-                SizedBox(height: 30,),
+              SizedBox(height: 30,),
 
 
-                //EASY LOGIN BUTTONS
-                Center(
-                  child: Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
+              //EASY LOGIN BUTTONS
+              Center(
+                child: Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
                     //FACEBOOK
                     SizedBox(width: 80,height: 50,
                       child: OutlinedButton(onPressed: (){}, child: Icon(Icons.facebook),
@@ -223,7 +223,7 @@ class _LoginState extends State<Login> {
                             sign = false;
                           });
                         }
-                        }, child: Image.asset('assets/icons/google.png',width: 20,),
+                      }, child: Image.asset('assets/icons/google.png',width: 20,),
                         style: OutlinedButton.styleFrom(shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
                       ),
                     )
@@ -235,34 +235,34 @@ class _LoginState extends State<Login> {
                       ),
                     )
                   ],),
-                ),
-
-                SizedBox(height: 40,),
-
-
-                //// Signup button
-                Center(
-                  child: Padding(
-                      padding: const EdgeInsets.fromLTRB(100,0,0,0),
-                      child: Row(
-                        children: [
-                          Text("Don't have an account? ", style: TextStyle(
-                              color: Colors.black,fontSize: 15,fontWeight: FontWeight.w400
-                          ),
-                          ),
-                          GestureDetector(
-                            onTap: widget.showSignup,
-                            child: Text('Sign up',style: TextStyle(
-                              color: Colors.red[700],fontSize: 15,fontWeight: FontWeight.w500
-                            ),),
-                          )
-                        ],
-                      ),
-                    ),
-                  ),
-
-                ],
               ),
+
+              SizedBox(height: 40,),
+
+
+              //// Signup button
+              Center(
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(100,0,0,0),
+                  child: Row(
+                    children: [
+                      Text("Don't have an account? ", style: TextStyle(
+                          color: Colors.black,fontSize: 15,fontWeight: FontWeight.w400
+                      ),
+                      ),
+                      GestureDetector(
+                        onTap: widget.showSignup,
+                        child: Text('Sign up',style: TextStyle(
+                            color: Colors.red[700],fontSize: 15,fontWeight: FontWeight.w500
+                        ),),
+                      )
+                    ],
+                  ),
+                ),
+              ),
+
+            ],
+            ),
             )
             //Container()
           ],
