@@ -79,7 +79,7 @@ Widget returndrawer(Usermap x,BuildContext context){
               ListTile(
                 onTap:()
                 {
-                  Navigator.pushNamed(context,'/editProfile');
+                  Navigator.pushNamed(context,'/editprofile');
 
                 },
 
