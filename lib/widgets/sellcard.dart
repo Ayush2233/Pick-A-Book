@@ -14,9 +14,8 @@ Widget sellcard(Bookmap data, BuildContext context) {
     child: Container(
         decoration:
         BoxDecoration(
-            border: Border.all(color: Colors.pinkAccent),
-            borderRadius: BorderRadius.circular(10)
-        ),
+            border: Border.all(color: Theme.of(context).primaryColor),
+            borderRadius: BorderRadius.circular(10)),
         margin: EdgeInsets.fromLTRB(5, 0, 5, 0),
         height: 160,
         child: Column(

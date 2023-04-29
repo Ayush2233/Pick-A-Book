@@ -93,12 +93,12 @@ class _marketplaceState extends State<marketplace>
                     alignment: Alignment.centerLeft,
                     child: TabBar(
                         controller: _tabController,
-                        labelColor: Colors.black,
+                        labelColor: Theme.of(context).primaryColor,
                         isScrollable: true,
                         indicatorSize: TabBarIndicatorSize.label,
                         indicator: UnderlineTabIndicator(
                           borderSide:
-                              BorderSide(color: Color(0xffDE6077), width: 3.5),
+                              BorderSide(color: Theme.of(context).primaryColor, width: 3.5),
                         ),
                         unselectedLabelColor: Color(0xff969696),
                         tabs: [
