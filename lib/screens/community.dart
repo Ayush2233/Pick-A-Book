@@ -197,7 +197,7 @@ class _communityState extends State<community> {
             // Navigator.pushNamed(context,'/post');
             showInformationDialogue(context);
           },
-          backgroundColor: Color(0xffDE6077),
+          backgroundColor: Theme.of(context).primaryColor,
           child: Icon(Icons.add),
         ),
         body: Padding(

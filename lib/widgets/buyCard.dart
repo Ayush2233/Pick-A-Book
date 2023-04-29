@@ -5,7 +5,7 @@ import 'package:project2/models/marketPlaceModel.dart';
 Widget buycard(MarketPlaceModel data, BuildContext context) {
   return Container(
     decoration: BoxDecoration(
-        border: Border.all(color: Colors.pinkAccent),
+        border: Border.all(color: Theme.of(context).primaryColor),
         borderRadius: BorderRadius.circular(10)),
     margin: EdgeInsets.fromLTRB(5, 0, 5, 0),
     // height: 300,

@@ -82,10 +82,10 @@ Widget postCard(PostDisplay1 x, BuildContext context) {
                 LikeButton(
                   likeBuilder: (isliked) {
                     return Icon(
-
                       isliked ? Icons.favorite : Icons.favorite_outline,
                       size: 32,
-                      color: isliked ? Colors.redAccent : Colors.black,
+                      color: isliked ? Colors.redAccent : Theme.of(context).canvasColor,
+
                     );
                   },
                   // onTap: (isliked) async
@@ -100,7 +100,9 @@ Widget postCard(PostDisplay1 x, BuildContext context) {
                 ),
                 IconButton(
                     onPressed: () {},
-                    icon: Image.asset('assets/icons/bubble-chat.png')),
+                    icon: Image.asset('assets/icons/bubble-chat.png',
+                    color: Theme.of(context).canvasColor,)),
+
               ],
             ),
 
