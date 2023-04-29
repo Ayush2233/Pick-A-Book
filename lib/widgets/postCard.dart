@@ -5,8 +5,12 @@ import 'package:project2/models/data.dart';
 import 'package:like_button/like_button.dart';
 import 'package:project2/models/postDisplayModel.dart';
 import 'package:project2/models/connection.dart';
+import 'package:flutter_initicon/flutter_initicon.dart';
+import 'package:project2/models/user_model.dart';
 
 Widget postCard(PostDisplay1 x, BuildContext context) {
+
+
   return Padding(
     padding: const EdgeInsets.only(bottom: 20),
     child: Container(
@@ -25,7 +29,9 @@ Widget postCard(PostDisplay1 x, BuildContext context) {
                 child: Row(
                   children: [
                     CircleAvatar(
-                      backgroundImage: NetworkImage(userimage),
+                      child: Initicon(text: "${x.result[0].name}",
+                      style: TextStyle(color: Colors.white,fontSize: 18),
+                      backgroundColor: Theme.of(context).primaryColor,),
                       radius: 15,
                     ),
                     SizedBox(
@@ -76,6 +82,7 @@ Widget postCard(PostDisplay1 x, BuildContext context) {
                 LikeButton(
                   likeBuilder: (isliked) {
                     return Icon(
+
                       isliked ? Icons.favorite : Icons.favorite_outline,
                       size: 32,
                       color: isliked ? Colors.redAccent : Colors.black,
