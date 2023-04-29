@@ -17,10 +17,13 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 // import 'package:provider/provider.dart';
 import 'package:project2/models/connection.dart';
+import 'package:flutter_initicon/flutter_initicon.dart';
 
 
 class navcontroller extends StatefulWidget {
+
   const navcontroller({Key? key}) : super(key: key);
+
 
   @override
   State<navcontroller> createState() => _navcontrollerState();
@@ -38,16 +41,11 @@ class _navcontrollerState extends State<navcontroller> {
 
   final user = FirebaseAuth.instance.currentUser!;
 
-
-
   void _onItemTapped(int index) {
     setState(() {
       currentindex = index;
     });
   }
-
-
- 
 
   @override
   void initState() {
@@ -63,7 +61,6 @@ class _navcontrollerState extends State<navcontroller> {
     bool dark_mode = scaffoldcolor== Color(0xff000000);
 
 
-    
 
     return Scaffold(
       // backgroundColor: darktheme?Colors.black:Colors.white,
@@ -71,7 +68,8 @@ class _navcontrollerState extends State<navcontroller> {
 
         leading: Container(
           // padding: EdgeInsets.only(left: 10),
-          child: Image.asset(dark_mode?'assets/images/logo_dark.png':'assets/images/logo.png',fit: BoxFit.cover,),),
+          child: Image.asset(dark_mode?'assets/images/logo_dark.png':'assets/images/logo.png',
+            fit: BoxFit.cover,),),
         leadingWidth: 140,
         backgroundColor: Colors.transparent,
 
@@ -80,17 +78,45 @@ class _navcontrollerState extends State<navcontroller> {
         [
 
 
-          Builder(
-            builder: (context) {
-              return Padding(
-                padding: const EdgeInsets.only(right: 20),
-                child: GestureDetector(
-                  onTap: (){Scaffold.of(context).openEndDrawer();},
-                  child: CircleAvatar(backgroundImage:NetworkImage(userimage),radius: 20,),
-                ),
-              );
+          // Builder(
+          //   builder: (context) {
+          //
+          //     return Padding(
+          //       padding: const EdgeInsets.only(right: 20),
+          //       child: GestureDetector(
+          //         onTap: (){Scaffold.of(context).openEndDrawer();},
+          //         child: CircleAvatar(child: Initicon(text: "Kriti")
+          //           ,radius: 23,),
+          //         // child: CircleAvatar(backgroundImage:NetworkImage(userimage),radius: 20,),
+          //       ),
+          //     );
+          //   }
+          // )
+
+          FutureBuilder(
+            future: fetchuser,
+              builder: (context , AsyncSnapshot snapshot){
+            if(snapshot.connectionState == ConnectionState.waiting){
+              return CircleAvatar(child: CircularProgressIndicator(),);
             }
-          )
+            else{
+              if (snapshot.hasData){
+                return Padding(
+                  padding: const EdgeInsets.only(right: 20),
+                  child: GestureDetector(
+                    onTap: (){Scaffold.of(context).openEndDrawer();},
+                    child: CircleAvatar(child: Initicon(text: "${snapshot.data.name}")
+                      ,radius: 23,),
+                    // child: CircleAvatar(backgroundImage:NetworkImage(userimage),radius: 20,),
+                  ),
+                );
+              }
+              else{
+                return Text("no data");
+              }
+            }
+
+          } )
         ],
 
       ),

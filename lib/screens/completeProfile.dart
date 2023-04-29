@@ -1,9 +1,12 @@
+
+
 import 'package:flutter/material.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'sign up.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:project2/models/app_to_db.dart';
@@ -27,6 +30,7 @@ class _completeProfileState extends State<completeProfile> {
   final _gender = SingleValueDropDownController();
   final user = FirebaseAuth.instance.currentUser!;
   String? _chosenValue;
+
 
 
   @override
@@ -59,6 +63,7 @@ class _completeProfileState extends State<completeProfile> {
               height: 230,
               child: Column(
                 children: [
+
                   Image.asset('assets/images/login image.png',height: 150,),
 
                   SizedBox(height: 10,),
