@@ -22,12 +22,50 @@ Widget userSellCard(Sellmodel data, BuildContext context) {
             Image.network('${data.coverPage}', fit: BoxFit.cover),
             SizedBox(height: 5,),
             TextButton(onPressed: () {
-              // sellitem(Fireuser.uid.toString(), data.bookId, data.title, data.description, data.coverPage, data.author);
-              MongoDatabase.removeUserSelling(data.bookId);
+              showAlertDialog(context, data.title, data.bookId);
+
+
             }
                 , child: Text('Remove'))
           ],
-          // Image.network('${data.coverPage}',fit: BoxFit.cover),
         )),
+  );
+}
+
+
+showAlertDialog(BuildContext context, String title , int book_id) {
+
+  // set up the buttons
+  Widget cancelButton = TextButton(
+    child: Text("Cancel"),
+    onPressed:  () {
+      Navigator.of(context).pop();
+    },
+  );
+  Widget continueButton = TextButton(
+    child: Text("Continue"),
+    onPressed:  () {
+      MongoDatabase.removeUserSelling(book_id);
+      Navigator.of(context).pop();
+
+    },
+  );
+
+  // set up the AlertDialog
+  AlertDialog alert = AlertDialog(
+    title: Text("Sure?"),
+    content: Text("Do you want to remove $title from your selling"),
+    actions: [
+      cancelButton,
+      continueButton,
+    ],
+  );
+
+  // show the dialog
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return alert;
+    },
   );
 }

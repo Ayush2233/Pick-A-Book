@@ -56,7 +56,8 @@ Widget wishListCard(WishListDisplayModel x,BuildContext context)
                       ),
 
                       IconButton(onPressed: (){
-                        MongoDatabase.removeWishlistElement(x.result[0].bookId);
+                        // MongoDatabase.removeWishlistElement(x.result[0].bookId);
+                        showAlertDialog(context, x.result[0].title, x.result[0].bookId);
                       }, icon: Icon(Icons.delete,color: Theme.of(context).textTheme.titleLarge!.color,))
 
                     ],
@@ -69,5 +70,43 @@ Widget wishListCard(WishListDisplayModel x,BuildContext context)
 
         ),
       )
+  );
+}
+
+
+showAlertDialog(BuildContext context, String title , int book_id) {
+
+  // set up the buttons
+  Widget cancelButton = TextButton(
+    child: Text("Cancel"),
+    onPressed:  () {
+      Navigator.of(context).pop();
+    },
+  );
+  Widget continueButton = TextButton(
+    child: Text("Continue"),
+    onPressed:  () {
+      MongoDatabase.removeWishlistElement(book_id);
+      Navigator.of(context).pop();
+
+    },
+  );
+
+  // set up the AlertDialog
+  AlertDialog alert = AlertDialog(
+    title: Text("Sure?"),
+    content: Text("Do you want to remove $title from wishlist"),
+    actions: [
+      cancelButton,
+      continueButton,
+    ],
+  );
+
+  // show the dialog
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return alert;
+    },
   );
 }
