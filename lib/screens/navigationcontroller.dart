@@ -78,21 +78,6 @@ class _navcontrollerState extends State<navcontroller> {
         [
 
 
-          // Builder(
-          //   builder: (context) {
-          //
-          //     return Padding(
-          //       padding: const EdgeInsets.only(right: 20),
-          //       child: GestureDetector(
-          //         onTap: (){Scaffold.of(context).openEndDrawer();},
-          //         child: CircleAvatar(child: Initicon(text: "Kriti")
-          //           ,radius: 23,),
-          //         // child: CircleAvatar(backgroundImage:NetworkImage(userimage),radius: 20,),
-          //       ),
-          //     );
-          //   }
-          // )
-
           FutureBuilder(
             future: fetchuser,
               builder: (context , AsyncSnapshot snapshot){
@@ -105,8 +90,13 @@ class _navcontrollerState extends State<navcontroller> {
                   padding: const EdgeInsets.only(right: 20),
                   child: GestureDetector(
                     onTap: (){Scaffold.of(context).openEndDrawer();},
-                    child: CircleAvatar(child: Initicon(text: "${snapshot.data.name}")
-                      ,radius: 23,),
+                    child: CircleAvatar(
+                      // backgroundColor: Colors.pink
+                    child: Initicon(backgroundColor: Theme.of(context).primaryColor
+                    ,text: "${snapshot.data.name}",
+                    style: TextStyle(color: Colors.white),)
+                      ,radius: 23,
+                    ),
                     // child: CircleAvatar(backgroundImage:NetworkImage(userimage),radius: 20,),
                   ),
                 );
