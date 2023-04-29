@@ -289,7 +289,12 @@ class MongoDatabase{
     modify.addToSet("ratings", data));
   }
 
-
+  static Future <Map<String, dynamic>> fetchRecommendation() async{
+    final results = await ratingCollection.findOne(where.eq("uid", Fireuser.uid));
+    // final t = RatingModel.fromJson(results);
+    print(results);
+    return results;
+  }
 
 
 }

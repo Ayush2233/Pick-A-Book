@@ -1,14 +1,5 @@
 import 'package:flutter/material.dart';
 
-class ProfilePage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: "Setting UI",
-      home: EditProfilePage(),
-    );
-  }
-}
 
 class EditProfilePage extends StatefulWidget {
   @override
@@ -20,6 +11,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // appBar: AppBar(),
 
       body: Container(
         padding: EdgeInsets.only(left: 16, top: 25, right: 16),
