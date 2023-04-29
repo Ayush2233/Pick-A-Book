@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:project2/models/book_model.dart';
 import 'package:project2/screens/bookdetails.dart';
+import 'package:project2/models/RrecBookModel.dart';
 
 import '../models/user_model.dart';
 
@@ -107,3 +108,20 @@ Widget booktile(Bookmap x,BuildContext context)
   );
 }
 
+Widget bookscard12(Bookmap1 data,BuildContext context)
+{
+  return GestureDetector
+    (
+      onTap: ()
+      {
+        // var Book= bookdetails(data: data);
+        // Book.bottomup(context);
+      },
+      child: Container(
+        margin: EdgeInsets.fromLTRB(10,0,10,0),
+        height: 160,
+        child: Image.network('${data.coverPage}',fit: BoxFit.cover),
+      )
+  );
+
+}
