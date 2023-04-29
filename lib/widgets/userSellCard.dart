@@ -1,38 +1,42 @@
 import 'package:flutter/material.dart';
-import 'package:project2/models/app_to_db.dart';
-import 'package:project2/models/book_model.dart';
-import 'package:project2/models/marketPlaceModel.dart';
 import 'package:project2/models/sell_model.dart';
-import 'package:project2/screens/bookdetails.dart';
-import '../models/connection.dart';
+import 'package:project2/models/connection.dart';
 
 Widget userSellCard(Sellmodel data, BuildContext context) {
-  return GestureDetector
-    (
-    onTap: () {
-      // var Book = bookdetails(data: data);
-      // Book.bottomup(context);
-    },
-    child: Container(
-
-        margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
-        height: 160,
-        child: Column(
-          children: [
-            Image.network('${data.coverPage}', fit: BoxFit.cover),
-            SizedBox(height: 5,),
-            TextButton(onPressed: () {
+  return Container(
+    decoration: BoxDecoration(
+        border: Border.all(color: Colors.pinkAccent),
+        borderRadius: BorderRadius.circular(10)
+    ),
+    margin: EdgeInsets.fromLTRB(5, 0, 5, 0),
+    // height: 300,
+    child: Column(
+      children: [
+        SizedBox(
+          height: 15 ,
+        ),
+        SizedBox(height:130,width: 85, child: Image.network('${data.coverPage}', fit: BoxFit.cover)),
+        SizedBox(
+          height: 20 ,
+        ),
+        SizedBox(
+          height: 30,
+          width: 85,
+          child: ElevatedButton(
+            style: ElevatedButton.styleFrom(
+                elevation: 100,
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(2))
+            ),
+            onPressed: () {
               showAlertDialog(context, data.title, data.bookId);
-
-
-            }
-                , child: Text('Remove'))
-          ],
-        )),
-  );
+            },
+            child: Text('REMOVE', style: TextStyle(fontSize: 13),),
+          ),
+        ),
+      ],
+// Image.network('${data.coverPage}',fit: BoxFit.cover),
+    ),);
 }
-
-
 showAlertDialog(BuildContext context, String title , int book_id) {
 
   // set up the buttons
@@ -69,3 +73,4 @@ showAlertDialog(BuildContext context, String title , int book_id) {
     },
   );
 }
+

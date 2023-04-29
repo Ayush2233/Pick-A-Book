@@ -1,31 +1,49 @@
 import 'package:flutter/material.dart';
-import 'package:project2/models/app_to_db.dart';
-import 'package:project2/models/book_model.dart';
-import 'package:project2/screens/bookdetails.dart';
-import '../models/connection.dart';
+import 'package:project2/widgets/buydetails.dart';
 import 'package:project2/models/marketPlaceModel.dart';
 
-Widget buycard( MarketPlaceModel data, BuildContext context) {
-  return GestureDetector
-    (
-    onTap: () {
-      // var Book = bookdetails(data: data.books[0]);
-      // Book.bottomup(context);
-    },
-    child: Container(
-
-        margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
-        height: 160,
-        child: Column(
-          children: [
-            Image.network( '${data.coverPage}', fit: BoxFit.cover),
-            SizedBox(height: 5,),
-            TextButton(onPressed: () {
-            }
-                , child: Text('BUY'))
-
-          ],
-          // Image.network('${data.coverPage}',fit: BoxFit.cover),
-        )),
+Widget buycard(MarketPlaceModel data, BuildContext context) {
+  return Container(
+    decoration: BoxDecoration(
+        border: Border.all(color: Colors.pinkAccent),
+        borderRadius: BorderRadius.circular(10)),
+    margin: EdgeInsets.fromLTRB(5, 0, 5, 0),
+    // height: 300,
+    child: Column(
+      children: [
+        SizedBox(
+          height: 15,
+        ),
+        SizedBox(
+            height: 130,
+            width: 85,
+            child: Image.network('${data.coverPage}', fit: BoxFit.cover)),
+        SizedBox(
+          height: 20,
+        ),
+        SizedBox(
+          height: 30,
+          width: 85,
+          child: ElevatedButton(
+            style: ElevatedButton.styleFrom(
+                elevation: 100,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(2))),
+            onPressed: () {
+              showDialog(
+                context: context,
+                builder: (_) => buydetails(
+                  name: '${data.user[0].name}',
+                  email: '${data.user[0].email}',
+                  title: '${data.title}',
+                  image: '${data.coverPage}',
+                ),
+              );
+            },
+            child: Text('BUY'),
+          ),
+        ),
+      ],
+    ),
   );
 }

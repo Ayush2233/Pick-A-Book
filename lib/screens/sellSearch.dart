@@ -30,7 +30,7 @@ class _sellSearchState extends State<sellSearch> with TickerProviderStateMixin{
   @override
   void initState() {
     // TODO: implement initState
-    dynamicGrid= MongoDatabase.fetchbooks();
+    dynamicGrid= MongoDatabase.fetchnewbooks();
     super.initState();
   }
 
@@ -42,15 +42,13 @@ class _sellSearchState extends State<sellSearch> with TickerProviderStateMixin{
         child: Column(
 
         children: [
-
-          // SizedBox(hi)
-
-
-
-          Text("Select the Books you want to sell",
-            style: GoogleFonts.montserrat(
-            fontSize: 15,
-            color: Theme.of(context).textTheme.titleMedium?.color,),),
+          SizedBox(height: 20,),
+          // Text("Select the Books you want to sell",
+          //   textAlign: TextAlign.left,
+          //   style: GoogleFonts.montserrat(
+          //   fontSize: 15,
+          //   fontWeight: FontWeight.normal,
+          //   color: Colors.black),),
 
         SizedBox(height: 20,),
 
@@ -84,7 +82,7 @@ class _sellSearchState extends State<sellSearch> with TickerProviderStateMixin{
     suffixIcon: Icon(CupertinoIcons.search_circle_fill,color: Colors.white,size: 47,),
 
 
-    hintText: 'Search Book...',
+    hintText: 'Search for the Books you want to sell...',
     hintStyle: TextStyle(fontSize: 13,color: Colors.white),
 
 
@@ -95,9 +93,9 @@ class _sellSearchState extends State<sellSearch> with TickerProviderStateMixin{
     ),
     ),
     ),),
-          SizedBox(height: 10,),
+          SizedBox(height: 25,),
 
-          Container(child:futureSellGrid(dynamicGrid),
+          Container(padding: EdgeInsets.all(10),child:futureSellGrid(dynamicGrid),
           height: double.maxFinite,)
     ],)));
   }

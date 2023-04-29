@@ -6,22 +6,16 @@ import 'package:like_button/like_button.dart';
 import 'package:project2/models/postDisplayModel.dart';
 import 'package:project2/models/connection.dart';
 
-
-
-
-Widget postCard(PostDisplay1 x,BuildContext context){
-
+Widget postCard(PostDisplay1 x, BuildContext context) {
   return Padding(
     padding: const EdgeInsets.only(bottom: 20),
-
     child: Container(
       // height: 450,
       // width: 360,
-            // color: Colors.white,
+      // color: Colors.white,
       child: Padding(
-        padding: const EdgeInsets.fromLTRB(0,6,0,6),
+        padding: const EdgeInsets.fromLTRB(0, 6, 0, 6),
         child: Column(
-
           children: [
             // Avtar Image and username
             Container(
@@ -37,10 +31,12 @@ Widget postCard(PostDisplay1 x,BuildContext context){
                     SizedBox(
                       width: 15,
                     ),
-                    Text(
-                      "${x.result[0].name}",
-                      style: GoogleFonts.montserrat(fontSize: 15,fontWeight: FontWeight.w600,color: Theme.of(context).textTheme.titleLarge!.color)
-                    )
+                    Text("${x.result[0].name}",
+                        style: GoogleFonts.montserrat(
+                            fontSize: 15,
+                            fontWeight: FontWeight.w600,
+                            color:
+                                Theme.of(context).textTheme.titleLarge!.color))
                   ],
                 ),
               ),
@@ -50,36 +46,27 @@ Widget postCard(PostDisplay1 x,BuildContext context){
               height: 8,
             ),
 
-
             Container(
                 width: double.maxFinite,
                 height: 350,
-                child: Image.network(
-                  '${x.image}',
-                  fit: BoxFit.cover,
-                  loadingBuilder: (context, child, loadingProgress)
-                  {
-                    if (loadingProgress == null)
-                   {
-                     return child;
-                   }
-                    else
-                    {
-                      return CircularProgressIndicator();
-                    }
+                child: Image.network('${x.image}', fit: BoxFit.cover,
+                    loadingBuilder: (context, child, loadingProgress) {
+                  if (loadingProgress == null) {
+                    return child;
+                  } else {
+                    return Transform.scale(
+                        scale: 0.10, child: CircularProgressIndicator(strokeWidth: 38,));
                   }
-
-                  )
-
-            ),
+                })),
 
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Row(
                 children: [
-
                   Text('${x.caption}',
-                      style: GoogleFonts.montserrat(color: Theme.of(context).textTheme.titleLarge!.color)),
+                      style: GoogleFonts.montserrat(
+                          color:
+                              Theme.of(context).textTheme.titleLarge!.color)),
                 ],
               ),
             ),
@@ -87,10 +74,12 @@ Widget postCard(PostDisplay1 x,BuildContext context){
             Row(
               children: [
                 LikeButton(
-
-                  likeBuilder: (isliked)
-                  {
-                    return Icon(isliked?Icons.favorite:Icons.favorite_outline,size: 32,color: isliked?Colors.redAccent:Colors.black,);
+                  likeBuilder: (isliked) {
+                    return Icon(
+                      isliked ? Icons.favorite : Icons.favorite_outline,
+                      size: 32,
+                      color: isliked ? Colors.redAccent : Colors.black,
+                    );
                   },
                   // onTap: (isliked) async
                   // {
@@ -105,7 +94,6 @@ Widget postCard(PostDisplay1 x,BuildContext context){
                 IconButton(
                     onPressed: () {},
                     icon: Image.asset('assets/icons/bubble-chat.png')),
-
               ],
             ),
 
@@ -136,8 +124,7 @@ Widget postCard(PostDisplay1 x,BuildContext context){
                   ),
                   Text('Add a comment',
                       style: TextStyle(
-                          fontWeight: FontWeight.w100,
-                          color: Colors.grey)),
+                          fontWeight: FontWeight.w100, color: Colors.grey)),
                 ],
               ),
             )

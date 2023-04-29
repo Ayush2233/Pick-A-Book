@@ -61,7 +61,6 @@ class _appState extends State<app> {
         home: SplashView(
             logo: Splashscreen(),
             backgroundColor: Colors.white,
-            loadingIndicator: CircularProgressIndicator(),
             done: Done(initScreen == 0 || initScreen ==null ? OnBoardingScreen() : Check())
         ),
         routes: {
