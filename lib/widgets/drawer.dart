@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_initicon/flutter_initicon.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:project2/models/user_model.dart';
 import 'package:provider/provider.dart';
@@ -6,6 +7,7 @@ import 'package:project2/utilities/appstartnotifier.dart';
 import '../models/data.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import '../screens/sign up.dart';
+import 'package:flutter_initicon/flutter_initicon.dart';
 
 Widget returndrawer(Usermap x,BuildContext context){
   return Drawer(
@@ -47,8 +49,13 @@ Widget returndrawer(Usermap x,BuildContext context){
             children:
             [
               //IMAGE
-              CircleAvatar(radius: 70, backgroundImage: NetworkImage(
-                userimage,)),
+              CircleAvatar(
+            backgroundColor: Theme.of(context).primaryColor
+            ,radius: 70, child: Initicon(
+                text: "${x.name}",style: TextStyle(color: Colors.white,fontSize: 50),
+                backgroundColor: Theme.of(context).primaryColor,
+              ),
+              ),
               //USERNAME
               Text("${x.name}", style: GoogleFonts.montserrat(
                   color: Theme.of(context).textTheme.titleLarge?.color,

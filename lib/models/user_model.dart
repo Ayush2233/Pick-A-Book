@@ -18,6 +18,7 @@ class Usermap {
         required this.age,
         required this.gender,
         required this.wishlist,
+
     });
 
     ObjectId id;
@@ -28,6 +29,7 @@ class Usermap {
     String gender;
     List<int> wishlist;
 
+
     factory Usermap.fromJson(Map<String, dynamic> json) => Usermap(
         id: json["_id"],
         uid: json["uid"],
@@ -36,6 +38,7 @@ class Usermap {
         age: json["age"],
         gender: json["gender"],
         wishlist: List<int>.from(json["wishlist"].map((x) => x)),
+
     );
 
     Map<String, dynamic> toJson() => {
@@ -46,5 +49,6 @@ class Usermap {
         "age": age,
         "gender": gender,
         "wishlist": List<dynamic>.from(wishlist.map((x) => x)),
+
     };
 }
