@@ -51,9 +51,11 @@ class _marketplaceState extends State<marketplace> with TickerProviderStateMixin
         onRefresh: () async
         {
           var x= MongoDatabase.fetchBuybooks();
+          var y = MongoDatabase.fetchUserSellings();
           setState(()
           {
             selldata = x;
+            userSellings = y;
           });
         },
         child: NotificationListener<UserScrollNotification>(
