@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:project2/models/data.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:project2/widgets/homeslider.dart';
 import 'package:project2/models/connection.dart';
-import 'package:project2/models/book_model.dart';
 import 'genreresult.dart';
 
 
@@ -66,6 +64,8 @@ class _SearchState extends State<Search> with TickerProviderStateMixin{
         Column(
           children: [
 
+            SizedBox(height: 15,),
+
             // SEARCH TEXT FIELD
             Container(height: 55,child: SizedBox(width: 370,
               child: Padding(
@@ -115,6 +115,7 @@ class _SearchState extends State<Search> with TickerProviderStateMixin{
 
 
             SizedBox(height: 20,),
+
             Container(
               alignment: Alignment.topLeft,
               margin: EdgeInsets.fromLTRB(8, 0, 0, 0),
@@ -132,7 +133,7 @@ class _SearchState extends State<Search> with TickerProviderStateMixin{
                   )
                 ],
               )
-                  
+
                   :Text("Explore Genres",
 
                   style: GoogleFonts.montserrat(fontSize:25,fontWeight: FontWeight.bold,color: Theme.of(context).textTheme.titleLarge?.color)),
@@ -140,7 +141,7 @@ class _SearchState extends State<Search> with TickerProviderStateMixin{
 
 
 
-            SizedBox(height: 25,),
+            SizedBox(height: 30,),
 
             isSearch?(isGrid?futuregrid(_performSearch(searchquery)):futurelistview(_performSearch(searchquery))):Column(children: [
                 // Fantasy ROmance

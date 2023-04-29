@@ -12,17 +12,38 @@ Widget sellcard(Bookmap data, BuildContext context) {
       Book.bottomup(context);
     },
     child: Container(
-
-        margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
+        decoration:
+        BoxDecoration(
+            border: Border.all(color: Colors.pinkAccent),
+            borderRadius: BorderRadius.circular(10)
+        ),
+        margin: EdgeInsets.fromLTRB(5, 0, 5, 0),
         height: 160,
         child: Column(
           children: [
-            Image.network('${data.coverPage}', fit: BoxFit.cover),
-            SizedBox(height: 5,),
-            TextButton(onPressed: () {
+            SizedBox(
+              height: 20 ,
+            ),
+            SizedBox(height:130,width: 85, child: Image.network('${data.coverPage}', fit: BoxFit.cover)),
+            SizedBox(height: 20,),
+        SizedBox(
+            height: 30,
+            width: 85,
+          child: ElevatedButton(
+            style: ElevatedButton.styleFrom(
+                elevation: 100,
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(2))
+            ),
+            onPressed: () {
               sellitem(Fireuser.uid.toString(), data.bookId, data.title, data.description, data.coverPage, data.author);
-            }
-                , child: Text('SELL'))
+            },
+            child: Text('SELL'),
+          ),
+            // child:TextButton(onPressed: () {
+            //   sellitem(Fireuser.uid.toString(), data.bookId, data.title, data.description, data.coverPage, data.author);
+            // }
+            //     , child: Text('SELL'))
+        ),
           ],
           // Image.network('${data.coverPage}',fit: BoxFit.cover),
         )),
