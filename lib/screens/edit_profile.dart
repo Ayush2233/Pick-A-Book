@@ -1,5 +1,15 @@
 import 'package:flutter/material.dart';
 
+class ProfilePage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: "Setting UI",
+      home: EditProfilePage(),
+    );
+  }
+}
+
 class EditProfilePage extends StatefulWidget {
   @override
   _EditProfilePageState createState() => _EditProfilePageState();
@@ -10,9 +20,6 @@ class _EditProfilePageState extends State<EditProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(iconTheme: IconThemeData(
-        color: Colors.black
-      ),),
 
       body: Container(
         padding: EdgeInsets.only(left: 16, top: 25, right: 16),
@@ -82,7 +89,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
               buildTextField("Full Name", "Aanchal Sharma", false),
               buildTextField("E-mail", "aanchals2003@gmail.com", false),
               buildTextField("Password", "********", true),
-              buildTextField("Phone", "7217842311", false),
+
               SizedBox(
                 height: 35,
               ),

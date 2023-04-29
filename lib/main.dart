@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:project2/models/connection.dart';
+import 'package:project2/screens/edit_profile.dart';
 
 import 'package:splash_view/splash_view.dart';
 import 'screens/splashscreen.dart';
@@ -65,10 +66,13 @@ class _appState extends State<app> {
         ),
         routes: {
           "/sellSearch" : (context) => sellSearch(),
+          "/editprofile" : (context)=> EditProfilePage(),
           // "/completeProfile": (context) => completeProfile(),
           // "/" : (context) => Check(),
           // "/onboarding" : (context) => OnBoardingScreen(),
+
         },
+
       );
     }
     );
