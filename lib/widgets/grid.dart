@@ -52,7 +52,6 @@ Widget futureSellGrid(Future future) {
         }),
   );
 }
-
 Widget futurebuygrid(Future future) {
   return Container(
     // height: 800,
@@ -70,7 +69,7 @@ Widget futurebuygrid(Future future) {
                     SizedBox(
                       height: 230,
                     ),
-                    CircularProgressIndicator()
+                    CircularProgressIndicator(),
                   ],
                 ));
           } else {
@@ -82,7 +81,7 @@ Widget futurebuygrid(Future future) {
                     crossAxisSpacing: 7,
                     mainAxisSpacing: 12,
                   ),
-                  physics: ScrollPhysics(),
+                  physics: NeverScrollableScrollPhysics(),
                   itemCount: snapshot.data.length,
                   itemBuilder: (BuildContext ctx, index) {
                     return buycard(
