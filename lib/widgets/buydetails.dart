@@ -31,8 +31,13 @@ class buydetails extends StatelessWidget {
             height: 30,
           ),
           Text(
-            'Title: ' + title,
-            style: GoogleFonts.montserrat(fontSize:16,fontWeight: FontWeight.bold,color: Theme.of(context).textTheme.titleLarge?.color),
+            textAlign: TextAlign.center,
+
+              title,
+            style: GoogleFonts.montserrat(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+                color: Theme.of(context).textTheme.titleLarge?.color),
           ),
           SizedBox(
             height: 20,
@@ -44,34 +49,59 @@ class buydetails extends StatelessWidget {
             decoration: BoxDecoration(
               boxShadow: [
                 BoxShadow(
-                  color: Colors.pink.shade100,
-                  offset: const Offset(
-                    5.0,
-                    5.0,
-                  ),
-                  blurRadius: 10.0,
-                  spreadRadius: 5.0,
-                ), //BoxShadow
-                BoxShadow(
+                  // color: Colors.pink.shade100,
+                  //offset: const Offset(
+                  //  5.0,
+                  //  5.0,
+                  // ),
+                  // blurRadius: 10.0,
+                  // spreadRadius: 5.0,
+                  //  ), //BoxShadow
+                  // BoxShadow(
                   color: Colors.white,
                   offset: const Offset(0.0, 0.0),
-                  blurRadius: 0.0,
-                  spreadRadius: 0.0,
+                  //blurRadius: 0.0,
+                  // spreadRadius: 0.0,
                 ), //BoxShadow
               ],
             ),
-            child: Text(
-              ' Name:' + name + '\n\n' + ' Email: ' + email,
-              style: GoogleFonts.montserrat(
-                fontSize: 14,
-                  fontWeight: FontWeight.bold,
-                  color: Theme.of(context).textTheme.titleLarge?.color),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    Icon(
+                      Icons.person_2_outlined,
+                    ),
+                    SizedBox(width: 7),
+                    Text(
+                      textAlign: TextAlign.left,
+                       name,
+                      style: GoogleFonts.montserrat(
+                          fontSize: 14,
+                          fontWeight: FontWeight.bold,
+                          color: Theme.of(context).textTheme.titleLarge?.color),
+                    ),
+                  ],
+                ),
+                Row(
+                  children: [
+                    Icon(
+                      Icons.mail_outlined,
+                    ),
+                    SizedBox(width: 7),
+                    Text(
+                      email,
+                      textAlign: TextAlign.left,
+                      style: GoogleFonts.montserrat(
+                          fontSize: 14,
+                          fontWeight: FontWeight.bold,
+                          color: Theme.of(context).textTheme.titleLarge?.color),
+                    ),
+                  ],
+                ),
+              ],
             ),
-            // Text(
-            //   'Email: ' + email,
-            //   textAlign: TextAlign.left,
-            //   style: TextStyle(color: Colors.black),
-            // ),
           ),
         ],
       ),
