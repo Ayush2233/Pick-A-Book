@@ -114,12 +114,12 @@ Widget bookscard12(Bookmap1 data,BuildContext context)
     (
       onTap: ()
       {
-        // var Book= bookdetails(data: data);
-        // Book.bottomup(context);
+        var book=bookdetails_recom(data: data);
+        book.bottomup(context);
       },
       child: Container(
         margin: EdgeInsets.fromLTRB(10,0,10,0),
-        height: 160,
+        height: 100,
         child: Image.network('${data.coverPage}',fit: BoxFit.cover),
       )
   );
