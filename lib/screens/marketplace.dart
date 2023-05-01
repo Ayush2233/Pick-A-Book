@@ -80,6 +80,7 @@ class _marketplaceState extends State<marketplace>
                     child: Text(
                       "Marketplace",
                       style: GoogleFonts.montserrat(
+                        color: Theme.of(context).textTheme.titleLarge?.color,
                         fontSize: 25,
                         fontWeight: FontWeight.w600,
                       ),

@@ -137,33 +137,36 @@ class _HomeState extends State<Home> with TickerProviderStateMixin{
           //  RECOMMENDED FOR YOU
             Container(
               margin: EdgeInsets.symmetric(horizontal: 10),
-              child: Row(
-                children: [
-                  Text("Recommended for you",
-                    style:GoogleFonts.montserrat(
-                      color: Theme.of(context).textTheme.titleLarge?.color,
-                      fontSize: 20,
-                      fontWeight: FontWeight.w600,
-                      )),
-                  SizedBox(width: 75,),
+              child: FittedBox(
+                fit: BoxFit.contain,
+                child: Row(
+                  children: [
+                    Text("Recommended for you",
+                      style:GoogleFonts.montserrat(
+                        color: Theme.of(context).textTheme.titleLarge?.color,
+                        fontSize: 20,
+                        fontWeight: FontWeight.w600,
+                        )),
+                    SizedBox(width: 75,),
 
-                  FutureBuilder(
-                      future: ratinglist,
-                      builder: (context, AsyncSnapshot snapshot){
-                        if( snapshot.hasData){
-                          return IconButton(onPressed: (){
-                            var x= recommendBook(snapshot.data);
-                            setState(() {
-                              recData= x;
-                            });
-                          }, icon: Icon(Icons.auto_fix_high));
-                        }
-                        else{
-                          return IconButton(onPressed: (){}, icon:Icon(Icons.disabled_by_default));
-                        }
+                    FutureBuilder(
+                        future: ratinglist,
+                        builder: (context, AsyncSnapshot snapshot){
+                          if( snapshot.hasData){
+                            return IconButton(onPressed: (){
+                              var x= recommendBook(snapshot.data);
+                              setState(() {
+                                recData= x;
+                              });
+                            }, icon: Icon(Icons.auto_fix_high));
+                          }
+                          else{
+                            return IconButton(onPressed: (){}, icon:Icon(Icons.disabled_by_default));
+                          }
 
-                      }),
-                ],
+                        }),
+                  ],
+                ),
               ),),
           SizedBox(height: 10,),
 

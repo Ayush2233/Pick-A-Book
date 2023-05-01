@@ -37,7 +37,9 @@ class _sellSearchState extends State<sellSearch> with TickerProviderStateMixin{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(backgroundColor: Colors.black,),
+      appBar: AppBar(backgroundColor: Theme.of(context).textTheme.titleSmall?.color,
+
+      ),
         body:SingleChildScrollView(
         child: Column(
 
