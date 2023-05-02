@@ -7,7 +7,7 @@ import 'package:project2/models/user_model.dart';
 import 'package:project2/models/sell_model.dart';
 import 'package:project2/screens/Search.dart';
 import 'package:project2/models/ratingModel.dart';
-
+import 'flaskApp.dart';
 
 // Connection Constants
 
@@ -295,11 +295,13 @@ class MongoDatabase{
     {print(e);}
   }
 
-  static Future <Map<String, dynamic>> fetchRecommendation() async{
+  static Future <dynamic> fetchRecommendation() async{
     final results = await ratingCollection.findOne(where.eq("uid", Fireuser.uid));
+    final res=recommendBook(results);
+
     // final t = RatingModel.fromJson(results);
     // print(results);
-    return results;
+    return res;
   }
 
 

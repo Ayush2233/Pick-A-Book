@@ -21,10 +21,6 @@ Widget bookshelf(Future? future,Future alter)
           {
             return Center(child: CircularProgressIndicator(),);
           }
-        else if(future==null)
-        {
-          return Center(child: Text("Press the Above Icon to See Magic",style: GoogleFonts.montserrat(fontWeight: FontWeight.bold,color: Theme.of(context).textTheme.titleLarge!.color),));
-        }
         else{
           if(snapshot.hasData)
             {

@@ -10,11 +10,10 @@ Future recommendBook(var a) async {
   String jsonString = json.encode(a);
   try {
     var resp = await client.post(uri, headers: headers, body: jsonString);
-    //var resp=await http.get(Uri.parse("http://192.168.1.101:5000"));
     if (resp.statusCode == 200) {
       print("DATA FETCHED SUCCESSFULLY");
       var result = json.decode(resp.body);
-      print(result);
+      // print(result);
       return result;
     }
   }
