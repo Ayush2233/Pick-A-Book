@@ -237,8 +237,10 @@ class bookdetails
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+
+                      mainAxisAlignment: MainAxisAlignment.start,
                       children: [
+                        SizedBox(width: 20,),
                         Container(
                           child: Text(
                             "Publisher",
@@ -249,6 +251,8 @@ class bookdetails
                             ),
                           ),
                         ),
+
+                        SizedBox(width: 173,),
 
                         Container(
                           child: Text(

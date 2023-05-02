@@ -34,7 +34,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
             builder: (context, AsyncSnapshot snapshot) {
               var data = snapshot.data;
               if (snapshot.connectionState == ConnectionState.waiting) {
-                return CircularProgressIndicator();
+                return Center(child: CircularProgressIndicator());
               } else {
                 if (snapshot.hasData) {
                   return Container(
