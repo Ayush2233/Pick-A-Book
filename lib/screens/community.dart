@@ -1,10 +1,5 @@
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:like_button/like_button.dart';
-import 'package:project2/models/data.dart';
-import 'package:project2/screens/postUpload.dart';
 import 'package:project2/widgets/postCard.dart';
 import 'package:project2/models/connection.dart';
 import 'package:project2/models/postDisplayModel.dart';

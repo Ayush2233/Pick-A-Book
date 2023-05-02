@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:project2/screens/Home.dart';
-import 'package:project2/screens/completeProfile.dart';
+
 import 'package:project2/screens/sign%20up.dart';
 import 'package:project2/screens/signin.dart';
 

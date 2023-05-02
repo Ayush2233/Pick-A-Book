@@ -17,6 +17,7 @@ class buydetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       content: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -24,7 +25,7 @@ class buydetails extends StatelessWidget {
           Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
-          color:  Colors.grey.shade300,
+          color:  Theme.of(context).primaryColorLight,
         ),
             child: Column(
               children: [
@@ -36,7 +37,7 @@ class buydetails extends StatelessWidget {
                     style: GoogleFonts.montserrat(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
-                    color: Theme.of(context).textTheme.titleLarge?.color),
+                    color: Colors.black),
                   ),
                 ),
             SizedBox(
@@ -54,7 +55,7 @@ class buydetails extends StatelessWidget {
                 style: GoogleFonts.montserrat(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
-                    color: Theme.of(context).textTheme.titleLarge?.color),
+                    color: Colors.black),
               ),
             ),
                 Padding(padding: EdgeInsets.all(5)),
@@ -72,48 +73,64 @@ class buydetails extends StatelessWidget {
             padding: EdgeInsets.only(top: 15),
             width: double.maxFinite,
             height: 90,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                FittedBox(
-                  fit: BoxFit.contain,
-                  child: Row(
-                    children: [
-                      Icon(
-                        Icons.person_2_outlined,
-                      ),
-                      SizedBox(width: 7),
-                      Text(
-                        textAlign: TextAlign.left,
-                         name,
-                        style: GoogleFonts.montserrat(
-                            fontSize: 14,
-                            fontWeight: FontWeight.bold,
-                            color: Theme.of(context).textTheme.titleLarge?.color),
-                      ),
-                    ],
+            child: FittedBox(
+              fit: BoxFit.contain,
+              alignment: Alignment.centerLeft,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'User Details',
+                    textAlign: TextAlign.left,
+                    style: GoogleFonts.montserrat(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black),
                   ),
-                ),
-                FittedBox(
-                  fit: BoxFit.contain,
-                  child: Row(
-                    children: [
-                      Icon(
-                        Icons.mail_outlined,
-                      ),
-                      SizedBox(width: 7),
-                      Text(
-                        email,
-                        textAlign: TextAlign.left,
-                        style: GoogleFonts.montserrat(
-                            fontSize: 14,
-                            fontWeight: FontWeight.bold,
-                            color: Theme.of(context).textTheme.titleLarge?.color),
-                      ),
-                    ],
+                  SizedBox(height: 10,),
+
+                  FittedBox(
+                    fit: BoxFit.contain,
+                    child: Row(
+                      children: [
+                        Icon(
+                          Icons.person_2_outlined,
+                          color: Theme.of(context).textTheme.titleLarge?.color,
+                        ),
+                        SizedBox(width: 7),
+                        Text(
+                          textAlign: TextAlign.left,
+                           name,
+                          style: GoogleFonts.montserrat(
+                              fontSize: 14,
+                              fontWeight: FontWeight.bold,
+                              color: Theme.of(context).textTheme.titleLarge?.color),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-              ],
+                  FittedBox(
+                    fit: BoxFit.contain,
+                    child: Row(
+                      children: [
+                        Icon(
+                          Icons.mail_outlined,
+                          color: Theme.of(context).textTheme.titleLarge?.color,
+                        ),
+                        SizedBox(width: 7),
+                        Text(
+                          email,
+                          textAlign: TextAlign.left,
+                          style: GoogleFonts.montserrat(
+                              fontSize: 14,
+                              fontWeight: FontWeight.bold,
+                              color: Theme.of(context).textTheme.titleLarge?.color),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ],
