@@ -1,5 +1,4 @@
 import 'package:mongo_dart/mongo_dart.dart' as M;
-import 'package:project2/models/postDisplayModel.dart';
 import 'sell_model.dart';
 import 'connection.dart';
 import 'user_model.dart';

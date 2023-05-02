@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:project2/models/book_model.dart';
-import 'package:project2/models/data.dart';
 import 'package:project2/widgets/homeslider.dart';
 import '../models/RrecBookModel.dart';
 import 'bookcard.dart';

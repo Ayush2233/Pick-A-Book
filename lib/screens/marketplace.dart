@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:project2/models/connection.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:project2/widgets/grid.dart';
 
 class marketplace extends StatefulWidget {
@@ -80,6 +78,7 @@ class _marketplaceState extends State<marketplace>
                     child: Text(
                       "Marketplace",
                       style: GoogleFonts.montserrat(
+                        color: Theme.of(context).textTheme.titleLarge?.color,
                         fontSize: 25,
                         fontWeight: FontWeight.w600,
                       ),

@@ -1,9 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:project2/screens/sign%20up.dart';
 import 'package:project2/utilities/google.dart';
-import 'package:project2/utilities/signin_google.dart';
 
 
 class Login extends StatefulWidget {
@@ -213,16 +211,9 @@ class _LoginState extends State<Login> {
                     //GOOGLE
                     ,SizedBox(width: 80,height: 50,
                       child: OutlinedButton(onPressed: () async {
-                        bool user = await isFirstTimeGoogleSignIn();
-                        if (user) {
-                          setState(() {
-                            sign = true;
-                          });
-                        } else {
-                          setState(() {
-                            sign = false;
-                          });
-                        }
+                        setState(() async{
+                          await Auth_services().signInWithGoogle();
+                        });
                       }, child: Image.asset('assets/icons/google.png',width: 20,),
                         style: OutlinedButton.styleFrom(shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
                       ),

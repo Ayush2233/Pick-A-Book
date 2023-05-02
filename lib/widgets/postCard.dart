@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:mongo_dart/mongo_dart.dart';
 import 'package:project2/models/data.dart';
 import 'package:like_button/like_button.dart';
 import 'package:project2/models/postDisplayModel.dart';
-import 'package:project2/models/connection.dart';
 import 'package:flutter_initicon/flutter_initicon.dart';
-import 'package:project2/models/user_model.dart';
 
 Widget postCard(PostDisplay1 x, BuildContext context) {
 

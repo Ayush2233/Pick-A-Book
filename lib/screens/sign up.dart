@@ -1,14 +1,9 @@
-import 'dart:math';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:project2/models/app_to_db.dart';
-import 'package:project2/models/connection.dart';
-import 'package:project2/models/user_model.dart';
-import 'package:project2/screens/completeProfile.dart';
-import 'package:project2/utilities/check.dart';
-import 'package:mongo_dart/mongo_dart.dart' as M;
+
 
 
 
@@ -50,9 +45,7 @@ class _SignUpState extends State<SignUp> {
         // Auth User
         FirebaseAuth.instance.createUserWithEmailAndPassword(
             email: _email.text.trim(), password: _password.text.trim());
-        // print('success');
-        // User? _user = FirebaseAuth.instance.currentUser;
-        // print(_user?.uid);
+
       }catch(e){
         print(e);
       }
@@ -66,10 +59,6 @@ class _SignUpState extends State<SignUp> {
     setState(() {
       sign=true;
     });
-    // final user = FirebaseAuth.instance.currentUser;
-    // String? uid = user?.uid;
-
-    // await insertDB(uid!, _name.text.trim(), _email.text.trim(), int.parse(_age.text.trim()), _gender.text.trim());
 
   }
 

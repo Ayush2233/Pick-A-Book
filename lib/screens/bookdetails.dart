@@ -7,10 +7,8 @@ import 'package:project2/models/book_model.dart';
 import 'package:bottom_sheet/bottom_sheet.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:project2/models/connection.dart';
-
 import '../models/RrecBookModel.dart';
-import '../models/connection.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+
 
 class bookdetails
 {
@@ -239,8 +237,10 @@ class bookdetails
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+
+                      mainAxisAlignment: MainAxisAlignment.start,
                       children: [
+                        SizedBox(width: 20,),
                         Container(
                           child: Text(
                             "Publisher",
@@ -251,6 +251,8 @@ class bookdetails
                             ),
                           ),
                         ),
+
+                        SizedBox(width: 173,),
 
                         Container(
                           child: Text(

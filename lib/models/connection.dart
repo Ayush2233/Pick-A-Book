@@ -1,11 +1,9 @@
 import 'dart:developer';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:mongo_dart/mongo_dart.dart';
-import 'package:project2/models/book_model.dart';
 import 'package:project2/models/post_model.dart';
 import 'package:project2/models/user_model.dart';
 import 'package:project2/models/sell_model.dart';
-import 'package:project2/screens/Search.dart';
 import 'package:project2/models/ratingModel.dart';
 import 'flaskApp.dart';
 
@@ -302,6 +300,17 @@ class MongoDatabase{
     // final t = RatingModel.fromJson(results);
     // print(results);
     return res;
+  }
+
+  static Future updateUserData(
+      String name, String age, String gender) async {
+    var response = await userCollection.updateOne(
+        where.eq('uid', Fireuser.uid),
+        ModifierBuilder()
+            .set('name', name)
+            .set('age', int.parse(age))
+            .set('gender', gender));
+    return response;
   }
 
 

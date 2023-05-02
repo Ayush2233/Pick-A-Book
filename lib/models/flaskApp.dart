@@ -5,7 +5,7 @@ import 'dart:convert';
 
 Future recommendBook(var a) async {
   var client = http.Client();
-  var uri = Uri.parse("http://10.7.10.244:8080/recommend");
+  var uri = Uri.parse("http://192.168.0.108:5050/recommend");
   Map<String, String> headers = {"Content-type": "application/json"};
   String jsonString = json.encode(a);
   try {

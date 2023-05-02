@@ -147,22 +147,22 @@ class _HomeState extends State<Home> with TickerProviderStateMixin{
                       )),
                   SizedBox(width: 75,),
 
-                  // FutureBuilder(
-                  //     future: ratinglist,
-                  //     builder: (context, AsyncSnapshot snapshot){
-                  //       if( snapshot.hasData){
-                  //         return IconButton(onPressed: (){
-                  //           var x= recommendBook(snapshot.data);
-                  //           setState(() {
-                  //             recData= x;
-                  //           });
-                  //         }, icon: Icon(Icons.auto_fix_high));
-                  //       }
-                  //       else{
-                  //         return IconButton(onPressed: (){}, icon:Icon(Icons.disabled_by_default));
-                  //       }
-                  //
-                  //     }),
+                  FutureBuilder(
+                      future: ratinglist,
+                      builder: (context, AsyncSnapshot snapshot){
+                        if( snapshot.hasData){
+                          return IconButton(onPressed: (){
+                            var x= recommendBook(snapshot.data);
+                            setState(() {
+                              recData= x;
+                            });
+                          }, icon: Icon(Icons.auto_fix_high));
+                        }
+                        else{
+                          return IconButton(onPressed: (){}, icon:Icon(Icons.disabled_by_default));
+                        }
+
+                      }),
                 ],
               ),),
           SizedBox(height: 10,),
@@ -172,7 +172,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin{
           //       future: ratinglist,
           //       builder: (context, AsyncSnapshot snapshot){
           //         if( snapshot.hasData){
-                    bookshelf(ratinglist,MongoDatabase.fetchtopratedbooks()),
+                    bookshelf(recData,MongoDatabase.fetchtopratedbooks()),
                 //   }
                 //   else{
                 //     return Text("hello");
