@@ -25,11 +25,10 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> with TickerProviderStateMixin{
 
   // final GlobalKey _first = GlobalKey();
-  var ratinglist;
   var recData;
   @override
   void initState() {
-    ratinglist = MongoDatabase.fetchRecommendation();
+    recData = MongoDatabase.fetchRecommendation();
     print(FirebaseAuth.instance.currentUser?.uid);
     // TODO: implement initState
     super.initState();
@@ -147,22 +146,6 @@ class _HomeState extends State<Home> with TickerProviderStateMixin{
                       )),
                   SizedBox(width: 75,),
 
-                  FutureBuilder(
-                      future: ratinglist,
-                      builder: (context, AsyncSnapshot snapshot){
-                        if( snapshot.hasData){
-                          return IconButton(onPressed: (){
-                            var x= recommendBook(snapshot.data);
-                            setState(() {
-                              recData= x;
-                            });
-                          }, icon: Icon(Icons.auto_fix_high));
-                        }
-                        else{
-                          return IconButton(onPressed: (){}, icon:Icon(Icons.disabled_by_default));
-                        }
-
-                      }),
                 ],
               ),),
           SizedBox(height: 10,),
