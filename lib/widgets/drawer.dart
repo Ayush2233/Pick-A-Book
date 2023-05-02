@@ -7,7 +7,6 @@ import 'package:project2/utilities/appstartnotifier.dart';
 import '../models/data.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import '../screens/sign up.dart';
-import 'package:flutter_initicon/flutter_initicon.dart';
 
 Widget returndrawer(Usermap x,BuildContext context){
   return Drawer(

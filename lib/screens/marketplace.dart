@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:project2/models/connection.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:project2/widgets/grid.dart';
 
 class marketplace extends StatefulWidget {

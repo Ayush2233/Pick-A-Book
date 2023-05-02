@@ -5,7 +5,6 @@ import 'package:project2/models/user_model.dart';
 import 'package:project2/widgets/bookshelf.dart';
 import 'package:project2/widgets/homeslider.dart';
 import 'package:project2/models/connection.dart';
-import 'package:project2/widgets/bookcard.dart';
 
 import '../models/flaskApp.dart';
 

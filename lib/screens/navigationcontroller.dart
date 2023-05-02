@@ -1,21 +1,12 @@
-import 'dart:math';
 import 'package:flutter/material.dart';
-import 'package:project2/models/user_model.dart';
 import 'package:project2/widgets/drawer.dart';
-import 'package:provider/provider.dart';
-import '../utilities/appstartnotifier.dart';
-import 'sign up.dart';
-import 'package:project2/models/user_model.dart';
 import 'package:project2/screens/marketplace.dart';
 import 'package:project2/screens/community.dart';
 import 'package:project2/screens/bookmark.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:project2/screens/Home.dart';
 import 'package:project2/screens/Search.dart';
-import 'package:project2/models/data.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-// import 'package:provider/provider.dart';
 import 'package:project2/models/connection.dart';
 import 'package:flutter_initicon/flutter_initicon.dart';
 

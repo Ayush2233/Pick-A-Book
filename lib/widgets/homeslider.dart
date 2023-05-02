@@ -1,7 +1,5 @@
-import 'package:project2/models/data.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:project2/models/user_model.dart';
 import 'bookcard.dart';
 import 'package:project2/models/book_model.dart';
 import 'package:project2/models/RrecBookModel.dart';

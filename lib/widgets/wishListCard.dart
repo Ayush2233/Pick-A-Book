@@ -1,10 +1,7 @@
-
-
 import 'package:google_fonts/google_fonts.dart';
 import 'package:project2/models/connection.dart';
 import 'package:project2/models/wishListDisplayModel.dart';
 import 'package:flutter/material.dart';
-import 'package:project2/screens/bookdetails.dart';
 
 
 Widget wishListCard(WishListDisplayModel x,BuildContext context)
