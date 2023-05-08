@@ -217,7 +217,12 @@ class _completeProfileState extends State<completeProfile> {
                   Text("Already have an account ?", style: TextStyle(color: Colors.black,fontSize: 15,fontWeight: FontWeight.w400),),
 
                   GestureDetector(
-                    onTap: (){FirebaseAuth.instance.currentUser!.delete();},
+                    onTap: (){
+                      FirebaseAuth.instance.currentUser!.delete();
+                      setState(() {
+                        sign = false;
+                      });
+                      },
                     child: Text(' Go back',style: TextStyle(color: Colors.red[700],fontSize: 15,fontWeight: FontWeight.w500),),
 
                   )
