@@ -31,5 +31,14 @@ The highlight features of the application include:
 <br>
 <br>
 
+### Scrrenshots 
+
+
+
+![s2](https://github.com/Ayush2233/Pick-A-Book/assets/91687009/2b904397-c9f5-47a1-966d-b3e519aaa8e2)
+![s1](https://github.com/Ayush2233/Pick-A-Book/assets/91687009/a00e1e56-c933-40a7-a9f3-a60658d497cb)
+![s5](https://github.com/Ayush2233/Pick-A-Book/assets/91687009/9c0a403e-f95b-4f05-bfc8-69dd00efff62)
+![s4](https://github.com/Ayush2233/Pick-A-Book/assets/91687009/0fb9fd8e-2052-45d0-b20c-b3daa1a0b974)
+![s3](https://github.com/Ayush2233/Pick-A-Book/assets/91687009/fe178c10-7314-4937-ad79-2daf4421cfdb)
 
 
